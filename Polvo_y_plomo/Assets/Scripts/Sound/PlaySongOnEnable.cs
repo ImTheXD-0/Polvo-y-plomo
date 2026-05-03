@@ -36,6 +36,13 @@ public class PlaySongOnEnable : MonoBehaviour
     [SerializeField]
     private AudioClip MusicFase2;
 
+    /// <summary>
+    /// AudioClip OPCIONAL para cuando se encuentra en Pause.
+    /// </summary>
+    [SerializeField]
+    private AudioClip MusicPaused;
+
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -86,11 +93,7 @@ public class PlaySongOnEnable : MonoBehaviour
     {
         if (AudioManager.HasInstance())
         {
-            // Si tiene fase 2, inicia el sistema doble. Si no, arranca la música normal.
-            if (MusicFase2 != null)
-                AudioManager.Instance.StartDoublePhaseMusic(Music, MusicFase2);
-            else
-                AudioManager.Instance.PlayMusic(Music);
+            DecideAndPlayMusic();
         }
         this.enabled = false;
         _startHasBeenDone = true;
@@ -105,10 +108,7 @@ public class PlaySongOnEnable : MonoBehaviour
         {
             if (AudioManager.HasInstance())
             {
-                if (MusicFase2 != null)
-                    AudioManager.Instance.StartDoublePhaseMusic(Music, MusicFase2);
-                else
-                    AudioManager.Instance.PlayMusic(Music);
+                DecideAndPlayMusic(); 
             }
             this.enabled = false;
         }
@@ -131,6 +131,29 @@ public class PlaySongOnEnable : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método privado para evaluar qué campos del inspector están asignados
+    /// y llamar al método correcto del AudioManager.
+    /// </summary>
+    private void DecideAndPlayMusic()
+    {
+        // Si es un Jefe con dos fases y versión pausada
+        if (MusicFase2 != null)
+        {
+            AudioManager.Instance.StartBossMusic(Music, MusicFase2, MusicPaused);
+        }
+        // Si es un nivel normal con versión pausada (ej: Saloon)
+        else if (MusicPaused != null)
+        {
+            AudioManager.Instance.StartLevelMusic(Music, MusicPaused);
+        }
+        // Si es una canción simple sin pausa
+        else
+        {
+            AudioManager.Instance.PlayMusic(Music);
+        }
+    }
 
     #endregion
 

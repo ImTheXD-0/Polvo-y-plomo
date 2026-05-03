@@ -228,7 +228,7 @@ public class ComicCinematicManager : MonoBehaviour
     {
         _isAnimating = false;
         _waitTimer = WaitTimeAfterAnimation; // Resetea el temporizador para el avance automático
-        PromptText.text = "Pulsa cualquier botón para continuar";
+        PromptText.text = "Pulsa cualquier boton para continuar";
     }
 
     /// <summary>

@@ -99,7 +99,7 @@ public class SuziePhaseManager : MonoBehaviour
 
                 if (AudioManager.HasInstance())
                 {
-                    AudioManager.Instance.TransitionToPhase2Music();
+                    AudioManager.Instance.TransitionToPhase2();
                 }
             }
         }

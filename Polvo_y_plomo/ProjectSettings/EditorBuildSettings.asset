@@ -6,20 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu2.0.unity
+    path: Assets/Scenes/Menu.unity
     guid: 7f0a85e807778144f90dba22e934749d
   - enabled: 1
     path: Assets/Scenes/Cinem1.unity
     guid: 9c9bb3f8654dcd847af8f8137b3d8421
   - enabled: 1
-    path: Assets/Scenes/Hito2/Prototipo_Hito2_Level1.unity
-    guid: 6d2267974703d50449d028282606f471
+    path: Assets/Scenes/Level1.unity
+    guid: eb484f24c6ced1047a21db8577c3dfb4
   - enabled: 1
-    path: Assets/Scenes/Hito2/Prototipo_Hito2_Cinem2.unity
-    guid: 1db1a5f1a0b372547b56128e9add63f6
+    path: Assets/Scenes/Cinem2.unity
+    guid: 051588b1d491ee343a722e8c0df107ba
   - enabled: 1
-    path: Assets/Scenes/Hito2/Prototipo_Hito2_Level2.unity
-    guid: fea195f4106e27b45b9d6380888afea4
+    path: Assets/Scenes/Level2.unity
+    guid: c18fffdb03a7ed244bdf653cd9c74953
   - enabled: 1
     path: Assets/Scenes/CreditsScene.unity
     guid: 6041e9d914880a34fb2003350d646491
@@ -116,6 +116,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pruebas/Sprint10/PruebaCronoLvl1.unity
     guid: 427128e0c082d524795a8a0852058bfe
+  - enabled: 1
+    path: Assets/Scenes/Prototipo_Hito_1.unity
+    guid: 30199974954fb294889bff995dca1880
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

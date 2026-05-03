@@ -1056,6 +1056,11 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         _slowMultiplier = 0;
+        if (AudioManager.HasInstance())
+        {
+            // Activa el estado de pausa musical. El AudioManager se encarga de subir el volumen de la pista pausada.
+            AudioManager.Instance.SetPauseMusicStatus(true);
+        }
     }
 
     /// <summary>
@@ -1066,6 +1071,12 @@ public class GameManager : MonoBehaviour
         if (_gameMustBePaused) _slowMultiplier = 0;
         else if (_playerSlowShotOn) _slowMultiplier = SLOWSHOT_TIMEMULTIPLIER;
         else _slowMultiplier = 1.00f;
+
+        if (AudioManager.HasInstance())
+        {
+            // Desactiva el estado de pausa musical. El AudioManager volverá a la fase (1 o 2) en la que estuviera.
+            AudioManager.Instance.SetPauseMusicStatus(false);
+        }
     }
 
 
