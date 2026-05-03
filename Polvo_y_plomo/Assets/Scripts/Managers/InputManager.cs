@@ -444,6 +444,7 @@ public class InputManager : MonoBehaviour
 
     /// <summary>
     /// Método que desactiva los Inputs
+    /// Deja activo la acción Exit.
     /// </summary>
     public void DesactivarInput()
     {
@@ -456,6 +457,9 @@ public class InputManager : MonoBehaviour
         _roll.Disable();
     }
 
+    /// <summary>
+    /// Desactiva el input para el roll (mantiene el melee, exit, habilidad...)
+    /// </summary>
     public void DesactivarInputRoll()
     {
         _movement.Disable();
