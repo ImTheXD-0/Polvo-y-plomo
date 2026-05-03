@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a5e75601d319bd04cb31e9094ad781ca
+guid: da8e08179ca1771409497a7b56d60057
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2208703988740019828
-    second: Bullet_0
+      213: 1409138533219681029
+    second: Mando_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bullet_0
+      name: Mando_0
       rect:
         serializedVersion: 2
-        x: 127
-        y: 128
-        width: 160
-        height: 158
+        x: 24
+        y: 29
+        width: 152
+        height: 103
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 47656d65394e6ae10800000000000000
-      internalID: 2208703988740019828
+      spriteID: 503cfdfa7044e8310800000000000000
+      internalID: 1409138533219681029
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bullet_0: 2208703988740019828
+      Mando_0: 1409138533219681029
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
