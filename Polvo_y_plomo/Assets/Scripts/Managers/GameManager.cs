@@ -954,6 +954,8 @@ public class GameManager : MonoBehaviour
         _playerSlowShotOn = false;
         _gameMustBePaused = false;
         ResumeGame();
+        if (AudioManager.HasInstance())
+            AudioManager.Instance.SetSlowMotionAudio(false);
 
         // Realizar el FadeOut de la pantalla negra al inicio de la escena solo si estaba activo (valor 1).
         this.enabled = false;

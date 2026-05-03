@@ -65,6 +65,18 @@ public class PauseMenuManager : MonoBehaviour
     private GameObject FirstButtonWarningPannel;
 
     /// <summary>
+    /// Almacena el panel que se abrirá al presionar el boton de ayuda.
+    /// </summary>
+    [SerializeField]
+    private GameObject HelpPanel;
+
+    /// <summary>
+    /// Almacena el primer boton seleccionado en el panel de ayuda. Para mando.
+    /// </summary>
+    [SerializeField]
+    private GameObject FirstButtonHelpPannel;
+
+    /// <summary>
     /// Componente CursorBloqueado que deberá ser asignada si existe en la escena para
     /// liberar el mouse tras presionar "Reanudar partida".
     /// </summary>
@@ -91,6 +103,16 @@ public class PauseMenuManager : MonoBehaviour
     /// Booleano que registra si se han abierto los settings.
     /// </summary>
     private bool _settingsOpen = false;
+
+    /// <summary>
+    /// Booleano que registra si se ha abierto el panel de ayuda.
+    /// </summary>
+    private bool _helpOpen = false;
+
+    /// <summary>
+    /// Booleano que registra si se ha abierto el panel de Warning.
+    /// </summary>
+    private bool _warningOpen = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -120,7 +142,13 @@ public class PauseMenuManager : MonoBehaviour
 
         if (WarningPanel == null)
         {
-            Debug.Log("No se ha asignado al PauseMenumMaager un panel de warning. No funcionará");
+            Debug.Log("No se ha asignado al PauseMenuManager un panel de warning. No funcionará");
+            Destroy(this);
+        }
+
+        if (HelpPanel == null)
+        {
+            Debug.Log("No se ha asignado al PauseMenuManager un panel de ayuda. No funcionará");
             Destroy(this);
         }
 
@@ -162,7 +190,17 @@ public class PauseMenuManager : MonoBehaviour
                 _settingsOpen = false;
                 OpenPauseMenuFromInput();
             }
-            else // settings cerrado... ¿esta abierto el menu?
+            else if (_helpOpen)
+            {
+                _helpOpen = false;
+                OpenPauseMenuFromInput();
+            }
+            else if (_warningOpen)
+            {
+                _warningOpen = false;
+                OpenPauseMenuFromInput();
+            }
+            else // settings y ayuda cerrados... ¿esta abierto el menu?
             {
                 if (!_gamePaused) // menu no abierto -> abrir pausa
                 {
@@ -212,19 +250,35 @@ public class PauseMenuManager : MonoBehaviour
     {
         OpenPauseMenuFromInput();
         _settingsOpen = false;
+        _helpOpen = false;
+        _warningOpen = false;
         EventSystem.current.SetSelectedGameObject(FirstButtonPausePannel);
     }
 
     /// <summary>
-    /// Abre el menú de settings (pausa desactivado).
+    /// Abre el menú de settings
     /// Actualiza la lógica para indicar que se ha abierto el panel de Settings.
     /// </summary>
     public void OpenSettingsMenuFromButton()
     {
         PausePanel.SetActive(false);
+        HelpPanel.SetActive(false);
         SettingsPanel.SetActive(true);
         _settingsOpen = true;
         EventSystem.current.SetSelectedGameObject(FirstButtonSettingPannel);
+    }
+
+    /// <summary>
+    /// Abre el menú de ayuda
+    /// Actualiza la lógica para indicar que se ha abierto el panel de Ayuda
+    /// </summary>
+    public void OpenHelpMenuFromButton()
+    {
+        PausePanel.SetActive(false);
+        SettingsPanel.SetActive(false);
+        HelpPanel.SetActive(true);
+        _helpOpen = true;
+        EventSystem.current.SetSelectedGameObject(FirstButtonHelpPannel);
     }
 
     /// <summary>
@@ -233,9 +287,12 @@ public class PauseMenuManager : MonoBehaviour
     public void ResumeGameFromButton()
     {
         PausePanel.SetActive(false);
+        HelpPanel.SetActive(false);
         SettingsPanel.SetActive(false);
         _settingsOpen = false;
         _gamePaused = false;
+        _helpOpen = false;
+        _warningOpen = false;
 
         if (BlockCursor != null)
         {
@@ -255,6 +312,7 @@ public class PauseMenuManager : MonoBehaviour
     public void OpenWarningMenuFromButton()
     {
         WarningPanel.SetActive(true);
+        _warningOpen = true;
         EventSystem.current.SetSelectedGameObject(FirstButtonWarningPannel);
     }
 
@@ -264,6 +322,7 @@ public class PauseMenuManager : MonoBehaviour
     public void CloseWarningMenuFromButton()
     {
         WarningPanel.SetActive(false);
+        _warningOpen = false;
         EventSystem.current.SetSelectedGameObject(FirstButtonPausePannel);
     }
 
@@ -293,7 +352,10 @@ public class PauseMenuManager : MonoBehaviour
     private void OpenPauseMenuFromInput()
     {
         PausePanel.SetActive(true);
+        HelpPanel.SetActive(false);
+        WarningPanel.SetActive(false);
         SettingsPanel.SetActive(false);
+
         EventSystem.current.SetSelectedGameObject(FirstButtonPausePannel);
     }
     #endregion
