@@ -25,7 +25,7 @@ public class SuziesSecondPattern : MonoBehaviour
     /// Variable que sirve para guardar el audio del silbido
     /// </summary>
     [SerializeField]
-    private AudioSource Whistle;
+    private AudioClip Whistle;
 
     /// <summary>
     /// Variable que sirve para poder bloquear y desbloquear el daño cuando el jefe este escondido
@@ -82,7 +82,6 @@ public class SuziesSecondPattern : MonoBehaviour
 
     void Awake()
     {
-        Whistle = this.GetComponent<AudioSource>();
         HealthManager = this.GetComponent<HealthChanger>();
     }
 
@@ -115,7 +114,7 @@ public class SuziesSecondPattern : MonoBehaviour
     public void IniciarPatron()
     {
 
-        if (Whistle != null) Whistle.Play();
+        if (Whistle != null && AudioManager.HasInstance()) AudioManager.Instance.Play(Whistle, transform.position);
 
         Hide();
 
