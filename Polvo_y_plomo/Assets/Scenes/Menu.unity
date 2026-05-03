@@ -1210,6 +1210,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4784433415056174675, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
   m_PrefabInstance: {fileID: 3536002201115788836}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1196262755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7392735202868755761, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
+  m_PrefabInstance: {fileID: 3536002201115788836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196262754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ab21b0ea8b8c848bf2fa57d230538f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1197864665 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8737838446281022880, guid: 82407582cd096bd4fbbf395419292096, type: 3}
@@ -1523,7 +1534,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.05
+  m_fontSize: 30.55
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1669,7 +1680,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.2
+  m_fontSize: 25.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2088,6 +2099,17 @@ MonoBehaviour:
   ActivatePanel: {fileID: 1392819562}
   DisablePanel: {fileID: 1766211609}
   NextPanelSelectedButton: {fileID: 1196262754}
+--- !u!114 &2004319083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8988523093183721152, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
+  m_PrefabInstance: {fileID: 3536002201115788836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ab21b0ea8b8c848bf2fa57d230538f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2079326150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,17 +2290,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38e34521db28f6d49abfa40cada5651e, type: 3}
---- !u!114 &642966449017139210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5339151174146695594, guid: 38e34521db28f6d49abfa40cada5651e, type: 3}
-  m_PrefabInstance: {fileID: 642966449017139209}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5f6fae18ae3fb448080296fb9d6c0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3536002201115788836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2298,7 +2309,7 @@ PrefabInstance:
     - target: {fileID: 2927887767252164898, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 642966449017139210}
+      objectReference: {fileID: 2004319083}
     - target: {fileID: 6145471556987848185, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2382,7 +2393,7 @@ PrefabInstance:
     - target: {fileID: 6389855174123962089, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 642966449017139210}
+      objectReference: {fileID: 1196262755}
     - target: {fileID: 8925435281428150329, guid: 18bcb044d56d7584aae9d4ca250da96b, type: 3}
       propertyPath: m_Name
       value: DifficultyPanel

@@ -37,6 +37,13 @@ public class playerControlledMovement : MonoBehaviour
     /// </summary>
     [SerializeField]
     private float PlayerAntiSlowBuff = 1.5f;
+
+    /// <summary>
+    /// Animator del jugador. Le mandará el booleano isWalking en cada FixedUpdate().
+    /// Si no se configura no hace nada.
+    /// </summary>
+    [SerializeField]
+    private Animator Anim;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -97,6 +104,8 @@ public class playerControlledMovement : MonoBehaviour
         // Movimiento del jugador
         _rb.linearVelocity = InputManager.Instance.MovementVector * PlayerSpeed;
         if (_gameManager && GameManager.SlowMultiplier != 1) _rb.linearVelocity *= GameManager.SlowMultiplier * PlayerAntiSlowBuff;
+
+        if (Anim != null) Anim.SetBool("isWalking", _rb.linearVelocity.magnitude > 0);
     }
 
     #endregion

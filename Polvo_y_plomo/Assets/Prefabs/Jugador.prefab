@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 963654306252283241}
   - component: {fileID: 4864011063731840737}
   m_Layer: 0
-  m_Name: RevolverFather
+  m_Name: RotateBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   RotateTowardsPlayer: 0
   FlipY: 1
   RotationOffset: 0
+  Anim: {fileID: 7364166214027565214}
 --- !u!1 &4821254670401775029
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +339,6 @@ GameObject:
   - component: {fileID: 8640769707630179225}
   - component: {fileID: 3385198336411724539}
   - component: {fileID: 7364166214027565214}
-  - component: {fileID: 5717731416207717168}
   m_Layer: 10
   m_Name: Jugador
   m_TagString: Untagged
@@ -471,6 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSpeed: 6
   PlayerAntiSlowBuff: 1.5
+  Anim: {fileID: 7364166214027565214}
 --- !u!50 &166880489185979541
 Rigidbody2D:
   serializedVersion: 5
@@ -563,6 +564,7 @@ MonoBehaviour:
   DuracionRodado: 0.35
   HitboxJugador: {fileID: 5036081665872762522}
   SpriteArmaJugador: {fileID: 8180277153169744243}
+  Anim: {fileID: 7364166214027565214}
   RollSound: {fileID: 8300000, guid: 221236e18eb3a7944abffe6f6f9e0401, type: 3}
 --- !u!114 &3385198336411724539
 MonoBehaviour:
@@ -609,19 +611,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5717731416207717168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794519440049798451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92757aca1107bbe4797ad4ab296fef63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RevolverRotation: {fileID: 963654306252283241}
 --- !u!1 &8633089953209525018
 GameObject:
   m_ObjectHideFlags: 0

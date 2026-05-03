@@ -46,6 +46,14 @@ public class playerRoll : MonoBehaviour
     /// </summary>
     [SerializeField] private SpriteRenderer SpriteArmaJugador;
 
+    /// <summary>
+    /// Manda al animator asignado (idealmente el del jugador) la variable booleana isRolling.
+    /// También le manda los variables float RollDirX y RollDirY al iniciar el roll, con valores normalizados.
+    /// Si no se asigna no hace nada.
+    /// </summary>
+    [SerializeField]
+    private Animator Anim;
+
     [SerializeField]
     private AudioClip RollSound;
     #endregion
@@ -168,6 +176,7 @@ public class playerRoll : MonoBehaviour
             if (_tDuracionRodado <= 0)
             {
                 _isRolling = false;
+                if (Anim != null) Anim.SetBool("isRolling", false);
                 _rb.linearVelocity = Vector2.zero;
                 InputManager.Instance.ActivarInput();
                 LogicaRoll(true);
@@ -212,6 +221,12 @@ public class playerRoll : MonoBehaviour
         _tDuracionRodado = DuracionRodado;
         _isRolling = true;
         if (RollSound) AudioManager.Instance.Play(RollSound, transform.position);
+        if (Anim != null)
+        {
+            Anim.SetBool("isRolling", true);
+            Anim.SetFloat("RollDirX", _dirRoll.normalized.x);
+            Anim.SetFloat("RollDirY", _dirRoll.normalized.y);
+        }
     }
 
     /// <summary>
