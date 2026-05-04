@@ -108,21 +108,15 @@ public class PopUpController : MonoBehaviour
     }
 
     /// <summary>
-    /// Se llama al cargarse en escena si el componente esta activo, o al activarse por primera vez.
-    /// Pausa el juego y apaga el input.
-    /// </summary>
-    private void Start()
-    {
-        if (GameManager.HasInstance()) GameManager.Instance.PauseGame();
-        if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
-    }
-
-    /// <summary>
     /// Se llama cada frame mientras el componente este activo.
     /// Verifica si se ha presionado Exit para cerrar el popup
     /// </summary>
     private void Update()
     {
+        // Asegurarme de que todo se pause bien y los controles se apagen (en el Start podría no darse)
+        if (GameManager.HasInstance()) GameManager.Instance.PauseGame();
+        if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
+
         if (InputManager.HasInstance() && InputManager.Instance.ExitWasPressedThisFrame())
         {
             ClosePopUp();
