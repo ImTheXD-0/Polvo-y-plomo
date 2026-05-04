@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fbc3b48fe1950434cbba85b4ad61fadb
+guid: a4946bdc576c4774cbf03211c0a0e63a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7362937517325681551
-    second: EscalerasTerminanGiroFuera1_0
+      213: -690532609676411298
+    second: SueloHumedo_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EscalerasTerminanGiroFuera1_0
+      name: SueloHumedo_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17cf768a65791d990800000000000000
-      internalID: -7362937517325681551
+      spriteID: e5ef966004cba66f0800000000000000
+      internalID: -690532609676411298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloHumedo_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9539d9a2aecf02d468e6f3a7e7cfa261
+      internalID: 1244292639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloHumedo_2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71e692139b23a4441b8f876db3278ea2
+      internalID: -653802204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloHumedo_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e15f2c5ae39e39b479dec2df95fcbfa2
+      internalID: 1276440666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloHumedo_4
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c7c04d427a6b645b00589ad9e4097d
+      internalID: 803218703
       vertices: []
       indices: 
       edges: []
@@ -125,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: e3954383b60829044a9b7aff770f193c
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +223,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EscalerasTerminanGiroFuera1_0: -7362937517325681551
+      SueloHumedo_0: -690532609676411298
+      SueloHumedo_1: 1244292639
+      SueloHumedo_2: -653802204
+      SueloHumedo_3: 1276440666
+      SueloHumedo_4: 803218703
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fbc3b48fe1950434cbba85b4ad61fadb
+guid: c8c5d7acac1efba418408e40dd951331
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7362937517325681551
-    second: EscalerasTerminanGiroFuera1_0
+      213: -8925319760322513477
+    second: SueloMojado_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EscalerasTerminanGiroFuera1_0
+      name: SueloMojado_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17cf768a65791d990800000000000000
-      internalID: -7362937517325681551
+      spriteID: bb5b33367f4e22480800000000000000
+      internalID: -8925319760322513477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloMojado_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4399089d388049648a44204fd39f62f7
+      internalID: -1712325366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloMojado_2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22ef49aad51ee744791c330fd077f619
+      internalID: -1053660751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SueloMojado_3
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3bd257906c7ced4e8c3f573691235d3
+      internalID: -279450385
       vertices: []
       indices: 
       edges: []
@@ -125,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 7acb602cfbfa8b548bedad0d7ea0b353
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +201,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EscalerasTerminanGiroFuera1_0: -7362937517325681551
+      SueloMojado_0: -8925319760322513477
+      SueloMojado_1: -1712325366
+      SueloMojado_2: -1053660751
+      SueloMojado_3: -279450385
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fbc3b48fe1950434cbba85b4ad61fadb
+guid: 72fb98aaf1e3bbd45b1f52479a2e8347
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7362937517325681551
-    second: EscalerasTerminanGiroFuera1_0
+      213: -3035118906836337246
+    second: ParedBotellas_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EscalerasTerminanGiroFuera1_0
+      name: ParedBotellas_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17cf768a65791d990800000000000000
-      internalID: -7362937517325681551
+      spriteID: 2adb2fa5f6711e5d0800000000000000
+      internalID: -3035118906836337246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ParedBotellas_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e214cf068aeeb646a0620a050277fe9
+      internalID: -1095155402
       vertices: []
       indices: 
       edges: []
@@ -125,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 098f556a7fb5e1a4d9d0455db5874fc1
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +157,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EscalerasTerminanGiroFuera1_0: -7362937517325681551
+      ParedBotellas_0: -3035118906836337246
+      ParedBotellas_1: -1095155402
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
