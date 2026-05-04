@@ -250,24 +250,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ImageFill MeleeCooldown = null;
 
+    /// <summary>
+    /// Organizar apartados del Highscore
+    /// </summary>
     [Header("Highscore")]
 
     /// <summary>
     /// Texto en el que se escribe el número del highscore.
     /// </summary>
     [SerializeField]
-    private TextMeshProUGUI highScoreTextUI;
+    private TextMeshProUGUI HighScoreTextUI;
 
-
+    /// <summary>
+    /// Array para almacenar todos los gameObjects que se usaran para indicar los puntos que dan los enemigos en pantalla
+    /// </summary>
     [SerializeField]
-    int highScore;
-
-    [SerializeField]
-    GameObject[] streakText;
-
-    [SerializeField]
-    int actualtext;
-
+    private GameObject[] StreakText;
 
     /// <summary>
     /// Variable a la que se le debe asignar el Animator del icono de la habilidad.
@@ -277,9 +275,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Animator TimeAbilityAnimator;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido de la recarga
+    /// </summary>
     [SerializeField]
     private AudioClip ReloadClip;
-
 
     #endregion
 
@@ -386,6 +386,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private const float SLOWSHOT_TIMEMULTIPLIER = 0.25f;
 
+    /// <summary>
+    /// Número que lleva la cuenta del gameObject actual con el que indicar los puntos (Cual de los gameObjects dentro del array es el encargado de generarse)
+    /// </summary>
+    private int actualtext;
+
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -407,10 +413,10 @@ public class GameManager : MonoBehaviour
         else
         {
             // Transferencia de configuración del HUD
-            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, highScoreTextUI, streakText);
+            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, StreakText);
         }
 
-        foreach (GameObject obj in streakText) // Desactiva los indicadores de puntos 
+        foreach (GameObject obj in StreakText) // Desactiva los indicadores de puntos 
         {
             obj.SetActive(false);
         }
@@ -449,6 +455,7 @@ public class GameManager : MonoBehaviour
             this.enabled = false;
             Init();
         } // if-else somos instancia nueva o no.
+
         if (SceneManager.GetActiveScene().buildIndex == 0) LoadScore();
     }
 
@@ -638,17 +645,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Método que se encarga de generar los puntos que se le pasen en la posición que se le introduzca y de gestionar cual es el siguiente gameObject en encargarse de mostrarlos 
+    /// </summary>
     public void SpawnPointIndicator(Vector3 position, int cambioDePuntos)
     {
-        if (streakText.Length > 0)
+        if (StreakText.Length > 0)
         {
             //Setear el punto
-            streakText[actualtext].SetActive(true);
-            streakText[actualtext].GetComponent<PointIndicator>().SpawnHere(position, cambioDePuntos);
+            StreakText[actualtext].SetActive(true);
+            StreakText[actualtext].GetComponent<PointIndicator>().SpawnHere(position, cambioDePuntos);
 
             //Gestionar lista
             actualtext++;
-            if (actualtext >= streakText.Length) actualtext = 0;
+            if (actualtext >= StreakText.Length) actualtext = 0;
         }
     }
 
@@ -933,8 +943,8 @@ public class GameManager : MonoBehaviour
         this.TiempoEsperaRespawn = TiempoEsperaRespawn;
         this.TiempoEsperaSiguienteNivel = TiempoEsperaSiguienteNivel;
         this.MeleeCooldown = MeleeCooldown;
-        this.highScoreTextUI = highScoreTextUI;
-        this.streakText = streakText;
+        this.HighScoreTextUI = highScoreTextUI;
+        this.StreakText = streakText;
     }
 
     /// <summary>
@@ -1149,23 +1159,26 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    /// <summary>
+    /// Método que se encarga de guardar el highscore de puntos que has obtenido en el juego
+    /// </summary>
     public void SaveScore(int score)
     {
         string data = score.ToString();
         string path = Application.persistentDataPath + "/Score.txt";
 
-        if (File.Exists(path))
+        if (File.Exists(path)) //Si existe el path se leera el número almacenado
         {
             string contenido = File.ReadAllText(path);
             int savedScore = int.Parse(contenido);
 
-            if (savedScore >= score)
+            if (savedScore >= score) // Si la puntuación no es mayor a la puntuación del archivo se corta
             {
                 return;
             }
         }
-        File.WriteAllText(path, data);
-        Debug.Log("Puntuación guardada en: " + path);
+        File.WriteAllText(path, data); // Se guarda el puntaje en el path indicado
     }
 
     #endregion
@@ -1198,25 +1211,24 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
-
+    /// <summary>
+    /// Método que permite cargar el puntaje desde una ruta de archivo guardada
+    /// </summary>
     private void LoadScore()
     {
-
-        if (highScoreTextUI == null)
+        if (HighScoreTextUI == null) // Si no existe el archivo el puntaje es 0 y se acaba
         {
-            highScoreTextUI.text = "0";
+            HighScoreTextUI.text = "0";
             return;
         }
 
         string path = Application.persistentDataPath + "/Score.txt";
 
-        if (File.Exists(path))
+        if (File.Exists(path)) // Si existe el archivo se lee y se actualiza el highscore
         {
-
             string file = File.ReadAllText(path);
 
-
-            highScoreTextUI.text = file;
+            HighScoreTextUI.text = file;
             _highScore = int.Parse(file);
 
         }

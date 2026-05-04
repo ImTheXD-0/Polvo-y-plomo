@@ -42,9 +42,16 @@ public class CanMelee : MonoBehaviour
     [SerializeField]
     private GameObject MeleeShadowPrefab;
 
+
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido del ataque
+    /// </summary>
     [SerializeField]
     private AudioClip Attack;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido del desenfundado del cuchillo de ataque melee
+    /// </summary>
     [SerializeField]
     private AudioClip AttackShadow;
     #endregion

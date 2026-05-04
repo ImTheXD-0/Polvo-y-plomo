@@ -11,8 +11,9 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Script que permite generar un texto para indicar los puntos en la posición en la indicada.
+/// El script permite que el puntaje vaya desapareciendo hasta acabar completamente trasnparente. 
+/// Una vez pasa esto, el gameObject se desactiva.
 /// </summary>
 public class PointIndicator : MonoBehaviour
 {
@@ -24,19 +25,29 @@ public class PointIndicator : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    /// <summary>
+    /// Esta variable permite almacenar el texto para cambiar los puntos que aparecen
+    /// </summary>
     [SerializeField]
-    TextMeshProUGUI pointText;
+    private TextMeshProUGUI PointText;
 
-    Vector3 position;
-
+    /// <summary>
+    /// Velocidad a la que el texto desaparecerá tras aparecer encima del enemigo derribado
+    /// </summary>
     [SerializeField]
-    float DisappearSpeed = 1f;
+    private float DisappearSpeed = 1f;
 
+    /// <summary>
+    /// Velocidad a la que sube el texto hasta desaparecer
+    /// </summary>
     [SerializeField]
-    float MoveSpeed = 1f;
+    private float MoveSpeed = 1f;
 
+    /// <summary>
+    /// Posición en la que spawnea el texto de puntaje por encima del enemigo
+    /// </summary>
     [SerializeField]
-    float Subida = 0f;
+    private float Subida = 0f;
 
     #endregion
 
@@ -48,6 +59,11 @@ public class PointIndicator : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
+    /// <summary>
+    /// Posición de aparición de los puntos
+    /// </summary>
+    private Vector3 _position;
 
     #endregion
 
@@ -62,17 +78,17 @@ public class PointIndicator : MonoBehaviour
     /// <summary>
     /// Le vamos quitando la transparecia constantemente para que acabe desapareciendo
     /// También le indicaremos la velocidad a la que sube para darle una sensación más fluida
-    /// Por último le obligamos a permanecer quiero en el lugar en el que se ha generado primeramente
+    /// Por último le obligamos a permanecer quieto en el lugar en el que se ha generado primeramente
     /// </summary>
     void Update()
     {
-        pointText.alpha -= DisappearSpeed * Time.deltaTime;
+        PointText.alpha -= DisappearSpeed * Time.deltaTime;
 
-        position += Vector3.up * MoveSpeed * Time.deltaTime;
+        _position += Vector3.up * MoveSpeed * Time.deltaTime;
 
-        transform.position = Camera.main.WorldToScreenPoint(position);
+        transform.position = Camera.main.WorldToScreenPoint(_position);
 
-        if (pointText.alpha <= 0) gameObject.SetActive(false);
+        if (PointText.alpha <= 0) gameObject.SetActive(false);
     }
     #endregion
 
@@ -84,19 +100,18 @@ public class PointIndicator : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-
     /// <summary>
     /// Script que hace aparecer los puntos dados encima de una posicion que pasaremos para que se vea en el mismo lugar que en el HUD
     /// </summary>
     public void SpawnHere(Vector3 _position, int points)
     {
-        position = _position + new Vector3(0, Subida, 0);
-        pointText.text = points.ToString();
+        this._position = _position + new Vector3(0, Subida, 0);
+        PointText.text = points.ToString();
 
-        pointText.alpha = 1.0f;
+        PointText.alpha = 1.0f;
 
 
-        transform.position = Camera.main.WorldToScreenPoint(position);
+        transform.position = Camera.main.WorldToScreenPoint(this._position);
     }
 
     #endregion

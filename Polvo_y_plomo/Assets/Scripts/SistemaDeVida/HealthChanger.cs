@@ -8,6 +8,12 @@
 using DG.Tweening.Core.Easing;
 using UnityEngine;
 
+/// <summary>
+/// Script que permite gestionar la vida de los gameObjets
+/// Permite sumar y restar vida mediante un metodo general que pide la cantidad a restar/sumar
+/// También permite establecer la vida inicial del gameObject y bloquear si puede o no recibir daño
+/// Mediante el método de muerte se puede controlar lo que sucedera con el gameObject cuando su vida llegue a cero o menos
+/// </summary>
 public class HealthChanger : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
@@ -17,6 +23,7 @@ public class HealthChanger : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
     /// <summary>
     /// Esta será la variable de la vida con la que iniciarán los gameObject. Debe ser configurable para ajustarse a cada caso especificó y no variará una vez establecida
     /// </summary>
@@ -25,15 +32,27 @@ public class HealthChanger : MonoBehaviour
 
     [Header("SFX")]
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido que hará el jugador cuando reciba daño
+    /// </summary>
     [SerializeField]
     private AudioClip DanyoJugador;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido que hará el jugador cuando reciba vida
+    /// </summary>
     [SerializeField]
     private AudioClip CuracionJugador;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido que harán las coberturas al recibir daño
+    /// </summary>
     [SerializeField]
     private AudioClip CoberturaCubre;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido que harán las coberturas al ser destruida
+    /// </summary>
     [SerializeField]
     private AudioClip CoberturaRota;
     #endregion
@@ -46,6 +65,7 @@ public class HealthChanger : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
+
     /// <summary>
     /// Esta será la variable de la vida que tendrán los game objects (irá variando)
     /// </summary>
@@ -121,16 +141,9 @@ public class HealthChanger : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+    
     /// <summary>
-    /// Por lo general todos los ataques harán uno de daño, pero si te curas, no te puedes curar más del maximo de lo que se te permite
-    /// Este metodo permitirá curarse (teniendo como tope la vida con la que empiezas) y hacer daño hasta quedarte sin vida
-    /// Si te quedas sin vida llamara al metodo para matar
-    /// Si eres el jugador, actualiza tu vida en el HUD
-    /// </summary>
-
-
-    /// <summary>
-    /// Metodo que permitirá que no nos hagan daño mientras estamos escondidos
+    /// Metodo que permitirá que no nos hagan daño
     /// </summary
     public void BlockDamage()
     {
@@ -138,12 +151,21 @@ public class HealthChanger : MonoBehaviour
     }
 
     /// <summary>
-    /// Metodo que permitirá que nos hagan daño mientras no estamos escondidos
+    /// Metodo que permitirá que nos hagan daño
     /// </summary
     public void AllowDamage()
     {
         _canRecieveDamage = true;
     }
+
+    /// <summary>
+    /// Por lo general todos los ataques harán uno de daño, pero si te curas, no te puedes curar más del maximo de lo que se te permite
+    /// Este metodo permitirá curarse (teniendo como tope la vida con la que empiezas) y hacer daño hasta quedarte sin vida
+    /// Si te quedas sin vida llamara al metodo para matar
+    /// Si eres el jugador, actualiza tu vida en el HUD
+    /// Este método también se encarga de gestionar que sonido debe reproducirse dependiendo de que gameObject seamos
+    /// Además gestiona los flashes que haga un gameObject si puede al ser golpeado
+    /// </summary>
     public void CambiarVida(int cambio = -1)      
     {
         if (!_canRecieveDamage && cambio < 0) return;
@@ -197,7 +219,6 @@ public class HealthChanger : MonoBehaviour
     /// <summary>
     /// Método público que devuelve la vida actual del GameObject. Utilizado principalmente para transicionar fases en enemigos grandes (Suzie).
     /// </summary>
-    /// <returns></returns>
     public int GetCurrentHealth()
     {
         return _vida;
@@ -206,7 +227,6 @@ public class HealthChanger : MonoBehaviour
     /// <summary>
     /// Método público que devuelve la vida maxima del GameObject. Utilizado principalmente para transicionar fases en enemigos grandes (Suzie).
     /// </summary>
-    /// <returns></returns>
     public int GetMaxHealth()
     {
         return VidaMax;
@@ -220,12 +240,12 @@ public class HealthChanger : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
     /// <summary>
     /// Este metodo comprueba si el gameObject que le invoca es el jugador.
     /// Dependiendo de si lo llama el gameObject del jugador destruirá reiniciará la escena
     /// De otra manera comprueba si el gameObject tiene cadaver, si lo tiene lo genera el cadaver, de lo contrario destruye el objeto 
     /// Además, avisa al LevelManager cuando lo que muere es un enemigo
-    /// (Incompleto/Futuro)
     /// </summary>
     private void MetodoMuerte()
     {
@@ -252,8 +272,6 @@ public class HealthChanger : MonoBehaviour
             }
             else Debug.Log("Este Objeto no tiene un componente GeneraCadaver");
             Destroy(gameObject);
-            //Hay que hacer más adelante las animaciónes de muerte de los enemigos
-
         }
     }
 
