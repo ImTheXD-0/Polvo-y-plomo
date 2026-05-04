@@ -281,6 +281,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private AudioClip ReloadClip;
 
+    /// <summary>
+    /// Variable que almacena el texto que te dice si los cheats estan activados o no
+    /// </summary>
+    [SerializeField] 
+    private TextMeshProUGUI TextoCheatHUD;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -391,6 +397,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private int actualtext;
 
+    /// <summary>
+    /// Variable booleana para saber si el jugador tiene activados el rexibir daño
+    /// </summary>
+    private bool _cheatJugador = false;
+
 
     #endregion
 
@@ -413,7 +424,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // Transferencia de configuración del HUD
-            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, StreakText);
+            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, TextoCheatHUD, StreakText);
         }
 
         foreach (GameObject obj in StreakText) // Desactiva los indicadores de puntos 
@@ -919,7 +930,7 @@ public class GameManager : MonoBehaviour
     public void TransferManagerSetup(TextMeshProUGUI ActLevelMessage, ChangeColorAndHide LevelUpMessage, FadeColor FadeInBlackScreen, FadeColor FadeOutBlackScreen, FadeColor FadeInBlueScreen, FadeColor FadeOutBlueScreen,
         ImageFill HabilityLiquid, ImageFill HabilityShadow, GameObject Barrel , HeartUI[] Lifes, GameObject[] Bullets, TextMeshProUGUI ScoreText, TextMeshProUGUI StreakMultiplier, StreakColor[] StreakColors,
         ImageFill StreakBar, ImageFill LevelBar, AudioClip VictoryMusic,
-        int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel, ImageFill MeleeCooldown, TextMeshProUGUI highScoreTextUI,
+        int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel, ImageFill MeleeCooldown, TextMeshProUGUI highScoreTextUI, TextMeshProUGUI textoCheatHUDParametro,
         GameObject[] streakText)
     {
         this.ActLevelMessage = ActLevelMessage;
@@ -945,6 +956,7 @@ public class GameManager : MonoBehaviour
         this.MeleeCooldown = MeleeCooldown;
         this.HighScoreTextUI = highScoreTextUI;
         this.StreakText = streakText;
+        this.TextoCheatHUD = textoCheatHUDParametro;
     }
 
     /// <summary>
@@ -972,6 +984,23 @@ public class GameManager : MonoBehaviour
         if (FadeOutBlackScreen != null) FadeOutBlackScreen.enabled = true;
 
         if (InputManager.HasInstance()) InputManager.Instance.ActivarInput();
+
+        if (_cheatJugador)
+        {
+            if (LevelManager.HasInstance())
+            {
+                Transform playerTransform = LevelManager.Instance.PlayerTransform();
+                if (playerTransform != null)
+                {
+                    HealthChanger healthChanger = playerTransform.GetComponent<HealthChanger>();
+
+                    if (healthChanger != null)
+                    {
+                        healthChanger.BlockDamage();
+                    }
+                }
+            }
+        }
 
         Init();
         if (_playerCursor != null)
@@ -1030,6 +1059,7 @@ public class GameManager : MonoBehaviour
     {
         return _vidaJugador;
     }
+
     #endregion
 
     #region Funcionalidad SlowShot y Pausa
@@ -1156,6 +1186,31 @@ public class GameManager : MonoBehaviour
     public float GetSens()
     {
         return _cursorSensibility;
+    }
+
+    #endregion
+
+    #region Cheats
+
+    /// <summary>
+    /// Un método para indicar que se activan y desactican los trucos
+    /// </summary>
+    public void InmortalCheats()
+    {
+        _cheatJugador = !_cheatJugador;
+        _totalDeaths = 1000;
+    }
+
+    /// <summary>
+    /// Actualiza en pantalla si el jugador tiene o no los cheats
+    /// </summary>
+    public void UpdateCheatHUD()
+    {
+        if (TextoCheatHUD != null)
+        {
+            if (_cheatJugador) TextoCheatHUD.text = "God Mode: ON";
+            else TextoCheatHUD.text = "God Mode: OFF";
+        }
     }
 
     #endregion
