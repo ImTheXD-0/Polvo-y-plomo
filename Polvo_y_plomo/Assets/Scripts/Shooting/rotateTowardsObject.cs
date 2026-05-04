@@ -53,6 +53,13 @@ public class rotateTowardsObject : MonoBehaviour
     [SerializeField]
     private float RotationOffset = 0f;
 
+    /// <summary>
+    /// Si se asigna, intentará mandarle la variable float "Angle" en cada Update.
+    /// Si no se asigna, se ignorará.
+    /// </summary>
+    [SerializeField]
+    private Animator Anim;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -132,6 +139,13 @@ public class rotateTowardsObject : MonoBehaviour
         // Normalización a angulos de 0 a 360
         angulo %= 360;
         if (angulo < 0) angulo += 360f;
+
+        // Derecha = 0
+        // Arriba = 90
+        // Izquierda = 180
+        // Abajo = 270
+        // Derecha = 360 (nunca llega a 360)
+        if (Anim != null) Anim.SetFloat("Angle", angulo);
 
         transform.rotation = Quaternion.Euler(0, 0, angulo);
         if (FlipY)

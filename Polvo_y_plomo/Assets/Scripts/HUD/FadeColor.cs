@@ -15,6 +15,9 @@ using UnityEngine.UI;
 /// Componente al que se le puede asignar cualquier objeto y busca este algún elemento de color.
 /// Si lo encuentra, realiza un fade de transparencia entre 2 asignables (inical y final) durante un tiempo asignable.
 /// (!) Ha de estar desactivada (como componente, no gameobject) al inicio de la escena. Si no lo está, se activará el fade.
+/// 
+/// +++
+/// Añadida funcionalidad para que si no se asigna target, intente cambiarse el color a si mismo.
 /// </summary>
 public class FadeColor : MonoBehaviour
 {
@@ -125,64 +128,44 @@ public class FadeColor : MonoBehaviour
 
     /// <summary>
     /// Se llama al cargarse en escena por primera vez.
-    /// Intenta sacar un componente SpriteRenderer, Image o Renderer con color del objeto target, y registra el color inicial con GetColor().
+    /// Intenta sacar un componente SpriteRenderer, Image, RawImage o Renderer con color del objeto target, y registra el color inicial con GetColor().
     /// También calcula cuales han de ser los colores iniciales y finales según las transparencias indicadas.
     /// Si no hay target o no hay componente con color hay programación defensiva que evita que el componente falle.
     /// </summary>
     private void Awake()
     {
-        if (target != null)
+        if (target == null) target = this.gameObject;
+
+        _sprite = target.GetComponent<SpriteRenderer>();
+        _uiImage = target.GetComponent<Image>();
+        _rawImage = target.GetComponent<RawImage>();
+        _rend = target.GetComponent<Renderer>();
+        if (_sprite == null && _uiImage == null && _rend == null && _rawImage == null)
         {
-            _sprite = target.GetComponent<SpriteRenderer>();
-            _uiImage = target.GetComponent<Image>();
-            _rawImage = target.GetComponent<RawImage>();
-            _rend = target.GetComponent<Renderer>();
-            if (_sprite == null && _uiImage == null && _rend == null && _rawImage == null)
-            {
-                Debug.Log("Script \"FadeColor\" colocado en un objeto sin color. Me destruyo");
-                Destroy(this);
-            }
-            _startColor = GetColor();
-            _startColor = new Color(_startColor.r, _startColor.g, _startColor.b, StartAlpha);
-            _endColor = new Color(_startColor.r, _startColor.g, _startColor.b, FinalAlpha);
-        }
-        else
-        {
-            Debug.Log("Componente \"Fade Color\" colocado y sin target asignado. No funcionará.");
+            Debug.Log("Script \"FadeColor\" colocado en un objeto sin color. Me destruyo");
             Destroy(this);
         }
+        _startColor = GetColor();
+        _startColor = new Color(_startColor.r, _startColor.g, _startColor.b, StartAlpha);
+        _endColor = new Color(_startColor.r, _startColor.g, _startColor.b, FinalAlpha);
     }
 
     /// <summary>
     /// Realiza el FadeColor cambiando entre _startColor y _endColor (mismo color, distinta transparencia) a lo largo del tiempo.
     /// Desactiva el componente trás acabar.
-    /// LateUpdate para sobreescribir otros cambios como el de los Animator.
     /// </summary>
     private void LateUpdate()
     {
         if (_t < FadeTime)
         {
             _t += Time.deltaTime;
+
             SetColor(Color.Lerp(_startColor, _endColor, _t / FadeTime));
         }
         else
         {
             SetColor(_endColor); // asegurarse de que acabe en el final
-
-            if (StartAlpha - FinalAlpha > 0) // si somos fade out
-            {
-                // Mantener el alpha si se tiene (sirve para el HUD de las balas y mantener su transparencia...)
-                OverrideAlpha MantainAlpha = GetComponent<OverrideAlpha>();
-                if (MantainAlpha != null) MantainAlpha.enabled = true;
-            }
-            else // si somos fade in
-            {
-                // Dejar de mantener el alpha
-                OverrideAlpha MantainAlpha = GetComponent<OverrideAlpha>();
-                if (MantainAlpha != null) MantainAlpha.enabled = false;
-            }
-
-                this.enabled = false;
+            this.enabled = false;
         }
     }
     #endregion
@@ -204,6 +187,10 @@ public class FadeColor : MonoBehaviour
         StartAlpha = newStartAlpha;
     }
 
+    /// <summary>
+    /// Método para leer el alpha actual
+    /// </summary>
+    /// <returns></returns>
     public float GetCurrentAlpha()
     {
         Color color = GetColor();
@@ -220,7 +207,7 @@ public class FadeColor : MonoBehaviour
     // mayúscula, incluida la primera letra)
      
     /// <summary>
-    /// Método que recoge el color del objeto, de los 3 posibles componentes con color.
+    /// Método que recoge el color del objeto, de los 4 posibles componentes con color.
     /// </summary>
     /// <returns></returns>
     private Color GetColor()
@@ -234,7 +221,7 @@ public class FadeColor : MonoBehaviour
     }
 
     /// <summary>
-    /// Método que establece el color del objeto, de los 3 posibles componentes con color.
+    /// Método que establece el color del objeto, de los 4 posibles componentes con color.
     /// </summary>
     /// <param name="c"></param>
     private void SetColor(Color c)

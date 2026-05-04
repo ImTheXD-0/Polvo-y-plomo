@@ -55,10 +55,22 @@ public class AudioManager : MonoBehaviour
 
     /// <summary>
     /// Parámetro de volumen de música.
-    /// Tiene métodos para leer y modificarlo.
     /// </summary>
     [SerializeField, Range(0f, 1f)]
     private float VolumeMusic = 1f;
+
+    /// <summary>
+    /// Velocidad a la que se realiza la transición de volumen al cambiar de fase.
+    /// Un valor menor hace que el fundido sea más lento.
+    /// </summary>
+    [SerializeField, Range(0.1f, 5f)]
+    private float FadeSpeed = 0.5f;
+
+    /// <summary>
+    /// Velocidad a la que se realiza la transición de volumen al pausar/despausar el juego.
+    /// </summary>
+    [SerializeField, Range(0.1f, 10f)]
+    private float PauseFadeSpeed = 5f;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -88,7 +100,7 @@ public class AudioManager : MonoBehaviour
 
     /// <summary>
     /// Contador que indica cuántas AudioSources han sido creadas.
-    /// Este -1 indica el máximo indice que no tiene AudioSource null.
+    /// Este 0 indica el máximo indice que no tiene AudioSource null.
     /// </summary>
     private int _createdAudioSources = 0;
 
@@ -97,6 +109,16 @@ public class AudioManager : MonoBehaviour
     /// Servirá para la música.
     /// </summary>
     private AudioSource _mySource;
+
+    /// <summary>
+    /// Fuente secundaria para la fase 2 de Suzie
+    /// </summary>
+    private AudioSource _fase2Source;
+
+    /// <summary>
+    /// Fuente terciaria para la música atenuada del menú de pausa.
+    /// </summary>
+    private AudioSource _pausedSource;
 
     /// <summary>
     /// Pitch objetivo al que se deben extender los audios 
@@ -112,6 +134,17 @@ public class AudioManager : MonoBehaviour
     /// Velocidad a la que se transiciona el pitch.
     /// </summary>
     private float _pitchTransitionSpeed = 5f;
+
+    /// <summary>
+    /// Estado interno: 1 para Fase 1, 2 para Fase Jefe 2.
+    /// </summary>
+    private int _currentPhase = 1;
+
+    /// <summary>
+    /// Estado interno: Indica si la música de pausa debe tomar el control.
+    /// </summary>
+    private bool _isPaused = false;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -144,6 +177,18 @@ public class AudioManager : MonoBehaviour
                 return;
             }
 
+            // Inicialización de la fuente para la música metalizada (Fase 2)
+            _fase2Source = gameObject.AddComponent<AudioSource>();
+            _fase2Source.loop = true;
+            _fase2Source.playOnAwake = false;
+            _fase2Source.spatialBlend = 0; // Sonido 2D para música
+
+            // Inicialización de la fuente para la música en pausa
+            _pausedSource = gameObject.AddComponent<AudioSource>();
+            _pausedSource.loop = true;
+            _pausedSource.playOnAwake = false;
+            _pausedSource.spatialBlend = 0;
+
             _poolAudioSources = new AudioSource[MaxAudioSources];
             DontDestroyOnLoad(gameObject);
             _instance = this;
@@ -169,6 +214,36 @@ public class AudioManager : MonoBehaviour
             }
         }
 
+        float targetFase1 = 0f;
+        float targetFase2 = 0f;
+        float targetPause = 0f;
+
+        if (_isPaused && _pausedSource.clip != null)
+        {
+            // Si está pausado y hay pista de pausa asignada, solo suena esta
+            targetPause = 1f;
+        }
+        else
+        {
+            // Si no está pausado, suena la fase correspondiente
+            if (_currentPhase == 1) targetFase1 = 1f;
+            else if (_currentPhase == 2) targetFase2 = 1f;
+        }
+
+        // Determinamos si debemos hacer el fundido rápido (por la pausa) o lento (por cambio de fase de Suzie)
+        float currentSpeed = FadeSpeed;
+
+        // Si hemos pausado, o si la música de pausa aún se está desvaneciendo al volver al juego
+        if (_isPaused || _pausedSource.volume > 0f)
+        {
+            currentSpeed = PauseFadeSpeed;
+        }
+
+        // Interpolación fluida de volúmenes
+        _mySource.volume = Mathf.MoveTowards(_mySource.volume, targetFase1 * VolumeMusic, Time.unscaledDeltaTime * FadeSpeed);
+        _fase2Source.volume = Mathf.MoveTowards(_fase2Source.volume, targetFase2 * VolumeMusic, Time.unscaledDeltaTime * FadeSpeed);
+        _pausedSource.volume = Mathf.MoveTowards(_pausedSource.volume, targetPause * VolumeMusic, Time.unscaledDeltaTime * PauseFadeSpeed);
+
         if (_currentPitch != _targetPitch)
         {
             // MoveTowards garantiza alcanzar el 1.0 o el 0.5 exacto. 
@@ -176,10 +251,9 @@ public class AudioManager : MonoBehaviour
             _currentPitch = Mathf.MoveTowards(_currentPitch, _targetPitch, Time.unscaledDeltaTime * _pitchTransitionSpeed);
 
             // Aplicar a la música
-            if (_mySource != null)
-            {
-                _mySource.pitch = _currentPitch;
-            }
+            if (_mySource != null) _mySource.pitch = _currentPitch;
+            if (_fase2Source != null) _fase2Source.pitch = _currentPitch;
+            if (_pausedSource != null) _pausedSource.pitch = _currentPitch;
 
             // Aplicar a todos los SFX
             for (int i = 0; i < _createdAudioSources; i++)
@@ -255,7 +329,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="music"></param>
     public void PlayMusic(AudioClip music)
     {
-        if (_mySource.isPlaying) _mySource.Stop();
+        StopMusic(); // Limpia fuentes anteriores
+        _currentPhase = 1; // Resetea estado
 
         _mySource.clip = music;
         _mySource.volume = VolumeMusic;
@@ -264,11 +339,68 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Inicia la lógica de combate con una versión normal y una pausada
+    /// </summary>
+    public void StartLevelMusic(AudioClip normal, AudioClip paused)
+    {
+        StopMusic();
+        _currentPhase = 1;
+
+        _mySource.clip = normal;
+        _pausedSource.clip = paused;
+
+        _mySource.volume = VolumeMusic;
+        _pausedSource.volume = 0f;
+
+        _mySource.Play();
+        if (paused != null) _pausedSource.Play();
+    }
+
+    /// <summary>
+    /// Inicia la lógica del Jefe con Fase 1, Fase 2 y versión Pausada.
+    /// </summary>
+    public void StartBossMusic(AudioClip fase1, AudioClip fase2, AudioClip paused)
+    {
+        StopMusic();
+        _currentPhase = 1;
+
+        _mySource.clip = fase1;
+        _fase2Source.clip = fase2;
+        _pausedSource.clip = paused;
+
+        _mySource.volume = VolumeMusic;
+        _fase2Source.volume = 0f;
+        _pausedSource.volume = 0f;
+
+        _mySource.Play();
+        if (fase2 != null) _fase2Source.Play();
+        if (paused != null) _pausedSource.Play();
+    }
+
+    /// <summary>
+    /// Cambia a la fase 2 de la canción del jefe.
+    /// </summary>
+    public void TransitionToPhase2()
+    {
+        _currentPhase = 2;
+    }
+
+    /// <summary>
+    /// Activa o desactiva la prioridad de la pista de pausa.
+    /// </summary>
+    public void SetPauseMusicStatus(bool isPaused)
+    {
+        _isPaused = isPaused;
+    }
+
+    /// <summary>
     /// Para la música.
     /// </summary>
     public void StopMusic()
     {
-        _mySource.Stop();
+        if (_mySource != null) _mySource.Stop();
+        if (_fase2Source != null) _fase2Source.Stop();
+        if (_pausedSource != null) _pausedSource.Stop();
     }
 
     /// <summary>
@@ -316,9 +448,7 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume"></param>
     public void SetMusicVolume(float volume)
     {
-        volume = Mathf.Clamp01(volume);
-        VolumeMusic = volume;
-        _mySource.volume = VolumeMusic;
+        VolumeMusic = Mathf.Clamp01(volume);
     }
     #endregion
 

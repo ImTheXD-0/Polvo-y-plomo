@@ -46,6 +46,14 @@ public class playerRoll : MonoBehaviour
     /// </summary>
     [SerializeField] private SpriteRenderer SpriteArmaJugador;
 
+    /// <summary>
+    /// Manda al animator asignado (idealmente el del jugador) la variable booleana isRolling.
+    /// También le manda los variables float RollDirX y RollDirY al iniciar el roll, con valores normalizados.
+    /// Si no se asigna no hace nada.
+    /// </summary>
+    [SerializeField]
+    private Animator Anim;
+
     [SerializeField]
     private AudioClip RollSound;
     #endregion
@@ -101,6 +109,10 @@ public class playerRoll : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
+    /// <summary>
+    /// Awake que inicializa las variables de los scripts RigidBody2D y playerControlledMovement que debería tener el jugador, destruyendo en caso contrario
+    /// (programación defensiva).
+    /// </summary>
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -164,6 +176,7 @@ public class playerRoll : MonoBehaviour
             if (_tDuracionRodado <= 0)
             {
                 _isRolling = false;
+                if (Anim != null) Anim.SetBool("isRolling", false);
                 _rb.linearVelocity = Vector2.zero;
                 InputManager.Instance.ActivarInput();
                 LogicaRoll(true);
@@ -179,6 +192,11 @@ public class playerRoll : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
+    public bool GetRoll()
+    {
+        return _isRolling;
+    }
+    
 
 
     #endregion
@@ -203,6 +221,12 @@ public class playerRoll : MonoBehaviour
         _tDuracionRodado = DuracionRodado;
         _isRolling = true;
         if (RollSound) AudioManager.Instance.Play(RollSound, transform.position);
+        if (Anim != null)
+        {
+            Anim.SetBool("isRolling", true);
+            Anim.SetFloat("RollDirX", _dirRoll.normalized.x);
+            Anim.SetFloat("RollDirY", _dirRoll.normalized.y);
+        }
     }
 
     /// <summary>

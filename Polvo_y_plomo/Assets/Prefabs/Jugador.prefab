@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 963654306252283241}
   - component: {fileID: 4864011063731840737}
   m_Layer: 0
-  m_Name: RevolverFather
+  m_Name: RotateBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4709658674322198269}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   RotateTowardsPlayer: 0
   FlipY: 1
   RotationOffset: 0
+  Anim: {fileID: 7364166214027565214}
 --- !u!1 &4821254670401775029
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +338,7 @@ GameObject:
   - component: {fileID: 1474871151810355398}
   - component: {fileID: 8640769707630179225}
   - component: {fileID: 3385198336411724539}
+  - component: {fileID: 7364166214027565214}
   m_Layer: 10
   m_Name: Jugador
   m_TagString: Untagged
@@ -406,7 +408,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 4483504832982471387, guid: a64fd7c0681edc04e98ec4e47462804f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -467,8 +469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6520cc7f89bc080478227369005003d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSpeed: 6.5
+  PlayerSpeed: 6
   PlayerAntiSlowBuff: 1.5
+  Anim: {fileID: 7364166214027565214}
 --- !u!50 &166880489185979541
 Rigidbody2D:
   serializedVersion: 5
@@ -509,7 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cursor: {fileID: 8633089953209525018}
-  CooldownMelee: 1
+  CooldownMelee: 1.2
 --- !u!114 &5273611612293079281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,9 +561,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CooldownRoll: 1.5
   DesplazamientoRodado: 5
-  DuracionRodado: 0.3
+  DuracionRodado: 0.35
   HitboxJugador: {fileID: 5036081665872762522}
   SpriteArmaJugador: {fileID: 8180277153169744243}
+  Anim: {fileID: 7364166214027565214}
   RollSound: {fileID: 8300000, guid: 221236e18eb3a7944abffe6f6f9e0401, type: 3}
 --- !u!114 &3385198336411724539
 MonoBehaviour:
@@ -579,12 +583,34 @@ MonoBehaviour:
   - PlayerAbilityDuration: 2.75
     AbilityUpgradeKillThreshold: 0
   - PlayerAbilityDuration: 3.75
-    AbilityUpgradeKillThreshold: 25
+    AbilityUpgradeKillThreshold: 30
   - PlayerAbilityDuration: 4.5
-    AbilityUpgradeKillThreshold: 50
+    AbilityUpgradeKillThreshold: 65
   - PlayerAbilityDuration: 5
-    AbilityUpgradeKillThreshold: 75
+    AbilityUpgradeKillThreshold: 100
   LevelUP: {fileID: 8300000, guid: e2e71451ece1a1543896e0495e7ce6db, type: 3}
+--- !u!95 &7364166214027565214
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794519440049798451}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 593e5aa37ff5fe0449e2809f4997d4e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8633089953209525018
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,6 +711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3098542290943024dbb3edfa05e72ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorSpeedMultiplier: 1
+  CursorSpeedMultiplier: 2
   CursorMaxRadius: 4
   CursorMinRadius: 1

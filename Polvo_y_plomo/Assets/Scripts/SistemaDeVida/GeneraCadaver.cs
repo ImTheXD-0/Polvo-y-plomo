@@ -16,6 +16,9 @@ using UnityEngine;
 /// 
 /// +++
 /// Implementada funcionalidad para que puedan aparecer varios cadáveres (necesario para dejar caer drops de vida)
+/// 
+/// +++
+/// Implementada funcionalidad para poder poner el cadaver en una posicion distinta si tenemos el compnoente EnemySpawnLogic
 /// </summary>
 public class GeneraCadaver : MonoBehaviour
 {
@@ -67,7 +70,18 @@ public class GeneraCadaver : MonoBehaviour
     {
         foreach (GameObject c in Cadaveres)
         {
-            if (c != null) Instantiate(c, transform.position + c.transform.position, transform.rotation);
+            if (c != null)
+            {
+                // Lógica para generar cadaver en la posicion de la animación si estamos en un EnemySpawnLogic. Si no lo hace aparecer en donde muere.
+                EnemySpawnLogic enemySpawn = GetComponent<EnemySpawnLogic>();
+                if (enemySpawn == null) Instantiate(c, transform.position + c.transform.position, transform.rotation);
+                else
+                {
+                    Hitbox enemyHitbox = enemySpawn.GetComponentInChildren<Hitbox>();
+                    if (enemyHitbox != null) Instantiate(c, enemyHitbox.transform.position + c.transform.position, enemyHitbox.transform.rotation);
+                    else Debug.Log("No se ha encontrado hitbox en el EnemySpawnLogic y no se puede generar cadaver correctamente");
+                }
+            }
         }
     }
     #endregion

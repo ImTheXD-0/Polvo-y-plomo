@@ -168,26 +168,14 @@ public class playerSlowShot : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (!_abilityOn) _tToReactivateAbility -= Time.deltaTime * GameManager.SlowMultiplier;
-
-        // Activacion de la habilidad
-        if (InputManager.Instance.HabilityWasPressedThisFrame() && !_abilityOn &&_tToReactivateAbility <= 0)
-        {
-            _tRemainingOfAbility = AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration;
-            _abilityOn = true;
-            GameManager.Instance.SlowShotOn(); // el resto de componentes que involucran a cosas en movimiento, tiempos, etc ahora van más lentos.
-            // el _tToReactivateHability se reinicia una vez _abilityOn = false.
-        }
-
         // Lógica de la habilidad
         if (_abilityOn)
         {
-            if (GameManager.SlowMultiplier == 0) _tRemainingOfAbility -= Time.deltaTime * GameManager.SlowMultiplier;
-            else _tRemainingOfAbility -= Time.deltaTime;
+            // Paso del tiempo
+            if (GameManager.SlowMultiplier != 0) _tRemainingOfAbility -= Time.deltaTime;
 
             if (_tRemainingOfAbility <= 0)
             {
-                _tRemainingOfAbility = 0;
                 _tToReactivateAbility = PlayerAbilityCooldown;
 
                 _abilityOn = false;
@@ -197,8 +185,23 @@ public class playerSlowShot : MonoBehaviour
                 GameManager.Instance.UpdateTimeHabilityLiquid(1);
                 GameManager.Instance.UpdateTimeHabilityShadow(1);
             }
+            else if (InputManager.Instance.HabilityWasPressedThisFrame()) // Desactivar la habilidad
+            {
+                // Tiempo restante para reactivar la habilidad
+                _tToReactivateAbility = PlayerAbilityCooldown * (1 - _tRemainingOfAbility / AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration);
+
+                _abilityOn = false;
+                GameManager.Instance.SlowShotOff();
+
+                // reset fillAmmount del líquido
+                GameManager.Instance.UpdateTimeHabilityLiquid(1);
+
+                // Pintado de sombra
+                GameManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
+            }
             else
             {
+
                 _abilityProportionLasting = _tRemainingOfAbility / AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration;
 
                 // pintar el fillAmmount del liquido de la habilidad
@@ -207,6 +210,18 @@ public class playerSlowShot : MonoBehaviour
         }
         else
         {
+            // Paso del tiempo
+            _tToReactivateAbility -= Time.deltaTime * GameManager.SlowMultiplier;
+
+            // Activacion de la habilidad
+            if (InputManager.Instance.HabilityWasPressedThisFrame() && _tToReactivateAbility <= 0)
+            {
+                _tRemainingOfAbility = AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration;
+                _abilityOn = true;
+                GameManager.Instance.SlowShotOn(); // el resto de componentes que involucran a cosas en movimiento, tiempos, etc ahora van más lentos.
+                                                   // el _tToReactivateHability se reinicia una vez _abilityOn = false.
+            }
+
             // pintar el fillAmmount de la sombra de la habilidad
             GameManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
         }
@@ -233,6 +248,10 @@ public class playerSlowShot : MonoBehaviour
             if (kills >= AbilityLevels[_abilityCurrentLevel + 1].AbilityUpgradeKillThreshold)
             {
                 _abilityCurrentLevel++;
+
+                // Para que la habilidad se amplie si se sube de nivel durante la duración de esta:
+                if (_abilityOn) _tRemainingOfAbility += AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration - AbilityLevels[_abilityCurrentLevel - 1].PlayerAbilityDuration;
+
                 GameManager.Instance.ActivateLevelUpText();
                 if (_abilityCurrentLevel == AbilityLevels.Length - 1) GameManager.Instance.UpdateLevelBar(1);
                 else GameManager.Instance.UpdateLevelBar(0);

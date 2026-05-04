@@ -103,7 +103,6 @@ GameObject:
   - component: {fileID: 6040358390256342124}
   - component: {fileID: 7949443984875414264}
   - component: {fileID: 9083717780677641832}
-  - component: {fileID: 6617239759872121760}
   - component: {fileID: 665035473078582}
   - component: {fileID: 5891100814486715577}
   - component: {fileID: 7280290977658881276}
@@ -245,104 +244,6 @@ MonoBehaviour:
   CuracionJugador: {fileID: 0}
   CoberturaCubre: {fileID: 0}
   CoberturaRota: {fileID: 0}
-  MuerteJugador: {fileID: 0}
---- !u!82 &6617239759872121760
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8374259116769511410}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 301015a462869ac4e9c70d093cf300df, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &665035473078582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da64d4f6a126e1843a4be8960921c590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Whistle: {fileID: 6617239759872121760}
+  Whistle: {fileID: 8300000, guid: 301015a462869ac4e9c70d093cf300df, type: 3}
   HealthManager: {fileID: 9083717780677641832}
   SpawnLevels:
   - LevelSpawners:
@@ -566,10 +467,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4373482155475448269, guid: 3e54fe0dcc77c074c8ec2f28b2f446e8, type: 3}
     - target: {fileID: 6906647698243497770, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
+      propertyPath: RangoCono
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906647698243497770, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
+      propertyPath: NumPerdigones
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906647698243497770, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
       propertyPath: DisparoEscopeta
       value: 
       objectReference: {fileID: 8300000, guid: c7043eb20cf1ead44a09063a425a1c83, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3349065422280928405, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

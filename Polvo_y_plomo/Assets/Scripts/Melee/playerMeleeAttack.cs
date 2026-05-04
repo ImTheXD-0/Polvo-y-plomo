@@ -46,9 +46,14 @@ public class playerMeleeAttack : MonoBehaviour
     /// </summary>
     private float _tRemainingToMelee = 0;
 
-    // Almacena el componente CanMelee que ha de tener el objeto con este script. Inicializado en Start().
+    /// <summary>
+    /// Almacena el componente CanMelee que ha de tener el objeto con este script. Inicializado en Start()
+    /// </summary>
     private CanMelee _canMelee;
 
+    /// <summary>
+    /// Bool que dice si hay una sombra de ataque melee en ese momento ya generada, o no
+    /// </summary>
     private bool _shadowSpawned = false;
     #endregion
 
@@ -100,6 +105,9 @@ public class playerMeleeAttack : MonoBehaviour
             DoMelee(true);
             _shadowSpawned = true;
         }
+
+        // Para que si el jugador abre el menu de pausa mientras mantiene el click derecho se pueda borrar la sombra y luego volver a generarse.
+        if (InputManager.Instance.ExitWasPressedThisFrame()) _shadowSpawned = false;
 
         if (InputManager.Instance.MeleeWasReleasedThisFrame() && _tRemainingToMelee <= 0)
         {

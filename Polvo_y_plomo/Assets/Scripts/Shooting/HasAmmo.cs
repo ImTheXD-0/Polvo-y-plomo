@@ -16,6 +16,7 @@ using UnityEngine;
 /// 
 /// (!) Por ahora solo tiene lógica para parar la recarga del jugador. Se puede implementar facilmente para un enemigo con un nuevo
 /// método "CancelaRecarga()" o algo por el estilo (como no tenemos pensado añadirlo no esta implementado).
+/// De hecho ha acabado convirtiendose en un script especialmente diseñado para el jugador... seguramente sea mejor diferenciarlo si se quiere implementar un enemigo con municion.
 /// 
 /// +++
 /// Se ha reescrito un poco el código para incluir el ShootEscopeta
@@ -116,6 +117,8 @@ public class HasAmmo : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// 
     /// Se llama cada frame.
     /// Lleva la lógica de recarga bala a bala.
     /// Si se dispara, hace roll o ataque melee, la recarga se para.

@@ -26,13 +26,24 @@ public class playerControlledMovement : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    // Parámetro que almacena la velocidad a la que se mueve el jugador, de forma constante.
+    /// <summary>
+    /// Parámetro que almacena la velocidad a la que se mueve el jugador, de forma constante.
+    /// </summary>
     [SerializeField]
     private float PlayerSpeed = 5f;
 
-    // Variable que compensa la habilidad "Disparo lento" del jugador con respecto a su movimiento, lo que le supone una ventaja frente a los enemigos.
+    /// <summary>
+    /// Variable que compensa la habilidad "Disparo lento" del jugador con respecto a su movimiento, lo que le supone una ventaja frente a los enemigos.
+    /// </summary>
     [SerializeField]
     private float PlayerAntiSlowBuff = 1.5f;
+
+    /// <summary>
+    /// Animator del jugador. Le mandará el booleano isWalking en cada FixedUpdate().
+    /// Si no se configura no hace nada.
+    /// </summary>
+    [SerializeField]
+    private Animator Anim;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -93,6 +104,8 @@ public class playerControlledMovement : MonoBehaviour
         // Movimiento del jugador
         _rb.linearVelocity = InputManager.Instance.MovementVector * PlayerSpeed;
         if (_gameManager && GameManager.SlowMultiplier != 1) _rb.linearVelocity *= GameManager.SlowMultiplier * PlayerAntiSlowBuff;
+
+        if (Anim != null) Anim.SetBool("isWalking", _rb.linearVelocity.magnitude > 0);
     }
 
     #endregion
