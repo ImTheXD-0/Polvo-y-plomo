@@ -299,6 +299,15 @@ public class ChasePlayer : MonoBehaviour
         }
     }
 
+     /// <summary>
+     /// Se ejecuta una vez despúes de realizar todos los ciclos lógicos.
+     /// Se suele usar para el renderizado.
+     /// </summary>
+    private void LateUpdate()
+    {
+        _animator.SetBool("isWalking", _isChasing);
+    }
+
     /// <summary>
     /// Se llama al destruirse el componente.
     /// Intentará destruir otros componentes que dependen completamente del ChasePlayer.
@@ -332,8 +341,11 @@ public class ChasePlayer : MonoBehaviour
     /// </summary>
     public void Stunned(bool stunned)
     {
+        Vector3 directionToPlayer = _playerTransform.position - transform.position;
         _isStunned = stunned;
         _animator.SetBool("isStunned", stunned);
+        _animator.SetFloat("XStunDir", directionToPlayer.normalized.x);
+        _animator.SetFloat("YStunDir", directionToPlayer.normalized.y);
         _animator.speed = 1f; // reinicio de la velocidad de animación
         if (stunned) _stunVelocity = StunSpeed * (transform.position - _playerTransform.position).normalized;
     }

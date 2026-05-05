@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e3004523a29b41149a06b718f677d1e8
+guid: 0aeb5ffd708a57542b9ac7ac021f4522
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2860493481452247983
-    second: CazarrecompensasWalkFront_0
+      213: 4748619663247623163
+    second: CazarrecompensasRight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,89 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CazarrecompensasWalkFront_0
+      name: CazarrecompensasRight_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 26
-        height: 40
+        width: 24
+        height: 35
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fab18447aa382b720800000000000000
-      internalID: 2860493481452247983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CazarrecompensasWalkFront_1
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 0
-        width: 26
-        height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dcb424b9b885013408e87ff6b69fbf09
-      internalID: 1799485273
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CazarrecompensasWalkFront_2
-      rect:
-        serializedVersion: 2
-        x: 52
-        y: 0
-        width: 26
-        height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6bbd60d6361346e438d2f3986ed862e9
-      internalID: -403932012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CazarrecompensasWalkFront_3
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 0
-        width: 26
-        height: 40
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d54421fb4736de140a50b4090165a1f3
-      internalID: 2144785573
+      spriteID: bf34f49ac6c76e140800000000000000
+      internalID: 4748619663247623163
       vertices: []
       indices: 
       edges: []
@@ -191,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b8dc5931d6ea02c41b05700f88c6ae60
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -201,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CazarrecompensasWalkFront_0: 2860493481452247983
-      CazarrecompensasWalkFront_1: 1799485273
-      CazarrecompensasWalkFront_2: -403932012
-      CazarrecompensasWalkFront_3: 2144785573
+      CazarrecompensasRight_0: 4748619663247623163
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
