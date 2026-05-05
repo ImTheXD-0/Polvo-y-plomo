@@ -67,6 +67,8 @@ public class ShootEscopeta : MonoBehaviour
     /// Inicializado en el Start().
     /// </summary>
     private int _difficultyExtraPellets;
+
+    protected Animator _gunshotAnimator;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -96,6 +98,11 @@ public class ShootEscopeta : MonoBehaviour
         if (DisparidadMinima * (NumPerdigones + _difficultyExtraPellets) >= RangoCono)
         {
             DisparidadMinima = (RangoCono / (NumPerdigones+_difficultyExtraPellets)) - 1f;
+        }
+        _gunshotAnimator = GetComponent<Animator>();
+        if (_gunshotAnimator == null)
+        {
+            Debug.Log("Se ha puesto el componente \"ShootEscopeta\" sin un animator. No se animará.");
         }
 
     }
@@ -138,6 +145,7 @@ public class ShootEscopeta : MonoBehaviour
             Instantiate(PerdigonPrefab, transform.position, rotacionPerdigon);
         }
         if (DisparoEscopeta) AudioManager.Instance.Play(DisparoEscopeta, transform.position);
+        if (_gunshotAnimator != null) _gunshotAnimator.SetTrigger("Shot");
     }
 
     #endregion

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a363614a8c605684ea216eb6384347df
+guid: eb15b3993fa04e748962346f155dd6cd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3233395927734931116
-    second: ESCOPETAAA_0
+      213: -4307831212930613509
+    second: BorrachoRight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ESCOPETAAA_0
+      name: BorrachoRight_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 34
-        height: 11
+        width: 20
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: caec5da07745fdc20800000000000000
-      internalID: 3233395927734931116
+      spriteID: bfe3ee0f5528734c0800000000000000
+      internalID: -4307831212930613509
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 69a0f235b6575de408a5d4faebc04b5c
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ESCOPETAAA_0: 3233395927734931116
+      BorrachoRight_0: -4307831212930613509
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

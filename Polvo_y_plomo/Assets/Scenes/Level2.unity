@@ -25140,13 +25140,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2833678224245811616, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833678224245811616, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3100835469812802007, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: ImageFilled
       value: 
       objectReference: {fileID: 801652967}
     - target: {fileID: 4537767330091140085, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5891100814486715577, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: ShotgunSprite
@@ -25316,6 +25324,26 @@ PrefabInstance:
       propertyPath: 'SpawnLevels.Array.data[8].LevelSpawners.Array.data[5]'
       value: 
       objectReference: {fileID: 34665874}
+    - target: {fileID: 7552268331452751956, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552268331452751956, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552268331452751956, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552268331452751956, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552268331452751956, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8374259116769511410, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: m_Name
       value: Suzie

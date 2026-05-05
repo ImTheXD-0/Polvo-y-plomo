@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using UnityEditorInternal;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -77,7 +78,7 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         _revolverAnimator = GetComponent<Animator>();
-        if (Bullet == null)
+        if (_revolverAnimator == null)
         {
             Debug.Log("Se ha puesto el componente \"Shoot\" sin un animator. No se animará.");
         }

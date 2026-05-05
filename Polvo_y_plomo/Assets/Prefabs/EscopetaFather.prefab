@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6510808595929221570}
   - component: {fileID: 3349065422280928405}
   - component: {fileID: 6906647698243497770}
+  - component: {fileID: 3531097274460025474}
   m_Layer: 0
   m_Name: EscopetaSon
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Reload: 0.3
   NumMaxBalas: 6
+  ShootFailed: {fileID: 0}
 --- !u!114 &6906647698243497770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +121,29 @@ MonoBehaviour:
   RangoCono: 60
   NumPerdigones: 4
   DisparidadMinima: 5
+  DisparoEscopeta: {fileID: 0}
+--- !u!95 &3531097274460025474
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893368117694355804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 975e52f27ec122740a5bcada06b41ffc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3270429832751051296
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,3 +193,4 @@ MonoBehaviour:
   RotateTowardsPlayer: 0
   FlipY: 1
   RotationOffset: 0
+  Anim: {fileID: 0}
