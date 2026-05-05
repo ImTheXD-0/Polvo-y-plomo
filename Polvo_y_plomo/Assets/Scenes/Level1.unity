@@ -363,9 +363,41 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5779818294175565228, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: 'SpritesTocando.Array.data[0]'
+      value: 
+      objectReference: {fileID: -4665263541380435437, guid: 5eb1a75d56dea684f865214d6fba0236, type: 3}
+    - target: {fileID: 5779818294175565228, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: 'SpritesTocando.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5774645237321130368, guid: 5eb1a75d56dea684f865214d6fba0236, type: 3}
+    - target: {fileID: 5779818294175565228, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: 'SpritesTocando.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1395045556, guid: 5eb1a75d56dea684f865214d6fba0236, type: 3}
+    - target: {fileID: 5779818294175565228, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: 'SpritesTocando.Array.data[3]'
+      value: 
+      objectReference: {fileID: 557995358, guid: 5eb1a75d56dea684f865214d6fba0236, type: 3}
+    - target: {fileID: 6040358390256342124, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040358390256342124, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: m_Size.y
+      value: 1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040358390256342124, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4665263541380435437, guid: 5eb1a75d56dea684f865214d6fba0236, type: 3}
     - target: {fileID: 6040358390256342124, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040358390256342124, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6196589736829201710, guid: c0a39386b6121cf42b336ce36d8b916b, type: 3}
       propertyPath: m_Size.y
@@ -32449,7 +32481,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.2, y: 2.55}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 1.28, y: 1.03}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -33419,7 +33451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248944528461249987, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12
+      value: 12.37
       objectReference: {fileID: 0}
     - target: {fileID: 7248944528461249987, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
       propertyPath: m_LocalPosition.z
