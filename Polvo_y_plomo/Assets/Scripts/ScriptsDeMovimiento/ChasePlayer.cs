@@ -299,7 +299,7 @@ public class ChasePlayer : MonoBehaviour
      /// </summary>
     private void LateUpdate()
     {
-        _animator.SetBool("isWalking", _isChasing);
+        if (_animator != null) _animator.SetBool("isWalking", _isChasing);
     }
 
     /// <summary>

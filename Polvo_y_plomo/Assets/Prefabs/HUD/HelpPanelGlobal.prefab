@@ -1701,6 +1701,8 @@ MonoBehaviour:
   NewText: Activa una habilidad que ralentiza el tiempo. Esta se puede ir mejorando
     al matar enemigos, aumentando su duracion. Tiene cierto cooldown, y se puede
     parar presionando el boton de activacion, haciendo que este cooldown sea menor.
+    Entre otros usos, te mueves mas rapido en relacion a los enemigos y recargas
+    mas rapido durante la habilidad.
 --- !u!1 &2133966029211045102
 GameObject:
   m_ObjectHideFlags: 0

@@ -125,7 +125,11 @@ public class HasAmmo : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance()) _tParaSiguienteRecarga -= Time.deltaTime * GameManager.SlowMultiplier;
+        if (GameManager.HasInstance())
+        {
+            // Si es 0 no debe correr el tiempo. De otra forma, que corra, sin que le afecte el tiempo (recarga transcurre normal).
+            if (GameManager.SlowMultiplier != 0) _tParaSiguienteRecarga -= Time.deltaTime;
+        }
         else _tParaSiguienteRecarga -= Time.deltaTime;
 
         if (_isPlayer && IsReloadCanceledThisFrame())
