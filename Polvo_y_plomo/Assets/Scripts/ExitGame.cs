@@ -10,8 +10,8 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Script que permite cerrar el juego 
+/// En Unity te avisa ocn un Debug.Log
 /// </summary>
 public class ExitGame : MonoBehaviour
 {
@@ -42,11 +42,6 @@ public class ExitGame : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -60,7 +55,6 @@ public class ExitGame : MonoBehaviour
     /// <summary>
     /// Método que permite cerrar el juego
     ///<summary>
-
     public void CerrarJuego()
     {
         Debug.Log("Cerrando juego...");

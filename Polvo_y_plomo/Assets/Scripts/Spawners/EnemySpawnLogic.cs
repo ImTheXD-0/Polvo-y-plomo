@@ -111,7 +111,8 @@ public class EnemySpawnLogic : MonoBehaviour
             {
                 if (clip.name == ("Spawn" + _spawnID))
                 {
-                    SpawnAnimator.Play(clip.name, 0, 0f);
+                    SpawnAnimator.Play(clip.name, 0, 0f); // layer 0; movimiento del transform
+                    SpawnAnimator.Play(clip.name + "Sprite", 1, 0f); // layer 1; cambios de sprite
                     SpawnAnimator.speed = 1f;
                     _duracionAnimacion = clip.length;
                 }
@@ -123,7 +124,7 @@ public class EnemySpawnLogic : MonoBehaviour
     /// Se llama cada frame mientras el componente esté activo.
     /// Espera la duración de la animación y hace el spawn del enemigo, luego autodestruyendose.
     /// </summary>
-    private void FixedUpdate()
+    private void Update()
     {
         if (GameManager.HasInstance())
         {
@@ -133,6 +134,7 @@ public class EnemySpawnLogic : MonoBehaviour
         else _duracionAnimacion -= Time.deltaTime;
 
         if (_duracionAnimacion < 0) DoSpawn();
+        else SpawnAnimator.SetFloat("Time", _duracionAnimacion);
     }
 
     #endregion

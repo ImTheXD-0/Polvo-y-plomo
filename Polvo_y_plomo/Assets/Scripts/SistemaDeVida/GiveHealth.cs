@@ -22,6 +22,7 @@ public class GiveHealth : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
+
     /// <summary>
     /// Con esta variable indicaremos la cantidad de curación que podra darnos el gameObject
     /// </summary>

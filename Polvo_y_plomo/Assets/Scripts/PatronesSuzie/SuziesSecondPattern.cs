@@ -5,11 +5,12 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
+/// 
 /// </summary>
 public class SuziesSecondPattern : MonoBehaviour
 {
@@ -47,8 +48,11 @@ public class SuziesSecondPattern : MonoBehaviour
     /// </summary>
     [SerializeField] private SpawnLevel[] SpawnLevels;
 
+
+    /// <summary>
+    /// El spawn inicial que activa el resto
+    /// </summary>
     [SerializeField]
-    [Tooltip("El spawn inicial que activa el resto")]
     private EnemySpawner Pattern2Spawner;
 
     #endregion
@@ -80,6 +84,10 @@ public class SuziesSecondPattern : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
+    /// <summary>
+    /// Se llama al cargarse en escena.
+    /// Comprueba que este gameObject tenga componente de vida
+    /// </summary>
     void Awake()
     {
         HealthManager = this.GetComponent<HealthChanger>();
@@ -166,7 +174,6 @@ public class SuziesSecondPattern : MonoBehaviour
     private void Hide()
     {
         HealthManager.BlockDamage();
-        // Aqui iria una animación de esconderse
     }
 
     /// <summary>
@@ -175,7 +182,6 @@ public class SuziesSecondPattern : MonoBehaviour
     private void UnHide()
     {
         HealthManager.AllowDamage();
-        // Aquí iria una animación para salir del escondite
     }
     #endregion
 

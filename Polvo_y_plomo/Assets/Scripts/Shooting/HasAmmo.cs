@@ -221,8 +221,7 @@ public class HasAmmo : MonoBehaviour
     /// <returns></returns>
     private bool IsReloadCanceledThisFrame()
     {
-        return (InputManager.Instance.FireWasPressedThisFrame() || InputManager.Instance.MeleeWasPressedThisFrame() ||
-            InputManager.Instance.FireWasReleasedThisFrame() || InputManager.Instance.MeleeWasReleasedThisFrame());
+        return (InputManager.Instance.FireWasPressedThisFrame() || InputManager.Instance.MeleeWasReleasedThisFrame());
     }
     #endregion
 

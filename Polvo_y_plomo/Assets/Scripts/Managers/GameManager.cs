@@ -250,24 +250,22 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ImageFill MeleeCooldown = null;
 
+    /// <summary>
+    /// Organizar apartados del Highscore
+    /// </summary>
     [Header("Highscore")]
 
     /// <summary>
     /// Texto en el que se escribe el número del highscore.
     /// </summary>
     [SerializeField]
-    private TextMeshProUGUI highScoreTextUI;
+    private TextMeshProUGUI HighScoreTextUI;
 
-
+    /// <summary>
+    /// Array para almacenar todos los gameObjects que se usaran para indicar los puntos que dan los enemigos en pantalla
+    /// </summary>
     [SerializeField]
-    int highScore;
-
-    [SerializeField]
-    GameObject[] streakText;
-
-    [SerializeField]
-    int actualtext;
-
+    private GameObject[] StreakText;
 
     /// <summary>
     /// Variable a la que se le debe asignar el Animator del icono de la habilidad.
@@ -277,9 +275,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Animator TimeAbilityAnimator;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido de la recarga
+    /// </summary>
     [SerializeField]
     private AudioClip ReloadClip;
 
+    /// <summary>
+    /// Variable que almacena el texto que te dice si los cheats estan activados o no
+    /// </summary>
+    [SerializeField] 
+    private TextMeshProUGUI TextoCheatHUD;
 
     #endregion
 
@@ -386,6 +392,17 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private const float SLOWSHOT_TIMEMULTIPLIER = 0.25f;
 
+    /// <summary>
+    /// Número que lleva la cuenta del gameObject actual con el que indicar los puntos (Cual de los gameObjects dentro del array es el encargado de generarse)
+    /// </summary>
+    private int actualtext;
+
+    /// <summary>
+    /// Variable booleana para saber si el jugador tiene activados el rexibir daño
+    /// </summary>
+    private bool _cheatJugador = false;
+
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -407,10 +424,10 @@ public class GameManager : MonoBehaviour
         else
         {
             // Transferencia de configuración del HUD
-            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, highScoreTextUI, streakText);
+            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, TextoCheatHUD, StreakText);
         }
 
-        foreach (GameObject obj in streakText) // Desactiva los indicadores de puntos 
+        foreach (GameObject obj in StreakText) // Desactiva los indicadores de puntos 
         {
             obj.SetActive(false);
         }
@@ -449,6 +466,7 @@ public class GameManager : MonoBehaviour
             this.enabled = false;
             Init();
         } // if-else somos instancia nueva o no.
+
         if (SceneManager.GetActiveScene().buildIndex == 0) LoadScore();
     }
 
@@ -638,17 +656,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Método que se encarga de generar los puntos que se le pasen en la posición que se le introduzca y de gestionar cual es el siguiente gameObject en encargarse de mostrarlos 
+    /// </summary>
     public void SpawnPointIndicator(Vector3 position, int cambioDePuntos)
     {
-        if (streakText.Length > 0)
+        if (StreakText.Length > 0)
         {
             //Setear el punto
-            streakText[actualtext].SetActive(true);
-            streakText[actualtext].GetComponent<PointIndicator>().SpawnHere(position, cambioDePuntos);
+            StreakText[actualtext].SetActive(true);
+            StreakText[actualtext].GetComponent<PointIndicator>().SpawnHere(position, cambioDePuntos);
 
             //Gestionar lista
             actualtext++;
-            if (actualtext >= streakText.Length) actualtext = 0;
+            if (actualtext >= StreakText.Length) actualtext = 0;
         }
     }
 
@@ -909,7 +930,7 @@ public class GameManager : MonoBehaviour
     public void TransferManagerSetup(TextMeshProUGUI ActLevelMessage, ChangeColorAndHide LevelUpMessage, FadeColor FadeInBlackScreen, FadeColor FadeOutBlackScreen, FadeColor FadeInBlueScreen, FadeColor FadeOutBlueScreen,
         ImageFill HabilityLiquid, ImageFill HabilityShadow, GameObject Barrel , HeartUI[] Lifes, GameObject[] Bullets, TextMeshProUGUI ScoreText, TextMeshProUGUI StreakMultiplier, StreakColor[] StreakColors,
         ImageFill StreakBar, ImageFill LevelBar, AudioClip VictoryMusic,
-        int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel, ImageFill MeleeCooldown, TextMeshProUGUI highScoreTextUI,
+        int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel, ImageFill MeleeCooldown, TextMeshProUGUI highScoreTextUI, TextMeshProUGUI textoCheatHUDParametro,
         GameObject[] streakText)
     {
         this.ActLevelMessage = ActLevelMessage;
@@ -933,8 +954,9 @@ public class GameManager : MonoBehaviour
         this.TiempoEsperaRespawn = TiempoEsperaRespawn;
         this.TiempoEsperaSiguienteNivel = TiempoEsperaSiguienteNivel;
         this.MeleeCooldown = MeleeCooldown;
-        this.highScoreTextUI = highScoreTextUI;
-        this.streakText = streakText;
+        this.HighScoreTextUI = highScoreTextUI;
+        this.StreakText = streakText;
+        this.TextoCheatHUD = textoCheatHUDParametro;
     }
 
     /// <summary>
@@ -962,6 +984,23 @@ public class GameManager : MonoBehaviour
         if (FadeOutBlackScreen != null) FadeOutBlackScreen.enabled = true;
 
         if (InputManager.HasInstance()) InputManager.Instance.ActivarInput();
+
+        if (_cheatJugador)
+        {
+            if (LevelManager.HasInstance())
+            {
+                Transform playerTransform = LevelManager.Instance.PlayerTransform();
+                if (playerTransform != null)
+                {
+                    HealthChanger healthChanger = playerTransform.GetComponent<HealthChanger>();
+
+                    if (healthChanger != null)
+                    {
+                        healthChanger.BlockDamage();
+                    }
+                }
+            }
+        }
 
         Init();
         if (_playerCursor != null)
@@ -1020,6 +1059,7 @@ public class GameManager : MonoBehaviour
     {
         return _vidaJugador;
     }
+
     #endregion
 
     #region Funcionalidad SlowShot y Pausa
@@ -1149,23 +1189,51 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    #region Cheats
+
+    /// <summary>
+    /// Un método para indicar que se activan y desactican los trucos
+    /// </summary>
+    public void InmortalCheats()
+    {
+        _cheatJugador = !_cheatJugador;
+        _totalDeaths = 1000;
+    }
+
+    /// <summary>
+    /// Actualiza en pantalla si el jugador tiene o no los cheats
+    /// </summary>
+    public void UpdateCheatHUD()
+    {
+        if (TextoCheatHUD != null)
+        {
+            if (_cheatJugador) TextoCheatHUD.text = "God Mode: ON";
+            else TextoCheatHUD.text = "God Mode: OFF";
+        }
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Método que se encarga de guardar el highscore de puntos que has obtenido en el juego
+    /// </summary>
     public void SaveScore(int score)
     {
         string data = score.ToString();
         string path = Application.persistentDataPath + "/Score.txt";
 
-        if (File.Exists(path))
+        if (File.Exists(path)) //Si existe el path se leera el número almacenado
         {
             string contenido = File.ReadAllText(path);
             int savedScore = int.Parse(contenido);
 
-            if (savedScore >= score)
+            if (savedScore >= score) // Si la puntuación no es mayor a la puntuación del archivo se corta
             {
                 return;
             }
         }
-        File.WriteAllText(path, data);
-        Debug.Log("Puntuación guardada en: " + path);
+        File.WriteAllText(path, data); // Se guarda el puntaje en el path indicado
     }
 
     #endregion
@@ -1198,25 +1266,24 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
-
+    /// <summary>
+    /// Método que permite cargar el puntaje desde una ruta de archivo guardada
+    /// </summary>
     private void LoadScore()
     {
-
-        if (highScoreTextUI == null)
+        if (HighScoreTextUI == null) // Si no existe el archivo el puntaje es 0 y se acaba
         {
-            highScoreTextUI.text = "0";
+            HighScoreTextUI.text = "0";
             return;
         }
 
         string path = Application.persistentDataPath + "/Score.txt";
 
-        if (File.Exists(path))
+        if (File.Exists(path)) // Si existe el archivo se lee y se actualiza el highscore
         {
-
             string file = File.ReadAllText(path);
 
-
-            highScoreTextUI.text = file;
+            HighScoreTextUI.text = file;
             _highScore = int.Parse(file);
 
         }

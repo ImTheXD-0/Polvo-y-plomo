@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Tercer patrón del jefe de Suzie, de tirar un par de dinamitas a un objetivo dependiendo del terreno de juego
+// Miguel Gómez García
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -13,8 +13,11 @@ using UnityEngine.Rendering;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Script del tercer patrón del jefe Suzie que gestiona el lanzamiento de dos dinamitas
+/// Mediante la tag de barriles comprobará cuantos hay en escena y determinará en base a eso los objetivos de la dinamita
+/// Si hay dos o mas barriles, las dinamitas iran a las coberturas. 
+/// Si hay solo un barril, una dinamita irá a esa cobertura y la otra al jugador
+/// Si no quedan coberturas ambas dinamitas irán siempre al jugador
 /// </summary>
 public class SuziesThirdPattern : MonoBehaviour
 {
@@ -31,12 +34,6 @@ public class SuziesThirdPattern : MonoBehaviour
     /// </summary>
     [SerializeField]
     GameObject[] Barrels;
-
-    /// <summary>
-    /// Variable para determinar a donde se lanzarán las dinamitas
-    /// </summary>
-    [SerializeField] 
-    Transform player;
 
     /// <summary>
     /// Contadir hacia cobertura
@@ -67,18 +64,40 @@ public class SuziesThirdPattern : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Almacena la posición del primer objetivo de la primera dinamita
+    /// </summary>
     private Vector3 _firstTarget;
+
+    /// <summary>
+    /// Almacena la posición del segundo objetivo de la segunda dinamita
+    /// </summary>
     private Vector3 _secondTarget;
 
+    /// <summary>
+    /// Booleano que indica que hay más de dos barriles 
+    /// </summary>
     private bool _manyBarrels = false;
+
+    /// <summary>
+    /// Booleano que indica que hay menos de dos barriles
+    /// </summary>
     private bool _lessThanTwo = false;
 
+    /// <summary>
+    /// Prefab de la dinamita que lanzará Suzie
+    /// </summary>
     private float _tFirstDyna = 0f;
 
     /// <summary>
     /// Almacena el HeatlhChanger de Suzie para evitar que reciba daño durante este patrón
     /// </summary>
     private HealthChanger _suzieHealthChanger;
+
+    /// <summary>
+    /// Variable para determinar a donde se lanzarán las dinamitas
+    /// </summary>
+    private Transform _player;
 
     #endregion
 
@@ -111,9 +130,9 @@ public class SuziesThirdPattern : MonoBehaviour
             ThrowSecondGrenade();
             FinalizarPatron();
         }
-        else if (_lessThanTwo && _tFirstDyna > Contador2)
+        else if (_lessThanTwo && _tFirstDyna > Contador2) // Si había menos de dos barriles la segunda dinamita siempre irá al jugador
         {
-            _secondTarget = player.position;
+            _secondTarget = _player.position;
             ThrowSecondGrenade();
             FinalizarPatron();
         }
@@ -137,17 +156,15 @@ public class SuziesThirdPattern : MonoBehaviour
     /// </summary>
     public void IniciarPatron()
     {
-        _suzieHealthChanger.BlockDamage();
-        _manyBarrels = false;
+        _suzieHealthChanger.BlockDamage(); // Suzie no podrá recibir daño mientras se ejecuta el patrón
+        _manyBarrels = false; 
         _lessThanTwo = false;
 
-        player = LevelManager.Instance.PlayerTransform();
+        _player = LevelManager.Instance.PlayerTransform();
 
         Barrels = GameObject.FindGameObjectsWithTag("Barrel");
 
-        Debug.Log("Suzie ha encontrado " + Barrels.Length + " barriles.");
-
-        if (Barrels.Length >= 2)
+        if (Barrels.Length >= 2) // Si hay más de dos barriles se lanzará una dinamita de manera aleatoria a dos de los barriles sin que se repita
         {
             _manyBarrels = true;
 
@@ -161,13 +178,13 @@ public class SuziesThirdPattern : MonoBehaviour
             _firstTarget = Barrels[r1].transform.position;
             _secondTarget = Barrels[r2].transform.position;
         }
-        else if (Barrels.Length == 1)
+        else if (Barrels.Length == 1)  // Si hay exactamente un barril, se lanza una dinamita al barril localizado
         {
             _firstTarget = Barrels[0].transform.position;
         }
-        else
+        else // De lo contrario se lanzan a la posición del jugador
         {
-            _firstTarget = player.position;
+            _firstTarget = _player.position;
         }
         if (!_manyBarrels) _lessThanTwo = true;
         ThrowFirstGrenade();
@@ -219,7 +236,7 @@ public class SuziesThirdPattern : MonoBehaviour
     }
 
     /// <summary>
-    /// Termina el ataque y lo reporta al Manager
+    /// Termina el ataque permitiendo recibir daño nuevamente y lo reporta al Manager
     /// </summary>
     private void FinalizarPatron()
     {

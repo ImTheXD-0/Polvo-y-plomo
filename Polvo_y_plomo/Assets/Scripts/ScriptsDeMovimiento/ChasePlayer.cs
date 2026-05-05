@@ -38,19 +38,19 @@ public class ChasePlayer : MonoBehaviour
     /// Parámetro que indica la distancia a la que el enemigo empezara a esquivar obstaculos
     /// </summary>
     [SerializeField]
-    private float raycastDistance = 2f;
+    private float RaycastDistance = 2f;
 
     /// <summary>
     /// Parámetro que indica la que layers esquivara el enemigo
     /// </summary>
     [SerializeField]
-    private LayerMask mascarachoque;
+    private LayerMask Mascarachoque;
 
     /// <summary>
     /// Parámetro que el giro que usa el enemigo para esquivar
     /// </summary>
     [SerializeField]
-    private float finalAngle = 15;
+    private float FinalAngle = 15;
 
 
     /// <summary>
@@ -206,9 +206,8 @@ public class ChasePlayer : MonoBehaviour
 
         //ahora mismo, el raycast puede chocar con el propio jugador
 
-        Debug.DrawRay(transform.position, directionToPlayer.normalized * raycastDistance, Color.red, Time.fixedDeltaTime);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer.normalized, raycastDistance, mascarachoque);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionToPlayer.normalized, RaycastDistance, Mascarachoque);
         if (hit)
         {
 
@@ -216,11 +215,11 @@ public class ChasePlayer : MonoBehaviour
             bool hittingright = true;
             Vector3 directionRight = directionToPlayer; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
             int rightangles = 0;
-            while (hittingright)
+            while (hittingright && rightangles < 180)
             {
                 rightangles += 5;
                 directionRight = Quaternion.Euler(0, 0, rightangles) * directionRight; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
-                RaycastHit2D _hit = Physics2D.Raycast(transform.position, directionRight.normalized, raycastDistance, mascarachoque);
+                RaycastHit2D _hit = Physics2D.Raycast(transform.position, directionRight.normalized, RaycastDistance, Mascarachoque);
 
 
 
@@ -234,11 +233,11 @@ public class ChasePlayer : MonoBehaviour
             bool hittingLeft = true;
             Vector3 directionLeft = directionToPlayer; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
             int lefttangles = 0;
-            while (hittingLeft)
+            while (hittingLeft && lefttangles < 180)
             {
                 lefttangles += 5;
                 directionLeft = Quaternion.Euler(0, 0, -lefttangles) * directionLeft; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
-                RaycastHit2D _hit = Physics2D.Raycast(transform.position, directionLeft.normalized, raycastDistance, mascarachoque);
+                RaycastHit2D _hit = Physics2D.Raycast(transform.position, directionLeft.normalized, RaycastDistance, Mascarachoque);
 
 
                 if (!_hit)
@@ -247,20 +246,15 @@ public class ChasePlayer : MonoBehaviour
                 }
             }
 
-            directionRight = Quaternion.Euler(0, 0, (rightangles + finalAngle)) * directionRight; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
-            directionLeft = Quaternion.Euler(0, 0, -(lefttangles + finalAngle)) * directionLeft; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
+            if (lefttangles < 180 || rightangles < 180)
+            {
+                directionRight = Quaternion.Euler(0, 0, (rightangles + FinalAngle)) * directionRight; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
+                directionLeft = Quaternion.Euler(0, 0, -(lefttangles + FinalAngle)) * directionLeft; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
 
 
-            Debug.DrawRay(transform.position, directionRight.normalized * raycastDistance, Color.yellow, Time.fixedDeltaTime);
-            Debug.DrawRay(transform.position, directionLeft.normalized * raycastDistance, Color.green, Time.fixedDeltaTime);
-
-
-
-            directionToPlayer = Vector3.Angle(directionRight, directionToPlayer) < Vector3.Angle(directionLeft, directionToPlayer) ? directionRight : directionLeft;
-
-
-
-            //Debug.Log("Chocamos con " + hit.collider.name);
+                if (Vector3.Angle(directionRight, directionToPlayer) < Vector3.Angle(directionLeft, directionToPlayer)) directionToPlayer = directionRight;
+                else directionToPlayer = directionLeft;
+            }
         }
 
 

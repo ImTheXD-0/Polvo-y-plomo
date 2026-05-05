@@ -24,8 +24,11 @@ public class BulletMove : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    /// <summary>
+    /// Velocidad de la bala
+    /// </summary>
     [SerializeField]
-    private float Speed = 15f; // Velocidad de la bala
+    private float Speed = 15f;  
 
     #endregion
 
@@ -56,6 +59,11 @@ public class BulletMove : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen
 
+    /// <summary>
+    /// Se ejecuta en el primer frame en el que el script está activo.
+    /// Inicializa la referencia al GameManager para la gestión del tiempo (SlowMotion)
+    /// y ajusta la velocidad de la bala según el multiplicador de dificultad.
+    /// </summary>
     void Start()
     {
         _gameManager = GameManager.HasInstance();

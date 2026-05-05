@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b27270550f37f3341864091727c319e7
+guid: 5eb1a75d56dea684f865214d6fba0236
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -77,8 +77,8 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    textureFormat: 4
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -162,8 +162,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dac399b396cbd04ebe5cb21998825a8
-      internalID: -697949833
+      spriteID: ca9910c7182b7fa4cbda71635df399eb
+      internalID: 1395045556
       vertices: []
       indices: 
       edges: []
@@ -184,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 558427967c776ae4d988cd827cfc8df4
-      internalID: -1006397728
+      spriteID: 39a9e02fe531d374e9869c611d611cec
+      internalID: 557995358
       vertices: []
       indices: 
       edges: []
@@ -206,8 +206,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3490616f3dbe290438d03ccab9281c77
-      internalID: -949036832
+      spriteID: ec57bddfd1b23d147a14cec4a25732cc
+      internalID: -855571070
       vertices: []
       indices: 
       edges: []
@@ -216,7 +216,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 52181ceb9bdce02439855db2115fb20c
+    spriteID: deb4caa32ce3a5844a730d6b6a9f19fd
     internalID: 0
     vertices: []
     indices: 
@@ -228,9 +228,9 @@ TextureImporter:
     nameFileIdTable:
       DanyPianista_0: -4665263541380435437
       DanyPianista_1: 5774645237321130368
-      DanyPianista_2: -697949833
-      DanyPianista_3: -1006397728
-      DanyPianista_4: -949036832
+      DanyPianista_2: 1395045556
+      DanyPianista_3: 557995358
+      DanyPianista_4: -855571070
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
