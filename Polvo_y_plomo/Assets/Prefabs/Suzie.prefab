@@ -329,7 +329,20 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-  Pattern2Spawner: {fileID: 0}
+  - LevelSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - LevelSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!114 &786613330448179768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +359,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  player: {fileID: 4373482155475448269, guid: 3e54fe0dcc77c074c8ec2f28b2f446e8, type: 3}
   Contador1: 0.5
   Contador2: 2
   DynamitePrefab: {fileID: 8424402985830408694, guid: 6a75dbcb9919ecb40b708d15b22d3168, type: 3}

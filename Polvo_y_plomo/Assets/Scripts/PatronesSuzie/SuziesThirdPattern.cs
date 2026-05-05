@@ -36,12 +36,6 @@ public class SuziesThirdPattern : MonoBehaviour
     GameObject[] Barrels;
 
     /// <summary>
-    /// Variable para determinar a donde se lanzarán las dinamitas
-    /// </summary>
-    [SerializeField] 
-    Transform Player;
-
-    /// <summary>
     /// Contadir hacia cobertura
     /// </summary>
     [SerializeField]
@@ -100,6 +94,11 @@ public class SuziesThirdPattern : MonoBehaviour
     /// </summary>
     private HealthChanger _suzieHealthChanger;
 
+    /// <summary>
+    /// Variable para determinar a donde se lanzarán las dinamitas
+    /// </summary>
+    private Transform _player;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -133,7 +132,7 @@ public class SuziesThirdPattern : MonoBehaviour
         }
         else if (_lessThanTwo && _tFirstDyna > Contador2) // Si había menos de dos barriles la segunda dinamita siempre irá al jugador
         {
-            _secondTarget = Player.position;
+            _secondTarget = _player.position;
             ThrowSecondGrenade();
             FinalizarPatron();
         }
@@ -161,7 +160,7 @@ public class SuziesThirdPattern : MonoBehaviour
         _manyBarrels = false; 
         _lessThanTwo = false;
 
-        Player = LevelManager.Instance.PlayerTransform();
+        _player = LevelManager.Instance.PlayerTransform();
 
         Barrels = GameObject.FindGameObjectsWithTag("Barrel");
 
@@ -185,7 +184,7 @@ public class SuziesThirdPattern : MonoBehaviour
         }
         else // De lo contrario se lanzan a la posición del jugador
         {
-            _firstTarget = Player.position;
+            _firstTarget = _player.position;
         }
         if (!_manyBarrels) _lessThanTwo = true;
         ThrowFirstGrenade();

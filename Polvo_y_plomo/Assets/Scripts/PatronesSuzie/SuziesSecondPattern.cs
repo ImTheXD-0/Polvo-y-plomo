@@ -52,6 +52,7 @@ public class SuziesSecondPattern : MonoBehaviour
     /// <summary>
     /// El spawn inicial que activa el resto
     /// </summary>
+    [SerializeField]
     private EnemySpawner Pattern2Spawner;
 
     #endregion

@@ -215,7 +215,7 @@ public class ChasePlayer : MonoBehaviour
             bool hittingright = true;
             Vector3 directionRight = directionToPlayer; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
             int rightangles = 0;
-            while (hittingright)
+            while (hittingright && rightangles < 180)
             {
                 rightangles += 5;
                 directionRight = Quaternion.Euler(0, 0, rightangles) * directionRight; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
@@ -233,7 +233,7 @@ public class ChasePlayer : MonoBehaviour
             bool hittingLeft = true;
             Vector3 directionLeft = directionToPlayer; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
             int lefttangles = 0;
-            while (hittingLeft)
+            while (hittingLeft && lefttangles < 180)
             {
                 lefttangles += 5;
                 directionLeft = Quaternion.Euler(0, 0, -lefttangles) * directionLeft; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
@@ -246,13 +246,15 @@ public class ChasePlayer : MonoBehaviour
                 }
             }
 
-            directionRight = Quaternion.Euler(0, 0, (rightangles + FinalAngle)) * directionRight; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
-            directionLeft = Quaternion.Euler(0, 0, -(lefttangles + FinalAngle)) * directionLeft; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
+            if (lefttangles < 180 || rightangles < 180)
+            {
+                directionRight = Quaternion.Euler(0, 0, (rightangles + FinalAngle)) * directionRight; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
+                directionLeft = Quaternion.Euler(0, 0, -(lefttangles + FinalAngle)) * directionLeft; //si chocamos con algo, nos movemos en otra dirección (perpendicular a la dirección al jugador)
 
 
-            if (Vector3.Angle(directionRight, directionToPlayer) < Vector3.Angle(directionLeft, directionToPlayer)) directionToPlayer = directionRight;
-            else directionToPlayer = directionLeft;
-
+                if (Vector3.Angle(directionRight, directionToPlayer) < Vector3.Angle(directionLeft, directionToPlayer)) directionToPlayer = directionRight;
+                else directionToPlayer = directionLeft;
+            }
         }
 
 

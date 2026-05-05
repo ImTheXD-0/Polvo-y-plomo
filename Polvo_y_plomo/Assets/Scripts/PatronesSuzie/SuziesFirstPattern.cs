@@ -52,6 +52,12 @@ public class SuziesFirstPattern : MonoBehaviour
     /// Tiempo máximo que puede permanecer Suzie escondida tras la carreta
     /// </summary>
     [SerializeField] private float MaxHidingTime = 3f;
+
+    /// <summary>
+    /// Variable que se debe asignar para esconder la escopeta cuando se cubre
+    /// </summary>
+    [SerializeField]
+    private SpriteRenderer ShotgunSprite;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -128,6 +134,15 @@ public class SuziesFirstPattern : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
+
+    /// <summary>
+    /// Al acabar el patrón nos aseguramos de que Suzie este escondida.
+    /// Si ya lo estaba, no hace nada.
+    /// </summary>
+    private void OnDisable()
+    {
+        SuzieHide();
+    }
 
     /// <summary>
     /// Start de programación defensiva que comprueba si hay LevelManager en la escena (para tomar la posición del jugador), en cuyo caso contrario destruirá el
@@ -268,6 +283,8 @@ public class SuziesFirstPattern : MonoBehaviour
     /// <param name="side"></param>
     private void SuzieShot(int side)
     {
+        ShotgunSprite.enabled = true;
+
         if (side == 0)
         {
             transform.position -= new Vector3(DistanceToPeekingPos, 0, 0);
@@ -318,6 +335,8 @@ public class SuziesFirstPattern : MonoBehaviour
     {
         if (_isPeeking)
         {
+            ShotgunSprite.enabled = false;
+
             _isPeeking = false;
             _hasShotOnlyOnce = false;
             transform.position = _initialPos;
