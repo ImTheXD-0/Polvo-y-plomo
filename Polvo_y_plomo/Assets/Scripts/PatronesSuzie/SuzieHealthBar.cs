@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Breve descripción del contenido del archivo
-// Responsable de la creación de este archivo
+// Controlador de la barra de vida de la interfaz de Suzie
+// Samuel Asensio Torres
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -10,8 +10,8 @@ using UnityEngine;
 
 
 /// <summary>
-/// Antes de cada class, descripción de qué es y para qué sirve,
-/// usando todas las líneas que sean necesarias.
+/// Componente encargado de actualizar visualmente la barra de vida del jefe Suzie en la interfaz de usuario.
+/// Calcula el porcentaje de vida restante y actualiza el componente ImageFill correspondiente.
 /// </summary>
 public class SuzieHealthBar : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class SuzieHealthBar : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Referencia al Image Filled para la barra
+    /// Referencia al componente ImageFill que controla el rellenado visual de la barra de vida en el Canvas.
     /// </summary>
     [SerializeField]
     private ImageFill ImageFilled;
@@ -47,23 +47,7 @@ public class SuzieHealthBar : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before 
-    /// any of the Update methods are called the first time.
-    /// </summary>
-    void Start()
-    {
-        
-    }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update()
-    {
-        
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -75,7 +59,7 @@ public class SuzieHealthBar : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     /// <summary>
-    /// Método que obtiene el porcentaje actual de la vida de Suzie
+    /// Calcula el porcentaje actual de la vida de Suzie y actualiza la barra.
     /// </summary>
     public void UpdateHealthBar(int vidaMaxima, int vidaActual)
     {
