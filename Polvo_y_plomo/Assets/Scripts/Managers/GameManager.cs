@@ -813,17 +813,19 @@ public class GameManager : MonoBehaviour
                     else if ((i == _municionJugador) && !recarga) bulletAnimator.Play("Bullet", 0, 0f);
                 }
                 else Debug.Log("Falta animator en una de las bullets del barril de recarga");
-                if (barrelAnimator != null)
-                {
-                    if (recarga)
-                    {
-                        barrelAnimator.Play("RevolverAntiClock", 0, 0f);
-                        if (ReloadClip && LevelManager.HasInstance()) AudioManager.Instance.Play(ReloadClip, LevelManager.Instance.PlayerTransform().position);
-                    }
-                    else barrelAnimator.Play("RevolverClock", 0, 0f);
-                }
             }
         }
+
+        if (barrelAnimator != null)
+        {
+            if (recarga)
+            {
+                barrelAnimator.Play("RevolverAntiClock", 0, 0f);
+            }
+            else barrelAnimator.Play("RevolverClock", 0, 0f);
+        }
+
+        if (recarga && ReloadClip && LevelManager.HasInstance()) AudioManager.Instance.Play(ReloadClip, LevelManager.Instance.PlayerTransform().position);
         //Debug.Log(_municionJugador);
     }
 
