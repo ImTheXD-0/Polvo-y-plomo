@@ -333,7 +333,7 @@ public class ChasePlayer : MonoBehaviour
     public void Stunned(bool stunned)
     {
         _isStunned = stunned;
-        _animator.SetBool("Stun", stunned);
+        _animator.SetBool("isStunned", stunned);
         _animator.speed = 1f; // reinicio de la velocidad de animación
         if (stunned) _stunVelocity = StunSpeed * (transform.position - _playerTransform.position).normalized;
     }
