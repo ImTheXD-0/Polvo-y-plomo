@@ -116,7 +116,7 @@ public class Shoot : MonoBehaviour
         Instantiate(Bullet, transform.position, rot);
 
         if (ShootClip) AudioManager.Instance.Play(ShootClip, transform.position);
-        if (_revolverAnimator!=null) _revolverAnimator.Play("Shot");
+        if (_revolverAnimator!=null) _revolverAnimator.SetTrigger("Shot");
     }
     #endregion
 
