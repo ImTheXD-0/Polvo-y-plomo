@@ -45,6 +45,8 @@ public class Shoot : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    protected Animator _revolverAnimator;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -70,6 +72,14 @@ public class Shoot : MonoBehaviour
         {
             Debug.Log("Se ha puesto el componente \"Shoot\" en un objeto cuyo padre no tiene el componente RotateTowardsObject y el spawn de la bala fallaría. No podrá disparar");
             Destroy(this);
+        }
+    }
+    void Start()
+    {
+        _revolverAnimator = GetComponent<Animator>();
+        if (Bullet == null)
+        {
+            Debug.Log("Se ha puesto el componente \"Shoot\" sin un animator. No se animará.");
         }
     }
 
@@ -106,6 +116,7 @@ public class Shoot : MonoBehaviour
         Instantiate(Bullet, transform.position, rot);
 
         if (ShootClip) AudioManager.Instance.Play(ShootClip, transform.position);
+        if (_revolverAnimator!=null) _revolverAnimator.Play("Shot");
     }
     #endregion
 

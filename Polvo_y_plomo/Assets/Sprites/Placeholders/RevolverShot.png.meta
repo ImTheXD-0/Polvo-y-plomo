@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3cb95abecc4c4ca479847a309583c798
+guid: 134ef179048282b4fa85a3e0c04656af
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4011165979584494121
-    second: Revolver_0
+      213: 3637976073092690296
+    second: RevolverShot_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Revolver_0
+      name: RevolverShot_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 40
+        y: 32
+        width: 48
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 92af344d4368aa730800000000000000
-      internalID: 4011165979584494121
+      spriteID: 8717f02b6ffac7230800000000000000
+      internalID: 3637976073092690296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RevolverShot_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 48
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db4e5305b9a916a478ede7a335ba3070
+      internalID: 1303447978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RevolverShot_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26f4ffa8cb5833a47900ab6c3e8cdaec
+      internalID: 145838374
       vertices: []
       indices: 
       edges: []
@@ -125,7 +169,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 09fe66cced4d2a041ba632a4deb48b47
+    spriteID: c54296c2736d44048b3d4aecf48fa120
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +179,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Revolver_0: 4011165979584494121
+      RevolverShot_0: 3637976073092690296
+      RevolverShot_1: 1303447978
+      RevolverShot_2: 145838374
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
