@@ -2233,6 +2233,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 2777244098022361363, guid: f6aceeafdd475a74eac5aa6f39a4b40e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7621208483911399560, guid: f6aceeafdd475a74eac5aa6f39a4b40e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.5
@@ -3293,6 +3297,10 @@ PrefabInstance:
     - target: {fileID: 7190003104732339145, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
       propertyPath: m_Name
       value: Cajas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7190003104732339145, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7248944528461249987, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33444,6 +33452,10 @@ PrefabInstance:
     - target: {fileID: 7190003104732339145, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
       propertyPath: m_Name
       value: Cajas (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7190003104732339145, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7248944528461249987, guid: 9ffa1cff34371034aa9835721c795402, type: 3}
       propertyPath: m_LocalPosition.x
