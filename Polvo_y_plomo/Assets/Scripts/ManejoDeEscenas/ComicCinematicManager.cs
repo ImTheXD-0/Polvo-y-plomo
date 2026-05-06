@@ -8,7 +8,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using DG.Tweening; // Librería de DOTween
+using DG.Tweening;
+using System.Runtime.CompilerServices; // Librería de DOTween
 // Añadir aquí el resto de directivas using
 
 
@@ -17,6 +18,9 @@ using DG.Tweening; // Librería de DOTween
 /// Gestiona la transición entre paneles usando DOTween para los fundidos,
 /// permite al jugador saltar la animación actual o avanzar al siguiente panel,
 /// y carga la escena del nivel al finalizar.
+/// 
+/// +++
+/// Añadida funcionalidad para que tenga sonidos
 /// </summary>
 public class ComicCinematicManager : MonoBehaviour
 {
@@ -29,10 +33,41 @@ public class ComicCinematicManager : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
+    /// Struct para montar un panel de cinemática con sonidos.
+    /// Incluye un array de ComicSound para poder poner varios en un solo panel.
+    /// </summary>
+    [System.Serializable]
+    private struct ComicPanel
+    {
+        public Sprite Panel;
+
+        public ComicSound[] ComicSounds;
+
+        public int CurrentSound;
+    }
+
+    /// <summary>
+    /// Struct para incluir en un panel un sonido con cierto delay.
+    /// </summary>
+    [System.Serializable]
+    private struct ComicSound
+    {
+        /// <summary>
+        /// Sonido que sonará en un instante del panel determinado por el tiempo.
+        /// </summary>
+        public AudioClip Sound;
+
+        /// <summary>
+        /// Cuantos segundos tardará en sonar tras activarse el panel
+        /// </summary>
+        public float TimeDelayToPlay;
+    }
+
+    /// <summary>
     /// Lista de sprites que componen la cinemática en orden de aparición.
     /// </summary>
     [SerializeField] 
-    private Sprite[] ComicPanels;
+    private ComicPanel[] CinematicPanels;
 
     /// <summary>
     /// Componente de UI de tipo Image donde se mostrarán los paneles.
@@ -95,6 +130,23 @@ public class ComicCinematicManager : MonoBehaviour
     /// </summary>
     private float _waitTimer = 0f;
 
+    /// <summary>
+    /// Temporizador interno para saber cuanto tiempo de animacion queda.
+    /// </summary>
+    private float _animationTimer = 0f;
+
+    /// <summary>
+    /// Variable que almacena Fadeduration + WaitTimeAfterAnimation para evitar calcularla constantemente.
+    /// Iniciada en el Start().
+    /// </summary>
+    private float _totalPanelTime;
+
+    /// <summary>
+    /// Variable que almacena el audioSource que ha de tener este objeto.
+    /// Configurado para que suene en 2D.
+    /// </summary>
+    private AudioSource _audioSource;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -117,6 +169,13 @@ public class ComicCinematicManager : MonoBehaviour
         {
             Debug.LogError("Se ha puesto un ComicCinematicManager en una escena sin InputManager y no se podrá saltar los comics");
         }
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            Debug.LogError("Falta ponerle AudioSource al gameobject con el ComicCinematicManager");
+        }
+
+        _totalPanelTime = FadeDuration + WaitTimeAfterAnimation;
 
         // Asegurar que la imagen sea transparente al inicio
         Color initialColor = PanelImage.color;
@@ -131,11 +190,15 @@ public class ComicCinematicManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // Saltar animacion o hacer que pase sola. Tambien lleva la cuenta de los timers.
         if (_isAnimating)
         {
+            _animationTimer -= Time.deltaTime;
+
             // Si está animando y se pulsa un botón, forzamos el final de la animación
             if (InputManager.HasInstance() && InputManager.Instance.AnyButtonWasPressedThisFrame())
             {
+                _audioSource.Stop();
                 SkipAnimation();
             }
         }
@@ -145,6 +208,7 @@ public class ComicCinematicManager : MonoBehaviour
             if (InputManager.HasInstance() && InputManager.Instance.AnyButtonWasPressedThisFrame())
             {
                 _currentPanelIndex++;
+                _audioSource.Stop();
                 ShowNextPanel();
             }
             else
@@ -156,9 +220,21 @@ public class ComicCinematicManager : MonoBehaviour
                 if (_waitTimer <= 0f)
                 {
                     _currentPanelIndex++;
+                    _audioSource.Stop();
                     ShowNextPanel();
                 }
             }
+        }
+
+        // Para hacer que suenen sonidos al iniciar cada panel
+        float time = _waitTimer + _animationTimer;
+        if (_currentPanelIndex < CinematicPanels.Length &&
+            CinematicPanels[_currentPanelIndex].CurrentSound < CinematicPanels[_currentPanelIndex].ComicSounds.Length && 
+            CinematicPanels[_currentPanelIndex].ComicSounds[CinematicPanels[_currentPanelIndex].CurrentSound].TimeDelayToPlay <= _totalPanelTime - time)
+        {
+            if (AudioManager.HasInstance()) _audioSource.volume = AudioManager.Instance.GetSFXVolume();
+            _audioSource.PlayOneShot(CinematicPanels[_currentPanelIndex].ComicSounds[CinematicPanels[_currentPanelIndex].CurrentSound].Sound);
+            CinematicPanels[_currentPanelIndex].CurrentSound++;
         }
     }
     #endregion
@@ -186,7 +262,7 @@ public class ComicCinematicManager : MonoBehaviour
     /// </summary>
     private void ShowNextPanel()
     {
-        if (_currentPanelIndex >= ComicPanels.Length)
+        if (_currentPanelIndex >= CinematicPanels.Length)
         {
             EndCinematic();
             return;
@@ -194,12 +270,17 @@ public class ComicCinematicManager : MonoBehaviour
 
         _isAnimating = true;
 
-        PanelImage.sprite = ComicPanels[_currentPanelIndex];
+        PanelImage.sprite = CinematicPanels[_currentPanelIndex].Panel;
 
         // Reiniciar alfa de la imagen a 0 antes de animar
         Color c = PanelImage.color;
         c.a = 0f;
         PanelImage.color = c;
+
+
+        // Reiniciar temporizador de animación
+        _animationTimer = FadeDuration;
+        _waitTimer = WaitTimeAfterAnimation;
 
         // Iniciar el Tween de fundido (Alpha de 0 a 1)
         _currentTween = PanelImage.DOFade(1f, FadeDuration).OnComplete(OnAnimationComplete);

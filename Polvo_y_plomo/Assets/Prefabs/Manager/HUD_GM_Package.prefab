@@ -693,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 8738004983739132652}
     - target: {fileID: 1646398101584530937, guid: 8081aee40de37ab4c98182c5a9a25019, type: 3}
       propertyPath: m_fontSize
-      value: 18.65
+      value: 16.3
       objectReference: {fileID: 0}
     - target: {fileID: 2408329938283253254, guid: 8081aee40de37ab4c98182c5a9a25019, type: 3}
       propertyPath: m_Name
@@ -797,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7788301395021856747, guid: 8081aee40de37ab4c98182c5a9a25019, type: 3}
       propertyPath: m_fontSize
-      value: 29.8
+      value: 24.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1534,9 +1534,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1106494149759899189}
     - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: StreakText.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
       propertyPath: streakText.Array.size
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7176263284336462545}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1962069579422004169}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3058415482314570518}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7087056798977406467}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6609254207851339875}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1948144900236866973}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8244010879404137991}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[7]'
+      value: 
+      objectReference: {fileID: 7461726905759534273}
+    - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
+      propertyPath: 'StreakText.Array.data[8]'
+      value: 
+      objectReference: {fileID: 7521444916079070342}
     - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
       propertyPath: 'streakText.Array.data[0]'
       value: 
@@ -1737,11 +1777,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5268326398451853533, guid: a5569ceae7fb055408f19908e14727ae, type: 3}
       propertyPath: m_fontSize
-      value: 13.6
+      value: 11.35
       objectReference: {fileID: 0}
     - target: {fileID: 7096620179220937496, guid: a5569ceae7fb055408f19908e14727ae, type: 3}
       propertyPath: m_fontSize
-      value: 15.95
+      value: 13.3
       objectReference: {fileID: 0}
     - target: {fileID: 7957210109996155953, guid: a5569ceae7fb055408f19908e14727ae, type: 3}
       propertyPath: m_Name

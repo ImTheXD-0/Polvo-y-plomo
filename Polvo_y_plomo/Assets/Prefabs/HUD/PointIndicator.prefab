@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640a22d467a85464c8838a63e5d3e1ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointText: {fileID: 1678577198621761321}
+  PointText: {fileID: 1678577198621761321}
   DisappearSpeed: 1
   MoveSpeed: 1
   Subida: 0

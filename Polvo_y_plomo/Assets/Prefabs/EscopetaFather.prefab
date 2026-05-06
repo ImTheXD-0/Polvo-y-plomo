@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 0}
-  RotateTowardsPlayer: 0
+  RotateTowardsPlayer: 1
   FlipY: 1
   RotationOffset: 0
   Anim: {fileID: 0}
