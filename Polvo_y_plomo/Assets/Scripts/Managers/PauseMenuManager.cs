@@ -333,6 +333,7 @@ public class PauseMenuManager : MonoBehaviour
     public void GoToMainMenuFromButton()
     {
         GameManager.Instance.ResetStats();
+        GameManager.Instance.ResetCheats();
         GameManager.Instance.ChangeScene(0);
     }
 

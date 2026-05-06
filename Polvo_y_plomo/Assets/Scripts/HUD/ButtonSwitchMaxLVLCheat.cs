@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Script que permite activar la inmortalidad
-// Miguel Gómez García
+// Breve script con métodos publicos para activar y desactivar en el GM el cheat de MaxLVL
+// Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -10,9 +10,9 @@ using UnityEngine;
 
 
 /// <summary>
-/// Script que llama al método para activar los trucos del GameManager
+/// Breve script con métodos publicos para activar y desactivar en el GM el cheat de MaxLVL
 /// </summary>
-public class ButtonSwitchInmortalCheat : MonoBehaviour
+public class ButtonSwitchMaxLVLCheat : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,7 +23,7 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     #endregion
-    
+
     // ---- ATRIBUTOS PRIVADOS ----
     #region Atributos Privados (private fields)
     // Documentar cada atributo que aparece aquí.
@@ -34,14 +34,14 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -55,12 +55,12 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
     /// <summary>
     /// Script que activa los cheats desde el gameManager
     /// </summary>
-    public void ActivateCheats() 
+    public void ActivateCheats()
     {
         if (GameManager.HasInstance())
         {
-            GameManager.Instance.InmortalCheats();
-            GameManager.Instance.UpdateInmortalCheatHUD();
+            GameManager.Instance.MaxLvlCheats();
+            GameManager.Instance.UpdateMaxLVLCheatHUD();
         }
 
     }
@@ -70,8 +70,9 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
     /// </summary>
     public void UpdateHUDCheats()
     {
-        if (GameManager.HasInstance()) GameManager.Instance.UpdateInmortalCheatHUD();
+        if (GameManager.HasInstance()) GameManager.Instance.UpdateMaxLVLCheatHUD();
     }
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -83,5 +84,5 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
 
     #endregion
 
-} // class ButtonSwitchInmortalCheat 
+} // class ButtonSwitchMaxLVLCheat 
 // namespace

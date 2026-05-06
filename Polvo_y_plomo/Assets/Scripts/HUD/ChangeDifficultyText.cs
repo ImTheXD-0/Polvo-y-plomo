@@ -13,6 +13,9 @@ using UnityEngine;
 /// <summary>
 /// Solo tiene un método público para cambiar el texto de un 
 /// TextMeshPro asignnable al nombre de la dificultad actual.
+/// 
+/// +++
+/// Implementado para que tambien cambie la descripcion.
 /// </summary>
 public class ChangeDifficultyText : MonoBehaviour
 {
@@ -28,7 +31,11 @@ public class ChangeDifficultyText : MonoBehaviour
     /// TextMeshPro cuyo texto cambiará.
     /// </summary>
     [SerializeField]
-    private TextMeshProUGUI DifficultyText;
+    private TextMeshProUGUI DifficultyNameText;
+
+
+    [SerializeField]
+    private TextMeshProUGUI DifficultyDescriptionText;
     #endregion
     
     // ---- ATRIBUTOS PRIVADOS ----
@@ -62,7 +69,8 @@ public class ChangeDifficultyText : MonoBehaviour
     {
         if (DifficultyManager.HasInstance())
         {
-            DifficultyText.text = DifficultyManager.Instance.GetCurrentDifficultyName();
+            DifficultyNameText.text = DifficultyManager.Instance.GetCurrentDifficultyName();
+            DifficultyDescriptionText.text = DifficultyManager.Instance.GetCurrentDifficultyDescription();
         }
         else
         {
