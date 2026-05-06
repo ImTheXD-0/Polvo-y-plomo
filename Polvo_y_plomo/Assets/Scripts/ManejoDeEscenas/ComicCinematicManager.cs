@@ -198,6 +198,7 @@ public class ComicCinematicManager : MonoBehaviour
             // Si está animando y se pulsa un botón, forzamos el final de la animación
             if (InputManager.HasInstance() && InputManager.Instance.AnyButtonWasPressedThisFrame())
             {
+                _audioSource.Stop();
                 SkipAnimation();
             }
         }
@@ -207,6 +208,7 @@ public class ComicCinematicManager : MonoBehaviour
             if (InputManager.HasInstance() && InputManager.Instance.AnyButtonWasPressedThisFrame())
             {
                 _currentPanelIndex++;
+                _audioSource.Stop();
                 ShowNextPanel();
             }
             else
@@ -218,6 +220,7 @@ public class ComicCinematicManager : MonoBehaviour
                 if (_waitTimer <= 0f)
                 {
                     _currentPanelIndex++;
+                    _audioSource.Stop();
                     ShowNextPanel();
                 }
             }
