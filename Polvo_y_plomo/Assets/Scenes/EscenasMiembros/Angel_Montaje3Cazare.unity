@@ -1217,7 +1217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4922729512018610371, guid: a3d1da7070ce5234099a344e7f15e2cd, type: 3}
       propertyPath: VidaMax
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5624217940321864117, guid: a3d1da7070ce5234099a344e7f15e2cd, type: 3}
       propertyPath: m_Name

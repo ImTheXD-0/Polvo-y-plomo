@@ -480,14 +480,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4422352495493863888, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
-      propertyPath: Object
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422352495493863888, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
-      propertyPath: RotateTowardsPlayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4895788694590530455, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

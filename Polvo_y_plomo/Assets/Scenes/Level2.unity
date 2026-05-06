@@ -25151,14 +25151,6 @@ PrefabInstance:
       propertyPath: ShotgunSprite
       value: 
       objectReference: {fileID: 203745328}
-    - target: {fileID: 6484392492889674727, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: Object
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6484392492889674727, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: RotateTowardsPlayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: Pattern2Spawner
       value: 
