@@ -3263,7 +3263,7 @@ MonoBehaviour:
   - EnemySpawnPrefab: {fileID: 219012534562007612, guid: 0132e82a8590a4e458522cf628ffeb78, type: 3}
     SpawnID: 9
     SpawnOffset: {x: -10, y: 0, z: 0}
-    SpawnDelay: 5
+    SpawnDelay: 6
   ActivateSpawnersWhenDone:
   - {fileID: 1605494061}
   - {fileID: 1303755862}
@@ -17696,7 +17696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &765915636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31451,7 +31451,7 @@ MonoBehaviour:
   - EnemySpawnPrefab: {fileID: 219012534562007612, guid: 0132e82a8590a4e458522cf628ffeb78, type: 3}
     SpawnID: 13
     SpawnOffset: {x: 5.5, y: -4.5, z: 0}
-    SpawnDelay: 3
+    SpawnDelay: 4
   ActivateSpawnersWhenDone:
   - {fileID: 620056697}
   - {fileID: 97235612}
@@ -31976,7 +31976,7 @@ MonoBehaviour:
   - EnemySpawnPrefab: {fileID: 219012534562007612, guid: 0132e82a8590a4e458522cf628ffeb78, type: 3}
     SpawnID: 13
     SpawnOffset: {x: 5.5, y: -4.5, z: 0}
-    SpawnDelay: 5
+    SpawnDelay: 6
   ActivateSpawnersWhenDone:
   - {fileID: 1249389935}
   - {fileID: 939513135}
