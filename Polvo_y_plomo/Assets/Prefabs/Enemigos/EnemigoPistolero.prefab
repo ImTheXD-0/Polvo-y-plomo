@@ -538,4 +538,4 @@ MonoBehaviour:
   RotateTowardsPlayer: 1
   FlipY: 1
   RotationOffset: 0
-  Anim: {fileID: 0}
+  Anim: {fileID: 2976707680206909084}
