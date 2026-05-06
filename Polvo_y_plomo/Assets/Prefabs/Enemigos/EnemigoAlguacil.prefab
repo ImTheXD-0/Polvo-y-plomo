@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4275824255011179172}
-  - component: {fileID: 5763217413291270079}
+  - component: {fileID: 1945896929318410773}
   m_Layer: 0
   m_Name: RevolverFather
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 1584107676765355981}
   m_Father: {fileID: 341326039761229700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5763217413291270079
+--- !u!114 &1945896929318410773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   RotateTowardsPlayer: 1
   FlipY: 1
   RotationOffset: 0
-  Anim: {fileID: 0}
+  Anim: {fileID: 1159541165885981876}
 --- !u!1 &7517479058046481912
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,55 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e133e046b422446a3069e4ee771a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8807229524569238650
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4010165384791524939}
-  - component: {fileID: 367753200074445491}
-  m_Layer: 10
-  m_Name: RotateBody
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4010165384791524939
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8807229524569238650}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.36, y: -3.31, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 341326039761229700}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &367753200074445491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8807229524569238650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa89e37dcb618a4981d167263937fa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Object: {fileID: 0}
-  RotateTowardsPlayer: 1
-  FlipY: 1
-  RotationOffset: 0
-  Anim: {fileID: 1159541165885981876}
 --- !u!1 &8865954822666686734
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +320,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4010165384791524939}
   - {fileID: 4275824255011179172}
   - {fileID: 4741497529442930451}
   m_Father: {fileID: 0}
@@ -592,13 +542,13 @@ Animator:
   m_GameObject: {fileID: 8865954822666686734}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d0a1c0e441996a1478c1e549b60f8e63, type: 2}
+  m_Controller: {fileID: 22100000, guid: d67b57b506d87c34e888f76cff2b17af, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 1
+  m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_AnimatePhysics: 1
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
