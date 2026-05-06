@@ -31,6 +31,8 @@ public class DifficultyManager : MonoBehaviour
     {
         public string DifficultyName;
 
+        public string DifficultyDescription;
+
         #region Modificadores multiplicadores
         // Enemigos
         public float MeleeChaseSpeedMultiplier;
@@ -56,6 +58,7 @@ public class DifficultyManager : MonoBehaviour
         public Difficulty(string name = "Unnamed")
         {
             this.DifficultyName = name;
+            this.DifficultyDescription = "Error";
 
             this.MeleeChaseSpeedMultiplier = 1f;
             this.RangedChaseSpeedMultiplier = 1f;
@@ -198,6 +201,15 @@ public class DifficultyManager : MonoBehaviour
     public string GetCurrentDifficultyName()
     {
         return difficulties[_currentDifficulty].DifficultyName;
+    }
+
+    /// <summary>
+    /// Método para acceder a la descripcion de la dificultad actual.
+    /// </summary>
+    /// <returns></returns>
+    public string GetCurrentDifficultyDescription()
+    {
+        return difficulties[_currentDifficulty].DifficultyDescription;
     }
 
     /// <summary>

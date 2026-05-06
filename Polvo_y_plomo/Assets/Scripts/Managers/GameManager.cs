@@ -6,10 +6,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
-using System.Collections;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -282,10 +279,16 @@ public class GameManager : MonoBehaviour
     private AudioClip ReloadClip;
 
     /// <summary>
-    /// Variable que almacena el texto que te dice si los cheats estan activados o no
+    /// Variable que almacena el texto que te dice si los cheats de inmortalidad estan activados o no
     /// </summary>
     [SerializeField] 
-    private TextMeshProUGUI TextoCheatHUD;
+    private TextMeshProUGUI TextoInmortalCheatHUD;
+
+    /// <summary>
+    /// Variable que almacena el texto que te dice si los cheats de Max LVL estan activados o no.
+    /// </summary>
+    [SerializeField]
+    private TextMeshProUGUI TextoMaxLVLCheatHUD;
 
     #endregion
 
@@ -400,7 +403,12 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Variable booleana para saber si el jugador tiene activados el rexibir daño
     /// </summary>
-    private bool _cheatJugador = false;
+    private bool _cheatInmortalJugador = false;
+
+    /// <summary>
+    /// Variable booleana para determinar si el jugador ha activado el cheat de nivel maximo de habilidad
+    /// </summary>
+    private bool _cheatMaxLVLJugador = false;
 
 
     #endregion
@@ -424,7 +432,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // Transferencia de configuración del HUD
-            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, TextoCheatHUD, StreakText);
+            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, TextoInmortalCheatHUD, StreakText, TextoMaxLVLCheatHUD);
         }
 
         foreach (GameObject obj in StreakText) // Desactiva los indicadores de puntos 
@@ -640,6 +648,19 @@ public class GameManager : MonoBehaviour
         PauseGame();
         LevelEnds(); // inicia el fin de nivel y guarda puntos
         ResetStats(); // reset de stats
+
+        // Desactivar cheats si estan activos para que no haya errores.
+        ResetCheats();
+    }
+
+    /// <summary>
+    /// Método para reiniciar los cheats y desactivarlos desde fuera.
+    /// Necesario para salir del juego desde PauseMenuManager sin que haya problemas.
+    /// </summary>
+    public void ResetCheats()
+    {
+        if (_cheatMaxLVLJugador) MaxLvlCheats();
+        if (_cheatInmortalJugador) InmortalCheats();
     }
 
     #endregion
@@ -933,7 +954,7 @@ public class GameManager : MonoBehaviour
         ImageFill HabilityLiquid, ImageFill HabilityShadow, GameObject Barrel , HeartUI[] Lifes, GameObject[] Bullets, TextMeshProUGUI ScoreText, TextMeshProUGUI StreakMultiplier, StreakColor[] StreakColors,
         ImageFill StreakBar, ImageFill LevelBar, AudioClip VictoryMusic,
         int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel, ImageFill MeleeCooldown, TextMeshProUGUI highScoreTextUI, TextMeshProUGUI textoCheatHUDParametro,
-        GameObject[] streakText)
+        GameObject[] streakText, TextMeshProUGUI TextoMaxLVLCheatHUD)
     {
         this.ActLevelMessage = ActLevelMessage;
         this.LevelUpMessage = LevelUpMessage;
@@ -958,7 +979,8 @@ public class GameManager : MonoBehaviour
         this.MeleeCooldown = MeleeCooldown;
         this.HighScoreTextUI = highScoreTextUI;
         this.StreakText = streakText;
-        this.TextoCheatHUD = textoCheatHUDParametro;
+        this.TextoInmortalCheatHUD = textoCheatHUDParametro;
+        this.TextoMaxLVLCheatHUD = TextoMaxLVLCheatHUD;
     }
 
     /// <summary>
@@ -987,7 +1009,7 @@ public class GameManager : MonoBehaviour
 
         if (InputManager.HasInstance()) InputManager.Instance.ActivarInput();
 
-        if (_cheatJugador)
+        if (_cheatInmortalJugador)
         {
             if (LevelManager.HasInstance())
             {
@@ -1199,19 +1221,47 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void InmortalCheats()
     {
-        _cheatJugador = !_cheatJugador;
-        _totalDeaths = 1000;
+        _cheatInmortalJugador = !_cheatInmortalJugador;
     }
 
     /// <summary>
     /// Actualiza en pantalla si el jugador tiene o no los cheats
     /// </summary>
-    public void UpdateCheatHUD()
+    public void UpdateInmortalCheatHUD()
     {
-        if (TextoCheatHUD != null)
+        if (TextoInmortalCheatHUD != null)
         {
-            if (_cheatJugador) TextoCheatHUD.text = "God Mode: ON";
-            else TextoCheatHUD.text = "God Mode: OFF";
+            if (_cheatInmortalJugador) TextoInmortalCheatHUD.text = "God Mode: ON";
+            else TextoInmortalCheatHUD.text = "God Mode: OFF";
+        }
+    }
+
+    /// <summary>
+    /// Un método para indicar que se activan y desactican los trucos
+    /// </summary>
+    public void MaxLvlCheats()
+    {
+        if (_cheatMaxLVLJugador)
+        {
+            _cheatMaxLVLJugador = false;
+            _totalDeaths = 0;
+        }
+        else
+        {
+            _cheatMaxLVLJugador = true;
+            _totalDeaths = 1000;
+        }
+    }
+
+    /// <summary>
+    /// Actualiza en pantalla si el jugador tiene o no los cheats
+    /// </summary>
+    public void UpdateMaxLVLCheatHUD()
+    {
+        if (TextoMaxLVLCheatHUD != null)
+        {
+            if (_cheatMaxLVLJugador) TextoMaxLVLCheatHUD.text = "Max LVL: ON";
+            else TextoMaxLVLCheatHUD.text = "Max LVL: OFF";
         }
     }
 
@@ -1222,20 +1272,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void SaveScore(int score)
     {
-        string data = score.ToString();
-        string path = Application.persistentDataPath + "/Score.txt";
-
-        if (File.Exists(path)) //Si existe el path se leera el número almacenado
+        if (!_cheatInmortalJugador && !_cheatMaxLVLJugador)
         {
-            string contenido = File.ReadAllText(path);
-            int savedScore = int.Parse(contenido);
+            string data = score.ToString();
+            string path = Application.persistentDataPath + "/Score.txt";
 
-            if (savedScore >= score) // Si la puntuación no es mayor a la puntuación del archivo se corta
+            if (File.Exists(path)) //Si existe el path se leera el número almacenado
             {
-                return;
+                string contenido = File.ReadAllText(path);
+                int savedScore = int.Parse(contenido);
+
+                if (savedScore >= score) // Si la puntuación no es mayor a la puntuación del archivo se corta
+                {
+                    return;
+                }
             }
+            File.WriteAllText(path, data); // Se guarda el puntaje en el path indicado
         }
-        File.WriteAllText(path, data); // Se guarda el puntaje en el path indicado
     }
 
     #endregion
