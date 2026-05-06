@@ -603,14 +603,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerAbilityCooldown: 20
   AbilityLevels:
-  - PlayerAbilityDuration: 2.75
+  - PlayerAbilityDuration: 3
     AbilityUpgradeKillThreshold: 0
-  - PlayerAbilityDuration: 3.75
-    AbilityUpgradeKillThreshold: 30
   - PlayerAbilityDuration: 4.5
-    AbilityUpgradeKillThreshold: 65
-  - PlayerAbilityDuration: 5
-    AbilityUpgradeKillThreshold: 100
+    AbilityUpgradeKillThreshold: 35
+  - PlayerAbilityDuration: 6
+    AbilityUpgradeKillThreshold: 70
+  - PlayerAbilityDuration: 7.5
+    AbilityUpgradeKillThreshold: 105
   LevelUP: {fileID: 8300000, guid: e2e71451ece1a1543896e0495e7ce6db, type: 3}
 --- !u!95 &7364166214027565214
 Animator:

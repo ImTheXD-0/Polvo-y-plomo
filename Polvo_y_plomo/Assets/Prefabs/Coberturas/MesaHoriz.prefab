@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VidaMax: 5
+  VidaMax: 6
   DanyoJugador: {fileID: 0}
   CuracionJugador: {fileID: 0}
   CoberturaCubre: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
