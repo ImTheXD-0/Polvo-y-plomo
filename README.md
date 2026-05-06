@@ -1,4 +1,3 @@
-# Template-P1
 # Título del juego: "Polvo & Plomo".
 # Integrantes del equipo de desarrollo ZeroZinco (Grupo 05): 
 - Miguel Gómez García
