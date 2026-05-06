@@ -463,7 +463,6 @@ public class InputManager : MonoBehaviour
     public void DesactivarInputRoll()
     {
         _movement.Disable();
-        _look.Disable();
         _fire.Disable();
         _reload.Disable();
         _roll.Disable();
