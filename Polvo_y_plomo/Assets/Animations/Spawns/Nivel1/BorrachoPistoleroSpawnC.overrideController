@@ -7,5 +7,25 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BorrachoPistoleroSpawnC
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Controller: {fileID: 9100000, guid: 02bbab15cf8780e4eb9b9c2f7e73d100, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: df003de599a716741b2f9320d63689fb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 305151594ca86a64692b3712275fe88c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fcce414407ed17948b3928a9d4edc300, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 464d768cc802ecc4ebacde0353c5f4f1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b4af0096d9b31c547ab475e0835eeb4c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: abcb62e6321542c4d9a777ff6ed4900e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e299dea56ee6e3343a7cac601f466b5e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 45d514f6059144946b9f2970a8d0f911, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9b85d08456d498b4982ffcbdd83c8104, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9efadc97cb8a44e4ea89c73e96b58199, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ed030160004e4844b826b7e9f26431f2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d0aef3b8d7001d146b179aaccbb2ed88, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: eaa416998887d1941b4682ccc4f402de, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f9c478e4af8e66d41aac6fad4d4f80b7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f3e3cf25245b62740a0f45ccea4c7b88, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 99bc69c05fc0be042926ce469a2f3e1c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4f043387ef810b04885fcafed2a74d36, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e1db7ce98aedc92439e8ed0197a29711, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ab7c44b1f19284b45bd665113384ada4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 39b92e387ebf1ac4d86574e57e3d33bd, type: 2}
