@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: f9e32660899799e4faa922b3f7d8e804
+guid: e9f3e0e4d3e57984ab8dd5829e22d18c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5409834276022356756
-    second: CazarecompensasStunFront_0
+      213: 821149973768770749
+    second: AlguacilWalkLeft_0
   - first:
-      213: -2657864623821968741
-    second: CazarecompensasStunFront_1
+      213: -8194758508561802599
+    second: AlguacilWalkLeft_1
+  - first:
+      213: -9157013888827490379
+    second: AlguacilWalkLeft_2
+  - first:
+      213: -8767511482548737343
+    second: AlguacilWalkLeft_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,12 +109,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CazarecompensasStunFront_0
+      name: AlguacilWalkLeft_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 27
+        width: 26
         height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,19 +124,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41b8b0c8c97931b40800000000000000
-      internalID: 5409834276022356756
+      spriteID: db41fcdec8f456b00800000000000000
+      internalID: 821149973768770749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CazarecompensasStunFront_1
+      name: AlguacilWalkLeft_1
       rect:
         serializedVersion: 2
-        x: 27
+        x: 26
         y: 0
-        width: 27
+        width: 26
         height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -140,8 +146,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9aa304e43e5d1bd0800000000000000
-      internalID: -2657864623821968741
+      spriteID: 99a501ddd8e564e80800000000000000
+      internalID: -8194758508561802599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlguacilWalkLeft_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 26
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bf7e115260cbe080800000000000000
+      internalID: -9157013888827490379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlguacilWalkLeft_3
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 0
+        width: 26
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ca268642ca835680800000000000000
+      internalID: -8767511482548737343
       vertices: []
       indices: 
       edges: []
@@ -150,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9115889686039da48b7f2a4d2d9f5eb3
+    spriteID: c9df820017514c240871076eb4aa61d3
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CazarecompensasStunFront_0: 5409834276022356756
-      CazarecompensasStunFront_1: -2657864623821968741
+      AlguacilWalkLeft_0: 821149973768770749
+      AlguacilWalkLeft_1: -8194758508561802599
+      AlguacilWalkLeft_2: -9157013888827490379
+      AlguacilWalkLeft_3: -8767511482548737343
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

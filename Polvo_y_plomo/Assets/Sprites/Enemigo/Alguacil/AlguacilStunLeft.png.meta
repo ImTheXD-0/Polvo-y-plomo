@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: f9e32660899799e4faa922b3f7d8e804
+guid: 13ce10a8210b4634bb0059c7845b1fdf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5409834276022356756
-    second: CazarecompensasStunFront_0
+      213: 917531037683111627
+    second: AlguacilStunLeft_0
   - first:
-      213: -2657864623821968741
-    second: CazarecompensasStunFront_1
+      213: -6433107867272168917
+    second: AlguacilStunLeft_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,12 +103,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CazarecompensasStunFront_0
+      name: AlguacilStunLeft_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 27
+        width: 26
         height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,19 +118,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41b8b0c8c97931b40800000000000000
-      internalID: 5409834276022356756
+      spriteID: bc65f731e99bbbc00800000000000000
+      internalID: 917531037683111627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CazarecompensasStunFront_1
+      name: AlguacilStunLeft_1
       rect:
         serializedVersion: 2
-        x: 27
+        x: 26
         y: 0
-        width: 27
+        width: 26
         height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9aa304e43e5d1bd0800000000000000
-      internalID: -2657864623821968741
+      spriteID: b2ab8719a7209b6a0800000000000000
+      internalID: -6433107867272168917
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9115889686039da48b7f2a4d2d9f5eb3
+    spriteID: 221a9a1d72703764fb0646f92d12ecdb
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CazarecompensasStunFront_0: 5409834276022356756
-      CazarecompensasStunFront_1: -2657864623821968741
+      AlguacilStunLeft_0: 917531037683111627
+      AlguacilStunLeft_1: -6433107867272168917
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

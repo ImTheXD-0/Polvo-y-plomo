@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: f9e32660899799e4faa922b3f7d8e804
+guid: 79fc97e00c721164c95d85d848217c13
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5409834276022356756
-    second: CazarecompensasStunFront_0
-  - first:
-      213: -2657864623821968741
-    second: CazarecompensasStunFront_1
+      213: -787142612383534242
+    second: AlguacilWalkBack_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CazarecompensasStunFront_0
+      name: AlguacilWalkBack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 27
+        width: 24
         height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,19 +115,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41b8b0c8c97931b40800000000000000
-      internalID: 5409834276022356756
+      spriteID: e537e49e6f18315f0800000000000000
+      internalID: -787142612383534242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CazarecompensasStunFront_1
+      name: AlguacilWalkBack_1
       rect:
         serializedVersion: 2
-        x: 27
+        x: 24
         y: 0
-        width: 27
+        width: 24
         height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -138,10 +135,54 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b9aa304e43e5d1bd0800000000000000
-      internalID: -2657864623821968741
+      spriteID: 40f4caf54a1c42a49bee36201f0be16d
+      internalID: -988311900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlguacilWalkBack_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957e49b616d93d6498043f9332927874
+      internalID: 1828553562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlguacilWalkBack_3
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 24
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0293697c056ca15438895a4233f90db1
+      internalID: -695722332
       vertices: []
       indices: 
       edges: []
@@ -150,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9115889686039da48b7f2a4d2d9f5eb3
+    spriteID: e7f7744250056b34392f56db23383335
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +201,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CazarecompensasStunFront_0: 5409834276022356756
-      CazarecompensasStunFront_1: -2657864623821968741
+      AlguacilWalkBack_0: -787142612383534242
+      AlguacilWalkBack_1: -988311900
+      AlguacilWalkBack_2: 1828553562
+      AlguacilWalkBack_3: -695722332
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
