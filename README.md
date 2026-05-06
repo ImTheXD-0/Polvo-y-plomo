@@ -1,4 +1,4 @@
-# Título del juego: "Polvo & Plomo".
+# Polvo & Plomo
 # Integrantes del equipo de desarrollo ZeroZinco (Grupo 05): 
 - Miguel Gómez García
 - Camilo Sandoval Sánchez
@@ -6,7 +6,7 @@
 - Juan José de Reyna Godoy
 - Ángel Seijas de Ema
 - Samuel Asensio Torres
-# Instrucciones para jugar: 
+# Breve descripción y cómo ganar: 
 Polvo y Plomo es un shooter de vista top down ambientado en el viejo oeste. Deberás ponerte en la piel de Hudson, un forajido que llega a un pueblo en el desierto con la intención de robar un banco.
 Para ello deberá sobrevivir a la furia de sus habitantes que se vuelven contra ti para vengar los actos criminales que has cometido.
 Para ganar debes acabar con todos los enemigos y enfrentarte en un duelo final, cumpliendo así tu objetivo de llenar tus bolsillos de oro.
@@ -24,6 +24,6 @@ Para ganar debes acabar con todos los enemigos y enfrentarte en un duelo final, 
 
 
 # "Known Issues"
-Ningún error conocido
+Ningún error conocido.
 
 # ¡Gracias por jugar nuestro juego!
