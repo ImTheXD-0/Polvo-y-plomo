@@ -280,6 +280,7 @@ MonoBehaviour:
   LapseBetweenShots: 0.2
   MaxHidingTime: 3
   ShotgunSprite: {fileID: 4537767330091140085}
+  DynaSpawnOffset: {x: 0, y: 2.2, z: 0}
 --- !u!114 &7280290977658881276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +296,10 @@ MonoBehaviour:
   Whistle: {fileID: 8300000, guid: 301015a462869ac4e9c70d093cf300df, type: 3}
   HealthManager: {fileID: 9083717780677641832}
   SpawnLevels:
+  - LevelSpawners:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   - LevelSpawners:
     - {fileID: 0}
     - {fileID: 0}
@@ -364,6 +369,7 @@ MonoBehaviour:
   Contador1: 0.5
   Contador2: 2
   DynamitePrefab: {fileID: 8424402985830408694, guid: 6a75dbcb9919ecb40b708d15b22d3168, type: 3}
+  DynaSpawnOffset: {x: 0, y: 2.2, z: 0}
 --- !u!114 &3100835469812802007
 MonoBehaviour:
   m_ObjectHideFlags: 0

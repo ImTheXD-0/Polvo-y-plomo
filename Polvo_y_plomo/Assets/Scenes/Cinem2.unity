@@ -226,8 +226,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 692534273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.125, y: 0.15}
-  m_AnchorMax: {x: 0.875, y: 0.95}
+  m_AnchorMin: {x: 0.175, y: 0.15}
+  m_AnchorMax: {x: 0.825, y: 0.95}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
@@ -527,13 +527,13 @@ MonoBehaviour:
     CurrentSound: 0
   - Panel: {fileID: -3029038973452701583, guid: 2ec0ebbf0248ecc4ab887d811e7b5e97, type: 3}
     ComicSounds:
-    - Sound: {fileID: 8300000, guid: 6598758f89b1a56488b4445a8c36dcc4, type: 3}
-      TimeDelayToPlay: 0.4
+    - Sound: {fileID: 8300000, guid: 883f8d52f720c8741b24bd23a0d7048f, type: 3}
+      TimeDelayToPlay: 0.6
     CurrentSound: 0
   - Panel: {fileID: -8400113362308445940, guid: d76ae16d3af95f6468a7211bc550a777, type: 3}
     ComicSounds:
-    - Sound: {fileID: 8300000, guid: 79de51b355cf5dd4ca12c3fe733692aa, type: 3}
-      TimeDelayToPlay: 0.4
+    - Sound: {fileID: 8300000, guid: 883f8d52f720c8741b24bd23a0d7048f, type: 3}
+      TimeDelayToPlay: 0.415
     CurrentSound: 0
   PanelImage: {fileID: 211358962}
   PromptText: {fileID: 1926595937}

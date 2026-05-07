@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 814360797894667470}
   - component: {fileID: 2883376256833120092}
   - component: {fileID: 2763892333630398400}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BoomRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

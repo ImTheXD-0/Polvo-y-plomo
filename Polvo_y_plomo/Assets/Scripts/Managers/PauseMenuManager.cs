@@ -249,9 +249,6 @@ public class PauseMenuManager : MonoBehaviour
     public void OpenPauseMenuFromButton()
     {
         OpenPauseMenuFromInput();
-        _settingsOpen = false;
-        _helpOpen = false;
-        _warningOpen = false;
         EventSystem.current.SetSelectedGameObject(FirstButtonPausePannel);
     }
 
@@ -263,7 +260,10 @@ public class PauseMenuManager : MonoBehaviour
     {
         PausePanel.SetActive(false);
         HelpPanel.SetActive(false);
+        WarningPanel.SetActive(false);
         SettingsPanel.SetActive(true);
+        _warningOpen = false;
+        _helpOpen = false;
         _settingsOpen = true;
         EventSystem.current.SetSelectedGameObject(FirstButtonSettingPannel);
     }
@@ -276,8 +276,11 @@ public class PauseMenuManager : MonoBehaviour
     {
         PausePanel.SetActive(false);
         SettingsPanel.SetActive(false);
+        WarningPanel.SetActive(false);
         HelpPanel.SetActive(true);
         _helpOpen = true;
+        _warningOpen = false;
+        _settingsOpen = false;
         EventSystem.current.SetSelectedGameObject(FirstButtonHelpPannel);
     }
 
@@ -289,6 +292,7 @@ public class PauseMenuManager : MonoBehaviour
         PausePanel.SetActive(false);
         HelpPanel.SetActive(false);
         SettingsPanel.SetActive(false);
+        WarningPanel.SetActive(false);
         _settingsOpen = false;
         _gamePaused = false;
         _helpOpen = false;
@@ -356,6 +360,10 @@ public class PauseMenuManager : MonoBehaviour
         HelpPanel.SetActive(false);
         WarningPanel.SetActive(false);
         SettingsPanel.SetActive(false);
+
+        _helpOpen = false;
+        _warningOpen = false;
+        _settingsOpen = false;
 
         EventSystem.current.SetSelectedGameObject(FirstButtonPausePannel);
     }

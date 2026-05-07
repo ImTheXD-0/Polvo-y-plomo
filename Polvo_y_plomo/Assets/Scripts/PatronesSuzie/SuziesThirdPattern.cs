@@ -53,6 +53,12 @@ public class SuziesThirdPattern : MonoBehaviour
     [SerializeField]
     private GameObject DynamitePrefab;
 
+    /// <summary>
+    /// Vector que se añadira de offset al spawn de la dinamita, desde la posición de Suzie.
+    /// </summary>
+    [SerializeField]
+    private Vector3 DynaSpawnOffset;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -224,7 +230,7 @@ public class SuziesThirdPattern : MonoBehaviour
     {
         if (DynamitePrefab != null)
         {
-            GameObject dynamite = Instantiate(DynamitePrefab, transform.position, Quaternion.identity);
+            GameObject dynamite = Instantiate(DynamitePrefab, transform.position + DynaSpawnOffset, Quaternion.identity);
 
             MoveToCoordsAndExplode moveScript = dynamite.GetComponent<MoveToCoordsAndExplode>();
 
