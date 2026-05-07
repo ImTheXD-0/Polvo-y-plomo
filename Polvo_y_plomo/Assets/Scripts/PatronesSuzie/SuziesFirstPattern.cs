@@ -185,6 +185,15 @@ public class SuziesFirstPattern : MonoBehaviour
     }
 
     /// <summary>
+    /// Inicializa los tiempos primordiales del componente.
+    /// </summary>
+    private void OnEnable()
+    {
+        _tWhileHidden = 0;
+        _rndHidingTime = UnityEngine.Random.Range(1f, MaxHidingTime); ;
+    }
+
+    /// <summary>
     /// Update que lleva los ciclos de atacar (escopeta/dinamita)-esconderse, determinando cuándo, cómo, durante cuánto, hasta cuándo...
     /// Más especificado línea a línea por claridad.
     /// </summary>
@@ -327,7 +336,7 @@ public class SuziesFirstPattern : MonoBehaviour
         }
 
         _tWhileHidden = 0;
-        _rndHidingTime = UnityEngine.Random.Range(1f, MaxHidingTime);
+        UnityEngine.Random.Range(1f, MaxHidingTime);
 
         SuziePhaseManager suzie = GetComponent<SuziePhaseManager>();
         if (suzie != null) suzie.ReportarAtaqueTerminado();

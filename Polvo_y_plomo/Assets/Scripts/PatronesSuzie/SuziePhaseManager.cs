@@ -95,6 +95,7 @@ public class SuziePhaseManager : MonoBehaviour
 
             if (_healthManager.GetCurrentHealth() <= mitadDeVida)
             {
+                if (_patron2.enabled) _patron2.ForceStop(); 
                 CambiarAFase2();
 
                 if (AudioManager.HasInstance())

@@ -246,7 +246,6 @@ public class SuziesThirdPattern : MonoBehaviour
     /// </summary>
     private void FinalizarPatron()
     {
-        _suzieHealthChanger.AllowDamage();
         GetComponent<SuziePhaseManager>().ReportarAtaqueTerminado();
     }
     #endregion

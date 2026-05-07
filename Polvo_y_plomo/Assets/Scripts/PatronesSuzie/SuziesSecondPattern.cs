@@ -75,6 +75,13 @@ public class SuziesSecondPattern : MonoBehaviour
     /// Contador que indica el nivel de spawn de enemigos actual
     /// </summary>
     private int _currentSpawnLevel = 0;
+
+    /// <summary>
+    /// Almacena un booleano que le dice a este patrón si ha sido forzado a parar.
+    /// Esto es para que no haya errores con la transición de fase 1 a fase 2 de Suzie (que de inmediato hace el patrón 3)
+    /// El error en concreto es que se puede estar dando este patron, y cuando acaban sus spawners se llama a reportar el acabado, pero ya se habia "acabado" por la transicion a la fase 2.
+    /// </summary>
+    private bool _forcedStop = false;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -142,7 +149,6 @@ public class SuziesSecondPattern : MonoBehaviour
         // Si ya se han apagado tantos spawners como hay en la lista Suzie volverá a aparecer siendo vulnerable
         if (deactivatedSpawns >= SpawnLevels[_currentSpawnLevel].LevelSpawners.Length)
         {
-            UnHide();
             deactivatedSpawns = 0; // Reseteamos el contador para la próxima vez
 
             if (_currentSpawnLevel < SpawnLevels.Length - 1)
@@ -151,12 +157,24 @@ public class SuziesSecondPattern : MonoBehaviour
                 Pattern2Spawner = SpawnLevels[_currentSpawnLevel].LevelSpawners[0];
             }
 
-            SuziePhaseManager phaseManager = GetComponent<SuziePhaseManager>();
-            if (phaseManager != null)
+            if (!_forcedStop)
             {
-                phaseManager.ReportarAtaqueTerminado();
+                SuziePhaseManager phaseManager = GetComponent<SuziePhaseManager>();
+                if (phaseManager != null)
+                {
+                    phaseManager.ReportarAtaqueTerminado();
+                }
             }
+            else _forcedStop = false;
         }
+    }
+
+    /// <summary>
+    /// Método para comunicarle a este patrón que ha acabado de funcionar y que no de errores reportando un "falso final de ataque".
+    /// </summary>
+    public void ForceStop()
+    {
+        _forcedStop = true;
     }
 
     #endregion

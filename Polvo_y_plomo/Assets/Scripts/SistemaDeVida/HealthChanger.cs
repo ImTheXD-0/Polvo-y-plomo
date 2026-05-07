@@ -147,6 +147,7 @@ public class HealthChanger : MonoBehaviour
     /// </summary
     public void BlockDamage()
     {
+        Debug.Log("blockdmg");
         _canRecieveDamage = false;
     }
 
@@ -155,6 +156,7 @@ public class HealthChanger : MonoBehaviour
     /// </summary
     public void AllowDamage()
     {
+        Debug.Log("allowdmg");
         _canRecieveDamage = true;
     }
 
