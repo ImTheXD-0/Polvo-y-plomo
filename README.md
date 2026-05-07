@@ -1,4 +1,4 @@
-# Polvo & Plomo
+# Polvo y Plomo
  <img width="200" height="150" alt="Cinema6" src="https://github.com/user-attachments/assets/46ef0401-5b20-43c2-8025-21b5aeceb939" />
  
 # Integrantes del equipo de desarrollo ZeroZinco (Grupo 05): 
