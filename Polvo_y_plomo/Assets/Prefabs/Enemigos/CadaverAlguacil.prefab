@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2964489506024197493, guid: 47e0513aeddf05345922d5ab95144362, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4450507
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2964489506024197493, guid: 47e0513aeddf05345922d5ab95144362, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1451554
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2964489506024197493, guid: 47e0513aeddf05345922d5ab95144362, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,10 +51,14 @@ PrefabInstance:
     - target: {fileID: 4565238313982163585, guid: 47e0513aeddf05345922d5ab95144362, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3613554965654871164, guid: d7c46721290644f4fa2ac1a7a1ab12da, type: 3}
+      objectReference: {fileID: 21300000, guid: d7c46721290644f4fa2ac1a7a1ab12da, type: 3}
+    - target: {fileID: 4565238313982163585, guid: 47e0513aeddf05345922d5ab95144362, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7466230054317833982, guid: 47e0513aeddf05345922d5ab95144362, type: 3}
       propertyPath: m_Name
-      value: CadaverAlguacil Variant
+      value: CadaverAlguacil
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

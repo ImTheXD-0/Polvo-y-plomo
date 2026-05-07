@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3431735393579477392, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
       propertyPath: m_Name
-      value: CadaverCazarrecompensas Variant
+      value: CadaverCazarrecompensas
       objectReference: {fileID: 0}
     - target: {fileID: 6998984123762547227, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4450507
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6998984123762547227, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1451554
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6998984123762547227, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53,9 +53,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8599735134736739823, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599735134736739823, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599735134736739823, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -5373157820855173599, guid: 6c7689dc975bd5c43883d2af9b88320b, type: 3}
+      objectReference: {fileID: 21300000, guid: 6c7689dc975bd5c43883d2af9b88320b, type: 3}
+    - target: {fileID: 8599735134736739823, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
