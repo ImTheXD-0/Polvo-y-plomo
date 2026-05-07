@@ -105,8 +105,8 @@ public class ChasePlayer : MonoBehaviour
     /// Almacena el Rigidbody2d del objeto.
     /// Inicializado en el Awake().
     /// </summary>
-    
     private Rigidbody2D _rb;
+
     /// <summary>
     /// Almacena el Animator del objeto.
     /// Inicializado en el Awake().
