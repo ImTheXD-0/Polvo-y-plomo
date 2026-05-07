@@ -184,7 +184,7 @@ MonoBehaviour:
     CurrentSound: 0
   - Panel: {fileID: 5347648085908654301, guid: 4c818f058de5a6240bc0a80a2909fbc2, type: 3}
     ComicSounds:
-    - Sound: {fileID: 8300000, guid: 8dd4140a33a20594badb7202c48130eb, type: 3}
+    - Sound: {fileID: 8300000, guid: 2b216bc8c2fd5a24d85cf45bd7081b6e, type: 3}
       TimeDelayToPlay: 0.4
     CurrentSound: 0
   - Panel: {fileID: -5470655758979094006, guid: da0105bce1f15724bae201025d4ebed6, type: 3}
