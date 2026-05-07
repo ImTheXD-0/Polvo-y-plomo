@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cadaveres:
-  - {fileID: 3431735393579477392, guid: ce7a0d454f12f554cbf3b6db48204416, type: 3}
+  - {fileID: 6128539911675885188, guid: 52c89077afbb5ab4c8779f0ae8421b0a, type: 3}
 --- !u!114 &633418101502212348
 MonoBehaviour:
   m_ObjectHideFlags: 0
