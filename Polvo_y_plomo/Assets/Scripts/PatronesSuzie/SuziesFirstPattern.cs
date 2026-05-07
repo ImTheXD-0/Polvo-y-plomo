@@ -58,6 +58,12 @@ public class SuziesFirstPattern : MonoBehaviour
     /// </summary>
     [SerializeField]
     private SpriteRenderer ShotgunSprite;
+
+    /// <summary>
+    /// Vector que se añadira de offset al spawn de la dinamita, desde la posición de Suzie.
+    /// </summary>
+    [SerializeField]
+    private Vector3 DynaSpawnOffset;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -312,7 +318,7 @@ public class SuziesFirstPattern : MonoBehaviour
         _playerPos = LevelManager.Instance.PlayerTransform();
         if (DynamitePrefab != null)
         {
-            MoveToCoordsAndExplode dynamite = Instantiate(DynamitePrefab, transform.position, Quaternion.identity).GetComponent<MoveToCoordsAndExplode>();
+            MoveToCoordsAndExplode dynamite = Instantiate(DynamitePrefab, transform.position + DynaSpawnOffset, Quaternion.identity).GetComponent<MoveToCoordsAndExplode>();
 
             if (dynamite != null)
             {

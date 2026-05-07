@@ -2501,11 +2501,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!212 &203745328 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4537767330091140085, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-  m_PrefabInstance: {fileID: 2677713106049116792}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &245465590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25829,46 +25824,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5891100814486715577, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: ShotgunSprite
-      value: 
-      objectReference: {fileID: 203745328}
     - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: Pattern2Spawner
       value: 
       objectReference: {fileID: 701342174}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[1].LevelSpawners.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[2].LevelSpawners.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[3].LevelSpawners.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[4].LevelSpawners.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[5].LevelSpawners.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[7].LevelSpawners.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
-      propertyPath: SpawnLevels.Array.data[9].LevelSpawners.Array.size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 7280290977658881276, guid: f6718466b7d375a4dbb20fecabdcfc80, type: 3}
       propertyPath: 'SpawnLevels.Array.data[0].LevelSpawners.Array.data[0]'
       value: 
