@@ -178,9 +178,7 @@ MonoBehaviour:
       TimeDelayToPlay: 0.3
     CurrentSound: 0
   - Panel: {fileID: -2987412409151280868, guid: ac709377758750446a72a767e93af63f, type: 3}
-    ComicSounds:
-    - Sound: {fileID: 8300000, guid: b8fc156aba30df248ad8972e50a4f647, type: 3}
-      TimeDelayToPlay: 0.3
+    ComicSounds: []
     CurrentSound: 0
   - Panel: {fileID: 5347648085908654301, guid: 4c818f058de5a6240bc0a80a2909fbc2, type: 3}
     ComicSounds:

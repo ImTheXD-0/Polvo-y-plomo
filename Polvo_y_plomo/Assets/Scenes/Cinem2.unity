@@ -538,7 +538,7 @@ MonoBehaviour:
   PanelImage: {fileID: 211358962}
   PromptText: {fileID: 1926595937}
   FadeDuration: 1.5
-  WaitTimeAfterAnimation: 3
+  WaitTimeAfterAnimation: 3.2
   SceneChanger: {fileID: 2003535280}
 --- !u!4 &759242510
 Transform:
