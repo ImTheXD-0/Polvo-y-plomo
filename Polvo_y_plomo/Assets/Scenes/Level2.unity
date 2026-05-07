@@ -8614,7 +8614,7 @@ PrefabInstance:
     - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
       propertyPath: VictoryMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 0c48c7cb110403b439bf401fd74d30a8, type: 3}
+      objectReference: {fileID: 8300000, guid: e7070bfdd49238c45a3edab197863650, type: 3}
     - target: {fileID: 685736466760669325, guid: a203563ead4faec4b8eef19511e8329c, type: 3}
       propertyPath: MeleeCooldown
       value: 
