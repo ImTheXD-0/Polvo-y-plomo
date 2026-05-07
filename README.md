@@ -20,10 +20,37 @@ Para ganar debes acabar con todos los enemigos y enfrentarte en un duelo final, 
 - Roll: Barra espaciadora / "A"
 - Pausa: "ESC" / "Options"
 # Créditos
-
-
+- Mike, the board please! - Toby Fox 
+- Main Menu 4 (Dunes) - MasterSwordRemix 
+- Showdown - MasterSwordRemix 
+- Showdown (Heavy cover) - Dethraxx
+- The straw - MasterSwordRemix
+- Revolver reloading_1(gun, pistol, weapon, metal).wav - o_ciz
+- mrfriends-pistol-shot-233473 - Antonn Bornemann
+ Sonidos sacados de: "https://pixabay.com/es/"
+- Riser Swoosh Reverb - ALEXIS_GAMING_CAM 
+- Heartbeat Sound - kauasilbershlachparodes
+- Gust of Wind - DRAGON-STUDIO
+- creaking floor OWI - miekyj (Freesound)
+- Cash Register Kaching - DRAGON-STUDIO
+- Walking on wood - freesounds123
+- Saloon Door Squeak - forfie (Freesound)
+- Running on gravel - AudioPapkin
+- Quick Swing Sound - XpMonster
+- taking out knife - u_dtbxmnju4i
+- Health Pickup - KeshaFilm (Freesound)
+- Gunshot - DRAGON-STUDIO
+- Power Up 01A - EdR
+- Retro Power Up Sound 03 - dogwolf123
+- wood block - thomasjaunism (Freesound)
+- Crate Break 1 - kevinkace (Freesound)
+- male_hurt7 - micahlg (Freesound)
+- Calling whistle - NyxLurvig (Freesound)
+- Explosive - qubodup (Freesound)
+- Movement - 2create (Freesound)
+- Empty Gun Shot - KlawyKogut (Freesound)
 
 # "Known Issues"
-Ningún error conocido.
+A veces al disparar y recargar la rotación del barril se desajusta y no queda como tenía la rotación al principio
 
 # ¡Gracias por jugar nuestro juego!
