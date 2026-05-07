@@ -406,7 +406,7 @@ RectTransform:
   m_Children:
   - {fileID: 207354873}
   - {fileID: 211358960}
-  - {fileID: 1869526101}
+  - {fileID: 1926595936}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -508,29 +508,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CinematicPanels:
-  - Panel: {fileID: -855298285791758126, guid: ac1b5432d70f2d541b4b3d70a93b0605, type: 3}
-    ComicSounds: []
+  - Panel: {fileID: -3142780795130146172, guid: 41017d050acb0ec47a7f37661df8dcf2, type: 3}
+    ComicSounds:
+    - Sound: {fileID: 8300000, guid: 5e71f50da6e4d874abcebdef302977ca, type: 3}
+      TimeDelayToPlay: 0.4
+    - Sound: {fileID: 8300000, guid: 45ffef9513e89d849840e3eed64ac2e5, type: 3}
+      TimeDelayToPlay: 0.9
     CurrentSound: 0
-  - Panel: {fileID: 6937817954938267909, guid: 47b988b2a1f8d3f49acc2d8fde4be2a2, type: 3}
-    ComicSounds: []
+  - Panel: {fileID: -7876350493648149075, guid: 40e154ee674b0cc4a81d05af9ddf6bab, type: 3}
+    ComicSounds:
+    - Sound: {fileID: 8300000, guid: f8ce2df245f9f274989330ee2425c8d2, type: 3}
+      TimeDelayToPlay: 0.5
     CurrentSound: 0
-  - Panel: {fileID: -6470460504253458178, guid: 3cfd739c2395d0f458ce96abe1410b6c, type: 3}
-    ComicSounds: []
+  - Panel: {fileID: -5658342054795682166, guid: 3edf1f85570e3cf4c8f0e4f226423d04, type: 3}
+    ComicSounds:
+    - Sound: {fileID: 8300000, guid: 5fe8c3472ebcd4e4aa36d41c27ee0b48, type: 3}
+      TimeDelayToPlay: 0.4
     CurrentSound: 0
-  - Panel: {fileID: -4178046375966092550, guid: adcd2a65087db6b4ab11c59a8c3eb7f3, type: 3}
-    ComicSounds: []
+  - Panel: {fileID: -3029038973452701583, guid: 2ec0ebbf0248ecc4ab887d811e7b5e97, type: 3}
+    ComicSounds:
+    - Sound: {fileID: 8300000, guid: 6598758f89b1a56488b4445a8c36dcc4, type: 3}
+      TimeDelayToPlay: 0.4
     CurrentSound: 0
-  - Panel: {fileID: 4130640169021434097, guid: f389853c046304c42ade816a2cc6a20f, type: 3}
-    ComicSounds: []
-    CurrentSound: 0
-  - Panel: {fileID: 3465286685962602723, guid: fea761fcb3e47e646828479078713659, type: 3}
-    ComicSounds: []
-    CurrentSound: 0
-  - Panel: {fileID: 7028616704906629411, guid: a9658e29ca8520645b745863304fe065, type: 3}
-    ComicSounds: []
+  - Panel: {fileID: -8400113362308445940, guid: d76ae16d3af95f6468a7211bc550a777, type: 3}
+    ComicSounds:
+    - Sound: {fileID: 8300000, guid: 79de51b355cf5dd4ca12c3fe733692aa, type: 3}
+      TimeDelayToPlay: 0.4
     CurrentSound: 0
   PanelImage: {fileID: 211358962}
-  PromptText: {fileID: 1869526099}
+  PromptText: {fileID: 1926595937}
   FadeDuration: 1.5
   WaitTimeAfterAnimation: 3
   SceneChanger: {fileID: 2003535280}
@@ -874,7 +880,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eeeaccf46f684f6da400b898bbc2f73, type: 3}
---- !u!1 &1869526098
+--- !u!1 &1926595935
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -882,9 +888,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1869526101}
-  - component: {fileID: 1869526100}
-  - component: {fileID: 1869526099}
+  - component: {fileID: 1926595936}
+  - component: {fileID: 1926595938}
+  - component: {fileID: 1926595937}
   m_Layer: 5
   m_Name: Text_Saltar
   m_TagString: Untagged
@@ -892,13 +898,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1869526099
+--- !u!224 &1926595936
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926595935}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 692534273}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.2, y: 0}
+  m_AnchorMax: {x: 0.8, y: 0.115}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1926595937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869526098}
+  m_GameObject: {fileID: 1926595935}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -914,8 +939,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 770a56d1dd875b446861404ab67ccdc4, type: 2}
+  m_sharedMaterial: {fileID: 7757960468951353716, guid: 770a56d1dd875b446861404ab67ccdc4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -983,33 +1008,14 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1869526100
+--- !u!222 &1926595938
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869526098}
+  m_GameObject: {fileID: 1926595935}
   m_CullTransparentMesh: 1
---- !u!224 &1869526101
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869526098}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 692534273}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2, y: 0}
-  m_AnchorMax: {x: 0.8, y: 0.115}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!1 &2003535279
 GameObject:
   m_ObjectHideFlags: 0

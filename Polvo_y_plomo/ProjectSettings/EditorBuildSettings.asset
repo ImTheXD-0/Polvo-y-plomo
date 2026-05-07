@@ -119,6 +119,27 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Prototipo_Hito_1.unity
     guid: 30199974954fb294889bff995dca1880
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje1Borracho.unity
+    guid: 9e2fbf07dd053d44d8b857137fa080bb
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje2Pistoleros.unity
+    guid: c6a76837cd8d9974d8b650fb0b722d32
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje3Cazare.unity
+    guid: e943515fa7716494e98ad274d19578a9
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje4Alguacil.unity
+    guid: 9c95d7f2186c9d643a51e9a8e05b498b
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje5Hab.unity
+    guid: 4ec956f2d7e1eef45922df25cc1b7e2c
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje6Roll.unity
+    guid: 96efc7d71f0b69c4cafa312c8eeb5211
+  - enabled: 0
+    path: Assets/Scenes/EscenasMiembros/Angel_Montaje7Combo.unity
+    guid: 16b678930ac48d742aee39e1dc85c0ba
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
