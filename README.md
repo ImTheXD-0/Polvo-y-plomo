@@ -53,4 +53,8 @@ Para ganar debes acabar con todos los enemigos y enfrentarte en un duelo final, 
 # "Known Issues"
 A veces al disparar y recargar la rotación del barril se desajusta y no queda como tenía la rotación al principio
 
+<img width="200" height="150" alt="Cinema6" src="https://github.com/user-attachments/assets/46ef0401-5b20-43c2-8025-21b5aeceb939" />
+<img width="500" height="500" alt="P PMeme" src="https://github.com/user-attachments/assets/f253aa53-640b-4fbb-8203-99c098d857f3" />
+
+
 # ¡Gracias por jugar nuestro juego!
