@@ -332,6 +332,8 @@ public class AudioManager : MonoBehaviour
         StopMusic(); // Limpia fuentes anteriores
         _currentPhase = 1; // Resetea estado
 
+        _isPaused = false;
+
         _mySource.clip = music;
         _mySource.volume = VolumeMusic;
         _mySource.loop = true;
