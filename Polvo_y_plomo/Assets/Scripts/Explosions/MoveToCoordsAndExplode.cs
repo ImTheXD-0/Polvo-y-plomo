@@ -61,7 +61,7 @@ public class MoveToCoordsAndExplode : MonoBehaviour
     /// <summary>
     /// Componente a activar.
     /// </summary>
-    private Explode _exp;
+    private ExplodeOverTime _exp;
 
 
 
@@ -81,14 +81,14 @@ public class MoveToCoordsAndExplode : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if (GetComponent<Explode>() == null)
+        if (GetComponent<ExplodeOverTime>() == null)
         {
             Debug.Log("Se ha puesto un componente MoveToCoordsAndExplode sin un componente de tipo Explode. Se eliminará  este componente.");
             Destroy(this);
         }
 
         _flash = GetComponent<CanFlash>();
-        _exp = GetComponent<Explode>();
+        _exp = GetComponent<ExplodeOverTime>();
 
         _exp.enabled = false;//Desactiva el componente,en caso de que estuviese activado.
 

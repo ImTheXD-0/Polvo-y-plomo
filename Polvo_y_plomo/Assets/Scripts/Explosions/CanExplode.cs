@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Este componente espera a que pase una cantidad de tiempo, y cuando lo haga, elimina este GameObject e instancia otro.
-// Juan José de Reyna Godoy.
+// Breve descripción del contenido del archivo
+// Responsable de la creación de este archivo
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -10,10 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Este componente, tiene un temporizador. Una vez este llegue a la cantidad de tiempo especificada en el editor, 
-/// instanciará un objeto que hará daño al colisionar, y se eliminará el objeto actual.
+/// Antes de cada class, descripción de qué es y para qué sirve,
+/// usando todas las líneas que sean necesarias.
 /// </summary>
-public class Explode : MonoBehaviour
+public class CanExplode : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -27,16 +27,14 @@ public class Explode : MonoBehaviour
     /// Este es el GameObject que se instanciará pasado el tiempo. Hará daño al colisionar con objetos.
     /// </summary>
     [SerializeField]
-    private onCollisionDealDamage BoomRange;
+    private onCollisionDealDamage Explosion;
 
     /// <summary>
-    /// Es el tiempo que tardará en instanciar el otro objeto y destruir este.
+    /// Sonido que se dará al iniciarse la explosion
     /// </summary>
     [SerializeField]
-    private float BoomTime;
+    private AudioClip ExplosionSound;
 
-    [SerializeField]
-    private AudioClip Explosion;
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -48,29 +46,28 @@ public class Explode : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
-    /// <summary>
-    /// Tiempo que ha pasado desde que se activa el componente.
-    /// </summary>
-    private float _actualTime = 0;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    /// <summary>
-    /// Se llama cada frame. Llevará el temporizador, y cuando termine, hará el proceso de explotar la dinamita.
-    /// </summary>
-    void Update()
-    {
-        if (GameManager.HasInstance()) _actualTime += Time.deltaTime * GameManager.SlowMultiplier;
-        else _actualTime += Time.deltaTime;
 
-        if (_actualTime > BoomTime)
+    // Por defecto están los típicos (Update y Start) pero:
+    // - Hay que añadir todos los que sean necesarios
+    // - Hay que borrar los que no se usen 
+
+    /// <summary>
+    /// Se llama al cargarse en escena.
+    /// Realiza comprobaciones necesarias para el componente.
+    /// </summary>
+    private void Awake()
+    {
+        if (Explosion == null)
         {
-            Instantiate(BoomRange, transform.position, transform.rotation);
-            if (Explosion) AudioManager.Instance.Play(Explosion, transform.position);
-            Destroy(this.gameObject);
+            Debug.Log("Componente CanExplode puesto sin asignarle objeto de explosion. No funcionará");
+            Destroy(this);
         }
     }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -81,8 +78,19 @@ public class Explode : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    #endregion
+    /// <summary>
+    /// Método público para iniciar la explosión.
+    /// Causará la destrucción de este objeto, y se instanciará el objeto asignado de explosion en la misma posicion.
+    /// </summary>
+    public void Explode()
+    {
+        Instantiate(Explosion, transform.position, transform.rotation);
+        if (AudioManager.HasInstance()) AudioManager.Instance.Play(ExplosionSound, transform.position);
+        Destroy(gameObject);
+    }
 
+    #endregion
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -90,7 +98,7 @@ public class Explode : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion
+    #endregion   
 
-} // class Explode 
+} // class CanExplode 
 // namespace

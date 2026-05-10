@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 753811012114295940}
   - component: {fileID: 2008846827194560464}
   - component: {fileID: 9065238930568911990}
-  - component: {fileID: 701332206798859173}
   - component: {fileID: 2902324470021608073}
   - component: {fileID: 3210294598857234518}
+  - component: {fileID: 8909721342739913772}
+  - component: {fileID: 3166594570574823066}
   m_Layer: 14
   m_Name: Dinamita
   m_TagString: Untagged
@@ -105,21 +106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovingTime: 0.7
   Pos: {x: -4, y: -4, z: 0}
---- !u!114 &701332206798859173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424402985830408694}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d546ebc9db80deb499602b85c8a520cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BoomRange: {fileID: 5640593100504841450, guid: c517fdbb0255f1746b2ed93c4dd845d3, type: 3}
-  BoomTime: 1.5
-  Explosion: {fileID: 8300000, guid: a06745194c1f1944786ed400c08d45ff, type: 3}
 --- !u!114 &2902324470021608073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +166,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.8, y: 1.3}
   m_EdgeRadius: 0
+--- !u!114 &8909721342739913772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424402985830408694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ca9716aa52c9648b6b5631eac887ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 5640593100504841450, guid: c517fdbb0255f1746b2ed93c4dd845d3, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: a06745194c1f1944786ed400c08d45ff, type: 3}
+--- !u!114 &3166594570574823066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424402985830408694}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfab4ce035ad0304c9c57e47f09a3ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoomTime: 1.8
