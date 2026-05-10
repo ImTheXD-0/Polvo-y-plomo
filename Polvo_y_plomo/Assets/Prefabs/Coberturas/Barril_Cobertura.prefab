@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 20315230054368432}
   - component: {fileID: 8342843463468810110}
-  - component: {fileID: 5152935766568805574}
   - component: {fileID: 8450082553039774674}
   - component: {fileID: 3607523043737096370}
+  - component: {fileID: 1145377437468689943}
   m_Layer: 10
   m_Name: Barril_Cobertura
   m_TagString: Barrel
@@ -91,23 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5152935766568805574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138649192628621738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 8
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
-  CoberturaRota: {fileID: 8300000, guid: 93b8800a90ab43e40a53378c4ff6e71c, type: 3}
 --- !u!114 &8450082553039774674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +142,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.4770291}
   m_Size: {x: 0.99999994, y: 1.0374904}
   m_Direction: 0
+--- !u!114 &1145377437468689943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138649192628621738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133afdb36f837ec449a0c44032bf235d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 8
+  SoundCoberturaDanyo: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
+  SoundCoberturaRota: {fileID: 8300000, guid: 93b8800a90ab43e40a53378c4ff6e71c, type: 3}
 --- !u!1 &159057533660135593
 GameObject:
   m_ObjectHideFlags: 0

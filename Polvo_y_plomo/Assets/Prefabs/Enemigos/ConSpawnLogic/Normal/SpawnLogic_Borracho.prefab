@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2897383855925376193}
   - component: {fileID: 219012534562007612}
-  - component: {fileID: 1930036622180947147}
   - component: {fileID: 8684798268332417072}
   - component: {fileID: 664694178486765240}
   - component: {fileID: 211340130927326986}
+  - component: {fileID: -8410880884219311861}
   m_Layer: 0
   m_Name: SpawnLogic_Borracho
   m_TagString: Untagged
@@ -52,23 +52,6 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1255211531776109209, guid: f603b35226294e54d9dc851670bc9f6d, type: 3}
   SpawnAnimator: {fileID: 2370648622509468972}
   SpawnPositionOffset: {x: 0, y: 0, z: 0}
---- !u!114 &1930036622180947147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2330249337698350027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 1
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &8684798268332417072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +91,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d9164fa8cf71d4280da9a0d40bd2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8410880884219311861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330249337698350027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 1
 --- !u!1 &3740666035433366395
 GameObject:
   m_ObjectHideFlags: 0

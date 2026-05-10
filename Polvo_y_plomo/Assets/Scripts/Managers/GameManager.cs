@@ -1016,7 +1016,7 @@ public class GameManager : MonoBehaviour
                 Transform playerTransform = LevelManager.Instance.PlayerTransform();
                 if (playerTransform != null)
                 {
-                    HealthChanger healthChanger = playerTransform.GetComponent<HealthChanger>();
+                    Health healthChanger = playerTransform.GetComponent<Health>();
 
                     if (healthChanger != null)
                     {

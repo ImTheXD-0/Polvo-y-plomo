@@ -101,9 +101,9 @@ GameObject:
   m_Component:
   - component: {fileID: 969840564596057144}
   - component: {fileID: 4846839339269171553}
-  - component: {fileID: 3302716786978048013}
   - component: {fileID: 712978835730918917}
   - component: {fileID: 4400901041711171617}
+  - component: {fileID: -8653694562945786386}
   m_Layer: 10
   m_Name: MesaRedonda
   m_TagString: Untagged
@@ -182,23 +182,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3302716786978048013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524019920602936446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 10
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
-  CoberturaRota: {fileID: 8300000, guid: 93b8800a90ab43e40a53378c4ff6e71c, type: 3}
 --- !u!114 &712978835730918917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,3 +233,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010597647, y: 0.582966}
   m_Size: {x: 2.860258, y: 1.287709}
   m_Direction: 1
+--- !u!114 &-8653694562945786386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524019920602936446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133afdb36f837ec449a0c44032bf235d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 10
+  SoundCoberturaDanyo: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
+  SoundCoberturaRota: {fileID: 8300000, guid: 93b8800a90ab43e40a53378c4ff6e71c, type: 3}

@@ -102,7 +102,6 @@ GameObject:
   - component: {fileID: 2663242726059304746}
   - component: {fileID: 6040358390256342124}
   - component: {fileID: 7949443984875414264}
-  - component: {fileID: 9083717780677641832}
   - component: {fileID: 665035473078582}
   - component: {fileID: 5891100814486715577}
   - component: {fileID: 7280290977658881276}
@@ -111,6 +110,7 @@ GameObject:
   - component: {fileID: 1427213371865770467}
   - component: {fileID: 4963184217477882435}
   - component: {fileID: -4203491633760675795}
+  - component: {fileID: 2798217472345194103}
   m_Layer: 0
   m_Name: Suzie
   m_TagString: Untagged
@@ -227,23 +227,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &9083717780677641832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8374259116769511410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 20
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &665035473078582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb8f35d34b54394fa6dafcf28c013bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthManager: {fileID: 9083717780677641832}
+  _healthManager: {fileID: 0}
   _patron1: {fileID: 5891100814486715577}
   _patron2: {fileID: 7280290977658881276}
   _patron3: {fileID: 786613330448179768}
@@ -294,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Whistle: {fileID: 8300000, guid: 301015a462869ac4e9c70d093cf300df, type: 3}
-  HealthManager: {fileID: 9083717780677641832}
+  HealthManager: {fileID: 0}
   SpawnLevels:
   - LevelSpawners:
     - {fileID: 0}
@@ -422,6 +405,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Points: 1000
+--- !u!114 &2798217472345194103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8374259116769511410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42106c2dc31a36f4ba8f2175b8fbaeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 20
 --- !u!1001 &7251475672145545783
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class SuziesSecondPattern : MonoBehaviour
     /// Variable que sirve para poder bloquear y desbloquear el daño cuando el jefe este escondido
     /// </summary>
     [SerializeField]
-    private HealthChanger HealthManager;
+    private Health HealthManager;
 
     /// <summary>
     /// Struct que guarda un array de spawners a modo de “nivel” de spawn de enemigos
@@ -97,7 +97,7 @@ public class SuziesSecondPattern : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        HealthManager = this.GetComponent<HealthChanger>();
+        HealthManager = this.GetComponent<Health>();
     }
 
     /// <summary>

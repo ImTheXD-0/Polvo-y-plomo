@@ -98,7 +98,7 @@ public class SuziesThirdPattern : MonoBehaviour
     /// <summary>
     /// Almacena el HeatlhChanger de Suzie para evitar que reciba daño durante este patrón
     /// </summary>
-    private HealthChanger _suzieHealthChanger;
+    private Health _suzieHealthChanger;
 
     /// <summary>
     /// Variable para determinar a donde se lanzarán las dinamitas
@@ -120,7 +120,7 @@ public class SuziesThirdPattern : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        _suzieHealthChanger = this.GetComponent<HealthChanger>();
+        _suzieHealthChanger = this.GetComponent<Health>();
     }
 
     /// <summary>

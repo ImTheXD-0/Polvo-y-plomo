@@ -180,10 +180,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8214250064592275576}
   - component: {fileID: 3666326155112927523}
-  - component: {fileID: 7682360418547904341}
   - component: {fileID: 7217836306041281690}
   - component: {fileID: 1307766076839307539}
   - component: {fileID: 8725754208628410070}
+  - component: {fileID: 5322952773920013517}
   m_Layer: 0
   m_Name: SpawnLogic_Pistolero
   m_TagString: Untagged
@@ -222,23 +222,6 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 1785516857285784455, guid: a94f7ca618441d04e89b679bb23ec5ac, type: 3}
   SpawnAnimator: {fileID: 8085384478356351022}
   SpawnPositionOffset: {x: 0, y: 0, z: 0}
---- !u!114 &7682360418547904341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5182282577603683333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 1
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &7217836306041281690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,3 +261,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d9164fa8cf71d4280da9a0d40bd2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5322952773920013517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5182282577603683333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 1

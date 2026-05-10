@@ -241,13 +241,13 @@ GameObject:
   - component: {fileID: 7454018999090099469}
   - component: {fileID: 9102653617390615290}
   - component: {fileID: 6617396062403538178}
-  - component: {fileID: 5337274639705726399}
   - component: {fileID: 5641564381990597020}
   - component: {fileID: 190865992326124501}
   - component: {fileID: 4645508896015054712}
   - component: {fileID: 3974216744498714624}
   - component: {fileID: -6752471459374253255}
   - component: {fileID: 2976707680206909084}
+  - component: {fileID: 3788434782797790377}
   m_Layer: 10
   m_Name: EnemigoPistolero
   m_TagString: Untagged
@@ -354,23 +354,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5337274639705726399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785516857285784455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 1
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &5641564381990597020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +472,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3788434782797790377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785516857285784455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 1
 --- !u!1 &7587484897282841623
 GameObject:
   m_ObjectHideFlags: 0

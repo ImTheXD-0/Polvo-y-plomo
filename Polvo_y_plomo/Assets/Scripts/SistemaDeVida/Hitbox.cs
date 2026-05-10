@@ -44,12 +44,7 @@ public class Hitbox : MonoBehaviour
     /// <summary>
     /// Almacena el HealthChanger del padre si lo tiene.
     /// </summary>
-    private HealthChanger _healthChanger;
-
-    /// <summary>
-    /// Almacena el número de golpes que recibe Suzie
-    /// </summary>
-    private SuzieHealthBar _suzieHealthBar;
+    private Health _healthChanger;
 
     /// <summary>
     /// Almacena el CanStun del padre si lo tiene.
@@ -70,9 +65,8 @@ public class Hitbox : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _healthChanger = GetComponentInParent<HealthChanger>();
+        _healthChanger = GetComponentInParent<Health>();
         _canStun = GetComponentInParent<CanBeStunned>();
-        _suzieHealthBar = GetComponentInParent<SuzieHealthBar>();
     }
 
     #endregion
@@ -95,15 +89,6 @@ public class Hitbox : MonoBehaviour
         if (_healthChanger != null)
         {
             _healthChanger.CambiarVida(-DamageDone);
-
-            if (_suzieHealthBar != null)
-            {
-                _suzieHealthBar.UpdateHealthBar(_healthChanger.GetMaxHealth(), _healthChanger.GetCurrentHealth());
-                if (_healthChanger.GetCurrentHealth() <= 0 && GameManager.HasInstance())
-                {
-                    GameManager.Instance.GameEnds();
-                }
-            }   
         }
     }
 
@@ -125,9 +110,9 @@ public class Hitbox : MonoBehaviour
     /// <param name="ObjetoQueLlama"></param>
     public void HitboxHeal(GameObject ObjetoQueLlama, int CantidadCuracion)
     {
-        if (_healthChanger != null && _healthChanger.CuracionPermitida())
+        if (_healthChanger != null && _healthChanger is PlayerHealth player && player.CuracionPermitida())
         {
-            _healthChanger.CambiarVida(CantidadCuracion);
+            player.CambiarVida(CantidadCuracion);
             Destroy(ObjetoQueLlama);
         }
     }

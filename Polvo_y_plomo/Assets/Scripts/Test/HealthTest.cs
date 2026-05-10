@@ -45,7 +45,7 @@ public class Pruebas : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Primero conseguimos la "instancia" del script en este objeto
-        HealthChanger miSalud = GetComponent<HealthChanger>();
+        Health miSalud = GetComponent<Health>();
 
         // Luego, si el componente existe, llamamos al método
         if (miSalud != null)

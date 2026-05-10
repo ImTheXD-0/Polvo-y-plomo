@@ -358,10 +358,10 @@ GameObject:
   - component: {fileID: 166880489185979541}
   - component: {fileID: 8960657160136326528}
   - component: {fileID: 5273611612293079281}
-  - component: {fileID: 1474871151810355398}
   - component: {fileID: 8640769707630179225}
   - component: {fileID: 3385198336411724539}
   - component: {fileID: 7364166214027565214}
+  - component: {fileID: 76058373681742415}
   m_Layer: 10
   m_Name: Jugador
   m_TagString: Untagged
@@ -553,23 +553,6 @@ MonoBehaviour:
   MeleeShadowPrefab: {fileID: 8050898191946779312, guid: 7af6244c8a64f6640abdc73abf374c71, type: 3}
   Attack: {fileID: 8300000, guid: dd204d5d02c26384c84a4a5ef767cef5, type: 3}
   AttackShadow: {fileID: 8300000, guid: 399363073f652c3408a1b8345655990c, type: 3}
---- !u!114 &1474871151810355398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794519440049798451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 10
-  DanyoJugador: {fileID: 8300000, guid: 6c4119d518c9178498c8600d8f7bdca8, type: 3}
-  CuracionJugador: {fileID: 8300000, guid: 7f4c840a24e850a4ea4f7a3acecda082, type: 3}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &8640769707630179225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,6 +617,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &76058373681742415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6794519440049798451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1111348ddeaf7147ad15b900c5b7e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 10
+  SonidoDanyo: {fileID: 8300000, guid: 6c4119d518c9178498c8600d8f7bdca8, type: 3}
+  SonidoCura: {fileID: 8300000, guid: 7f4c840a24e850a4ea4f7a3acecda082, type: 3}
 --- !u!1 &8633089953209525018
 GameObject:
   m_ObjectHideFlags: 0

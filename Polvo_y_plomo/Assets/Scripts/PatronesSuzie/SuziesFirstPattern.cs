@@ -77,7 +77,7 @@ public class SuziesFirstPattern : MonoBehaviour
     /// <summary>
     /// HealthChanger que determina si Suzie tiene vida
     /// </summary>
-    private HealthChanger _health = null;
+    private Health _health = null;
     /// <summary>
     /// ShootEscopeta que determina si Suzie tiene escopeta
     /// </summary>
@@ -164,7 +164,7 @@ public class SuziesFirstPattern : MonoBehaviour
             Destroy(this);
         }
 
-        _health = GetComponent<HealthChanger>();
+        _health = GetComponent<Health>();
         if (_health == null)
         {
             Debug.Log("Se ha puesto el componente \"SuziesFirstPattern\" en un GameObject sin PV. No podrá esconderse tras recibir daño.");

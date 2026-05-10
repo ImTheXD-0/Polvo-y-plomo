@@ -72,7 +72,7 @@ public class EnemySpawnLogic : MonoBehaviour
     /// <summary>
     /// Variable que contiene una referencia al script de HealthChanger que ha de tener el EnemySpawnLogic.
     /// </summary>
-    private HealthChanger _healthChanger;
+    private Health _healthChanger;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -97,7 +97,7 @@ public class EnemySpawnLogic : MonoBehaviour
             Destroy(this);
         }
 
-        _healthChanger = GetComponent<HealthChanger>();
+        _healthChanger = GetComponent<Health>();
         if (_healthChanger == null)
         {
             Debug.Log("Se ha colocado el componente EnemySpawnLogic en un objeto que no tiene HealthChanger y no podrá funcionar");
@@ -177,7 +177,7 @@ public class EnemySpawnLogic : MonoBehaviour
     private void DoSpawn()
     {
         GameObject enemy = Instantiate(EnemyPrefab, transform.position + SpawnPositionOffset, transform.rotation);
-        HealthChanger enemyHealth = enemy.GetComponent<HealthChanger>();
+        Health enemyHealth = enemy.GetComponent<Health>();
         if (enemyHealth != null)
         {
             // Llamada ANTES de que se de el Start() del HealthChanger del enemigo -> no se ha inicializado

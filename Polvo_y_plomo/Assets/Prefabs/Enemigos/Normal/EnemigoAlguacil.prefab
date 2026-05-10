@@ -291,7 +291,6 @@ GameObject:
   - component: {fileID: 341326039761229700}
   - component: {fileID: 2134217818562222195}
   - component: {fileID: 4042238330600525707}
-  - component: {fileID: 3016448515557850934}
   - component: {fileID: 3280731705190880021}
   - component: {fileID: 7019787367339077980}
   - component: {fileID: 2573091725193827825}
@@ -300,6 +299,7 @@ GameObject:
   - component: {fileID: 324571170871295859}
   - component: {fileID: 1159541165885981876}
   - component: {fileID: 8340894792744108211}
+  - component: {fileID: -4678716356330146744}
   m_Layer: 10
   m_Name: EnemigoAlguacil
   m_TagString: Untagged
@@ -406,23 +406,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3016448515557850934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8865954822666686734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 3
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &3280731705190880021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,3 +551,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlashTime: 0.2
   FlashesUntilDisable: 1
+--- !u!114 &-4678716356330146744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865954822666686734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 3

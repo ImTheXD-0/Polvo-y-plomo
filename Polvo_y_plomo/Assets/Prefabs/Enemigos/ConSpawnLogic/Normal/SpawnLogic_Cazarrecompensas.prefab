@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2790568673097240443}
   - component: {fileID: 8107004018138444696}
-  - component: {fileID: 4737385718968624493}
   - component: {fileID: 7063979724702506497}
   - component: {fileID: 7962177357529176308}
   - component: {fileID: 8269362506139806150}
+  - component: {fileID: -453012756277276469}
   m_Layer: 0
   m_Name: SpawnLogic_Cazarrecompensas
   m_TagString: Untagged
@@ -52,23 +52,6 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 5624217940321864117, guid: a3d1da7070ce5234099a344e7f15e2cd, type: 3}
   SpawnAnimator: {fileID: 2652948463516108969}
   SpawnPositionOffset: {x: 0, y: 0, z: 0}
---- !u!114 &4737385718968624493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907102445998842385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 2
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &7063979724702506497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +91,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d9164fa8cf71d4280da9a0d40bd2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-453012756277276469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907102445998842385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 2
 --- !u!1 &5996843321102875825
 GameObject:
   m_ObjectHideFlags: 0

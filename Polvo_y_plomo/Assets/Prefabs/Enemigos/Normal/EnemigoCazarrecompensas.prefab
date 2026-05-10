@@ -101,7 +101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6299723547244346314}
   - component: {fileID: 9178400707679230632}
-  - component: {fileID: 4922729512018610371}
   - component: {fileID: 3457531478176394882}
   - component: {fileID: 5192932032252607610}
   - component: {fileID: 8526727748900716160}
@@ -113,6 +112,7 @@ GameObject:
   - component: {fileID: 5421454282519577530}
   - component: {fileID: 6641096157026918729}
   - component: {fileID: 7179780338687176624}
+  - component: {fileID: -5688163412007713819}
   m_Layer: 10
   m_Name: EnemigoCazarrecompensas
   m_TagString: Untagged
@@ -192,23 +192,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4922729512018610371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5624217940321864117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 2
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &3457531478176394882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +394,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlashTime: 0.2
   FlashesUntilDisable: 1
+--- !u!114 &-5688163412007713819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624217940321864117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 2
 --- !u!1 &7406403120335310891
 GameObject:
   m_ObjectHideFlags: 0

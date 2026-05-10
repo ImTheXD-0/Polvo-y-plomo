@@ -101,9 +101,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7621208483911399560}
   - component: {fileID: 3737082922885351637}
-  - component: {fileID: 1868790855747279185}
   - component: {fileID: 6018414895681912387}
   - component: {fileID: 5385339906961922374}
+  - component: {fileID: -3552081254607138433}
   m_Layer: 10
   m_Name: MesaHoriz
   m_TagString: Barrel
@@ -182,23 +182,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1868790855747279185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2777244098022361363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 6
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
-  CoberturaRota: {fileID: 8300000, guid: 93b8800a90ab43e40a53378c4ff6e71c, type: 3}
 --- !u!114 &6018414895681912387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,3 +242,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &-3552081254607138433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2777244098022361363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133afdb36f837ec449a0c44032bf235d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 6
+  SoundCoberturaDanyo: {fileID: 8300000, guid: 12d14f74d5b72344baa91cea32ed0647, type: 3}
+  SoundCoberturaRota: {fileID: 8300000, guid: 93b8800a90ab43e40a53378c4ff6e71c, type: 3}

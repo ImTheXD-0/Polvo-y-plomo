@@ -25,7 +25,7 @@ public class SuziePhaseManager : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     [SerializeField]
-    private HealthChanger _healthManager;
+    private Health _healthManager;
 
     [SerializeField]
     private SuziesFirstPattern _patron1;

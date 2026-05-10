@@ -195,10 +195,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5648347049844260003}
   - component: {fileID: 8214019535417809679}
-  - component: {fileID: 4295734090570888731}
   - component: {fileID: 7335292695070044938}
   - component: {fileID: 633418101502212348}
   - component: {fileID: 4247799125197131790}
+  - component: {fileID: -220385709158906142}
   m_Layer: 0
   m_Name: SpawnLogic_Alguacil
   m_TagString: Untagged
@@ -237,23 +237,6 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 8865954822666686734, guid: 2525eb4ca2d7d584087023b45a3a2512, type: 3}
   SpawnAnimator: {fileID: 7122431263606850028}
   SpawnPositionOffset: {x: 0, y: 0, z: 0}
---- !u!114 &4295734090570888731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139357430570933698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 3
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &7335292695070044938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,3 +276,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d9164fa8cf71d4280da9a0d40bd2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-220385709158906142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7139357430570933698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 3

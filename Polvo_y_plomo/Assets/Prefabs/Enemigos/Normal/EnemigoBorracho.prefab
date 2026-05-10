@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1074170182009751435}
   - component: {fileID: 1577032685090469656}
-  - component: {fileID: 2413358798763728266}
   - component: {fileID: 6002467434332016076}
   - component: {fileID: 8200727855567051127}
   - component: {fileID: 3543519096889408412}
@@ -20,6 +19,7 @@ GameObject:
   - component: {fileID: 4556486768134854902}
   - component: {fileID: -4889716141608741800}
   - component: {fileID: 3760560220102523491}
+  - component: {fileID: -7228394098567157602}
   m_Layer: 10
   m_Name: EnemigoBorracho
   m_TagString: Untagged
@@ -99,23 +99,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2413358798763728266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255211531776109209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492bab6509dbde449a17beac0a5072c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VidaMax: 1
-  DanyoJugador: {fileID: 0}
-  CuracionJugador: {fileID: 0}
-  CoberturaCubre: {fileID: 0}
-  CoberturaRota: {fileID: 0}
 --- !u!114 &6002467434332016076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +274,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7228394098567157602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255211531776109209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8a8bf5670789f4ca9cc51133335199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VidaMax: 1
 --- !u!1 &2029871151495548159
 GameObject:
   m_ObjectHideFlags: 0
