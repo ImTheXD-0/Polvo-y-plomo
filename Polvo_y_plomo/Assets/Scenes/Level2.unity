@@ -6654,14 +6654,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 8450082553039774674, guid: 305d4ef0ceaf5764d8855f45b952e279, type: 3}
-      propertyPath: Cadaveres.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8450082553039774674, guid: 305d4ef0ceaf5764d8855f45b952e279, type: 3}
-      propertyPath: 'Cadaveres.Array.data[0]'
-      value: 
-      objectReference: {fileID: 7155229638782507219, guid: 092a210380e3f3a489af41a28ae1a0a8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22662,14 +22654,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8450082553039774674, guid: 305d4ef0ceaf5764d8855f45b952e279, type: 3}
-      propertyPath: Cadaveres.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8450082553039774674, guid: 305d4ef0ceaf5764d8855f45b952e279, type: 3}
-      propertyPath: 'Cadaveres.Array.data[0]'
-      value: 
-      objectReference: {fileID: 7155229638782507219, guid: 092a210380e3f3a489af41a28ae1a0a8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23739,14 +23723,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8450082553039774674, guid: 305d4ef0ceaf5764d8855f45b952e279, type: 3}
-      propertyPath: Cadaveres.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8450082553039774674, guid: 305d4ef0ceaf5764d8855f45b952e279, type: 3}
-      propertyPath: 'Cadaveres.Array.data[0]'
-      value: 
-      objectReference: {fileID: 7155229638782507219, guid: 092a210380e3f3a489af41a28ae1a0a8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

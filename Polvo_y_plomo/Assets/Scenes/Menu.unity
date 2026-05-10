@@ -3973,6 +3973,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HelpPanelGlobal
       objectReference: {fileID: 0}
+    - target: {fileID: 2133966029211045102, guid: 935098b4cfa73894da6aad726d419a63, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5126606776084002277, guid: 935098b4cfa73894da6aad726d419a63, type: 3}
       propertyPath: ActivatePanel
       value: 

@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a3bc37fd63acc4da9754829f22e2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cadaveres: []
+  Cadaveres:
+  - {fileID: 6736641350090882385, guid: 2bad6cf291c445d498c3000f27a2c7e8, type: 3}
 --- !u!70 &3607523043737096370
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
