@@ -314,6 +314,15 @@ public class ChasePlayer : MonoBehaviour
     {
         Destroy(GetComponent<CanBeStunned>());
     }
+
+    /// <summary>
+    /// Al desactivarse un ChasePlayer el objeto se para.
+    /// </summary>
+    private void OnDisable()
+    {
+        _rb.linearVelocity = Vector2.zero;
+    }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----

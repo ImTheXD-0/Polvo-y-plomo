@@ -6,6 +6,7 @@
 //---------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.UIElements;
 // Añadir aquí el resto de directivas using
 
 
@@ -81,6 +82,11 @@ public class rotateTowardsObject : MonoBehaviour
     /// </summary>
     private bool _flipped = false;
 
+    /// <summary>
+    /// Almacena el ángulo impuesto al cuerpo.
+    /// </summary>
+    private float _angulo;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -135,22 +141,82 @@ public class rotateTowardsObject : MonoBehaviour
     void Update()
     {
         // Cálculo del angulo
-        float angulo = 180f / Mathf.PI * Mathf.Atan2((Object.position - transform.position).y, (Object.position - transform.position).x) + RotationOffset;
-        // Normalización a angulos de 0 a 360
-        angulo %= 360;
-        if (angulo < 0) angulo += 360f;
+        _angulo = 180f / Mathf.PI * Mathf.Atan2((Object.position - transform.position).y, (Object.position - transform.position).x) + RotationOffset;
+        NormalizeAngle();
 
+        ProcessAngle();
+    }
+    #endregion
+
+    // ---- MÉTODOS PÚBLICOS ----
+    #region Métodos públicos
+    // Documentar cada método que aparece aquí con ///<summary>
+    // El convenio de nombres de Unity recomienda que estos métodos
+    // se nombren en formato PascalCase (palabras con primera letra
+    // mayúscula, incluida la primera letra)
+    // Ejemplo: GetPlayerController
+
+    /// <summary>
+    /// Método para establecer el ángulo del RotateBody artificialmente.
+    /// Usado por el EnemyBurstShootingAttack que puede controlar este script cuando lo necesite.
+    /// 
+    /// Derecha = 0
+    /// Arriba = 90
+    /// Izquierda = 180
+    /// Abajo = 270
+    /// Derecha = 360 (nunca llega a 360)
+    /// </summary>
+    public void SetAngle(float newAngle)
+    {
+        _angulo = newAngle;
+        NormalizeAngle();
+
+        ProcessAngle();
+    }
+
+    /// <summary>
+    /// Método para leer el ángulo del RotateTowardsObject.
+    /// </summary>
+    /// <returns></returns>
+    public float GetAngle()
+    {
+        return _angulo;
+    }
+
+    #endregion
+    
+    // ---- MÉTODOS PRIVADOS ----
+    #region Métodos Privados
+    // Documentar cada método que aparece aquí
+    // El convenio de nombres de Unity recomienda que estos métodos
+    // se nombren en formato PascalCase (palabras con primera letra
+    // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Normaliza el ángulo al intervalo [0, 360)
+    /// </summary>
+    private void NormalizeAngle()
+    {
+        _angulo %= 360;
+        if (_angulo < 0) _angulo += 360f;
+    }
+
+    /// <summary>
+    /// Procesa el nuevo ángulo recibido y lo pone en el GameObject.
+    /// </summary>
+    private void ProcessAngle()
+    {
         // Derecha = 0
         // Arriba = 90
         // Izquierda = 180
         // Abajo = 270
         // Derecha = 360 (nunca llega a 360)
-        if (Anim != null) Anim.SetFloat("Angle", angulo);
+        if (Anim != null) Anim.SetFloat("Angle", _angulo);
 
-        transform.rotation = Quaternion.Euler(0, 0, angulo);
+        transform.rotation = Quaternion.Euler(0, 0, _angulo);
         if (FlipY)
         {
-            if (angulo >= 90f && angulo <= 270f)
+            if (_angulo >= 90f && _angulo <= 270f)
             {
                 if (!_flipped)
                 {
@@ -165,24 +231,6 @@ public class rotateTowardsObject : MonoBehaviour
             }
         }
     }
-    #endregion
-
-    // ---- MÉTODOS PÚBLICOS ----
-    #region Métodos públicos
-    // Documentar cada método que aparece aquí con ///<summary>
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
-    // Ejemplo: GetPlayerController
-
-    #endregion
-    
-    // ---- MÉTODOS PRIVADOS ----
-    #region Métodos Privados
-    // Documentar cada método que aparece aquí
-    // El convenio de nombres de Unity recomienda que estos métodos
-    // se nombren en formato PascalCase (palabras con primera letra
-    // mayúscula, incluida la primera letra)
 
     #endregion   
 
