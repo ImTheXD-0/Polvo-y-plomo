@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Contiene un método para hacer que un objeto "explote"
+// Script sencillo para explotar un CanExplode al destruirse el objeto
 // Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
@@ -10,10 +10,15 @@ using UnityEngine;
 
 
 /// <summary>
-/// Contiene un objeto asignable para instanciar al activar el método Explode().
-/// Además contiene un AudioClip asignable que suene a la vez que se instancia, simulando la explosión.
+/// Hace explotar el CanExplode, que ha de tener el gameobject en el que se pone este componente, al
+/// ser destruido el objeto.
+/// 
+/// +++
+/// Añadida funcionalidad para que se incluya un método que evite que explote. Esto es ya que
+/// otros componentes pueden querer hacer que CanExplode se active pero que el ExplodeOnDestroy no lo haga,
+/// ya que generaria 2 explosiones.
 /// </summary>
-public class CanExplode : MonoBehaviour
+public class ExplodeOnDestroy : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,18 +27,6 @@ public class CanExplode : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    /// <summary>
-    /// Este es el GameObject que se instanciará pasado el tiempo. Hará daño al colisionar con objetos.
-    /// </summary>
-    [SerializeField]
-    private onCollisionDealDamage Explosion;
-
-    /// <summary>
-    /// Sonido que se dará al iniciarse la explosion
-    /// </summary>
-    [SerializeField]
-    private AudioClip ExplosionSound;
 
     #endregion
 
@@ -46,6 +39,17 @@ public class CanExplode : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Almacena el componente CanExplode que ha de tener el gameobject.
+    /// Inicializado en el Awake()
+    /// </summary>
+    private CanExplode _canExplode;
+
+    /// <summary>
+    /// Variable booleana que maneja si el objeto debe explotar en el OnDestroy.
+    /// </summary>
+    private bool _explode = true;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -56,18 +60,30 @@ public class CanExplode : MonoBehaviour
     // - Hay que borrar los que no se usen 
 
     /// <summary>
-    /// Se llama al cargarse en escena.
-    /// Realiza comprobaciones necesarias para el componente.
+    /// Se llama al cargarse en la escena.
+    /// Hace comprobaciones necesarias para el componente.
     /// </summary>
     private void Awake()
     {
-        if (Explosion == null)
+        _canExplode = GetComponent<CanExplode>();
+        if (_canExplode == null)
         {
-            Debug.Log("Componente CanExplode puesto sin asignarle objeto de explosion. No funcionará");
+            Debug.Log("ExplodeOnDestroy puesto en un componente sin CanExplode. No funcionará");
             Destroy(this);
+
         }
     }
 
+    /// <summary>
+    /// Al destruirse el objeto (normalmente interpretado como morir) explota.
+    /// 
+    /// +++
+    /// Ahora solo explota si _explode es true.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (_explode && _canExplode != null ) _canExplode.Explode();
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -79,18 +95,23 @@ public class CanExplode : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     /// <summary>
-    /// Método público para iniciar la explosión.
-    /// Causará la destrucción de este objeto, y se instanciará el objeto asignado de explosion en la misma posicion.
+    /// Activa la explosión del OnDestroy.
     /// </summary>
-    public void Explode()
+    public void EnableExplosion()
     {
-        Instantiate(Explosion, transform.position, transform.rotation);
-        if (AudioManager.HasInstance()) AudioManager.Instance.Play(ExplosionSound, transform.position);
-        Destroy(gameObject);
+        _explode = true;
+    }
+
+    /// <summary>
+    /// Desactiva la explosion del OnDestroy.
+    /// </summary>
+    public void DisableExplosion()
+    {
+        _explode = false;
     }
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -98,7 +119,7 @@ public class CanExplode : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    #endregion
 
-} // class CanExplode 
+} // class ExplodeOnDestroy 
 // namespace
