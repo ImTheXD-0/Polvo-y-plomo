@@ -624,6 +624,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void LevelEnds()
     {
+        _gameMustBePaused = true;
+        PauseGame();
+
         _currentStreakColor = 0;
 
         // Feedback de victoria
@@ -644,8 +647,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameEnds()
     {
-        _gameMustBePaused = true;
-        PauseGame();
         LevelEnds(); // inicia el fin de nivel y guarda puntos
         ResetStats(); // reset de stats
 

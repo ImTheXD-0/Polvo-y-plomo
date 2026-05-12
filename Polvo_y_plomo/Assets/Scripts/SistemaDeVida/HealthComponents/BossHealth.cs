@@ -24,6 +24,9 @@ public class BossHealth : Health
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
+    [SerializeField]
+    private bool IsFinalBoss = true;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -132,7 +135,14 @@ public class BossHealth : Health
         PointsOnDeath points = GetComponent<PointsOnDeath>();
         if (points != null) points.GivePoints();
 
-        if (GameManager.HasInstance()) GameManager.Instance.GameEnds();
+        if (GameManager.HasInstance())
+        {
+            if (IsFinalBoss) GameManager.Instance.GameEnds();
+            else
+            {
+                GameManager.Instance.LevelEnds();
+            }
+        }
 
         base.MetodoMuerte();
     }

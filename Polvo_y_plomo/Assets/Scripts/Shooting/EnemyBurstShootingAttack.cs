@@ -54,6 +54,17 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     [SerializeField]
     private bool ClockwiseBurst = false;
 
+    /// <summary>
+    /// Define cuantas veces se van a hacer las oleadas de "burst"
+    /// Es decir, con 1 simplemente hace una pasada de disparos completa.
+    /// Con 2, haría dos pasadas, omitiendo disparar en el borde inicial del ángulo barrido.
+    /// Para 3 o más haría ese número de pasadas, y siempre entre pasadas evitará el primer disparo (para no solapar disparos con la anterior pasada)
+    /// 
+    /// Es decir, este parámetro consigue que se hagan más pasadas de disparo, "repitiendo" la rafaga configurada anteriormente.
+    /// </summary>
+    [SerializeField]
+    private int BurstWavesAmmount = 1;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -111,6 +122,16 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     /// Almacena el ángulo inicial al empezar una ráfaga.
     /// </summary>
     private float _initialAngle;
+
+    /// <summary>
+    /// Número que variará entre 1 y -1, para realizar las varias pasadas de las rafagas.
+    /// </summary>
+    private int _actualAngleSignMultiplier = 1;
+
+    /// <summary>
+    /// Contador que almacena cuantas pasadas de ráfaga se han realizado en el ataque actual.
+    /// </summary>
+    private int _totalWavesDone = 0;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -123,10 +144,25 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     private void Awake()
     {
         _shoot = GetComponent<Shoot>();
+        if (_shoot == null)
+        {
+            Debug.Log("EneyBurstShootingAttack puesto en un gameobject sin componente Shoot. No funcionará");
+            Destroy(this);
+        }
 
         _chasePlayer = transform.root.GetComponent<ChasePlayer>(); // se revisa en el objeto más "grande", el "mayor padre"
+        if (_shoot == null)
+        {
+            Debug.Log("EneyBurstShootingAttack puesto en un gameobject cuyo mayor padre no tiene el componente ChasePlayer. No funcionará");
+            Destroy(this);
+        }
 
         _rotateBody = GetComponentInParent<rotateTowardsObject>();
+        if (_shoot == null)
+        {
+            Debug.Log("EneyBurstShootingAttack puesto en un gameobject cuyo padre directo no tiene componente RotateBody. No funcionará");
+            Destroy(this);
+        }
 
         _timeSinceLastBurst = TimeBetweenBursts + 1; // para que pueda empezar a atacar de inmediato; si no se quiere se modifica
     }
@@ -148,7 +184,10 @@ public class EnemyBurstShootingAttack : MonoBehaviour
             // ahora quiero que sea desde el angulo registrado _initialAngle entre [-CompleteBurstAngle/2, CompleteBurstAngle/2] por lo que le resto CompleteBurstAngle/2 y se lo sumo al angulo inicial
             float angulo = (_t / ( (BurstShotAmmount-1) * TimeBetweenShots)) * CompleteBurstAngle - CompleteBurstAngle / 2;
             if (ClockwiseBurst) angulo *= -1;
+            angulo *= _actualAngleSignMultiplier;
             angulo += _initialAngle;
+
+
 
              _rotateBody.SetAngle(angulo);
 
@@ -161,11 +200,27 @@ public class EnemyBurstShootingAttack : MonoBehaviour
                 // Rafaga acabada
                 if (_shotsTaken >= BurstShotAmmount)
                 {
-                    _timeSinceLastBurst = 0;
-                    _isShooting = false;
+                    // Contado de pasadas
+                    _totalWavesDone++;
 
-                    _chasePlayer.enabled = true;
-                    _rotateBody.enabled = true;
+                    // Todas las ráfagas acabadas
+                    if (_totalWavesDone >= BurstWavesAmmount)
+                    {
+                        // Establecer el estado actual para intentar empezar otro ataque
+                        _timeSinceLastBurst = 0;
+                        _isShooting = false;
+
+                        // Reactivar otros componentes controlados
+                        _chasePlayer.enabled = true;
+                        _rotateBody.enabled = true;
+                    }
+                    else // Hay que hacer otra ráfaga
+                    {
+                        // Reinicio de la rafaga para hacer otra
+                        _actualAngleSignMultiplier *= -1;
+                        _shotsTaken = 1;
+                        _t = 0;
+                    }
                 }
             }
         }
@@ -183,9 +238,14 @@ public class EnemyBurstShootingAttack : MonoBehaviour
                 // Se para el RotateBody para manejarlo desde este script
                 _rotateBody.enabled = false;
 
+                // Setup del nuevo ataque
                 _isShooting = true;
                 _t = 0;
                 _shotsTaken = 0;
+                _totalWavesDone = 0;
+                _actualAngleSignMultiplier = 1;
+
+                // Registrar el angulo inicial del ataque para rotar respecto a este
                 _initialAngle = _rotateBody.GetAngle();
             }
         }
