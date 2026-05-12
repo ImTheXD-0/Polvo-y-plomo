@@ -443,6 +443,16 @@ public class InputManager : MonoBehaviour
     #endregion
 
     /// <summary>
+    /// Método para leer una acción de _theController
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public InputAction GetAction(string name)
+    {
+        return _theController.asset.FindAction(name);
+    }
+
+    /// <summary>
     /// Método que desactiva los Inputs
     /// Deja activo la acción Exit.
     /// </summary>

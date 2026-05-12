@@ -80,7 +80,7 @@ public class PopUpController : MonoBehaviour
 
     /// <summary>
     /// Se llama al cargarse en la escena.
-    /// Inicializa el componente.
+    /// Hace comprobaciones necesarias para el componente.
     /// </summary>
     private void Awake()
     {
@@ -95,16 +95,24 @@ public class PopUpController : MonoBehaviour
             Debug.Log("PopUpController sin PauseMenu asignado. No funcionará y destruira el PopUp");
             Destroy(gameObject);
         }
+    }
 
-        if (FirstButtonSelected != null) 
+    /// <summary>
+    /// Se llama una vez al activarse por primera vez
+    /// Inicializa el componente.
+    /// </summary>
+    private void Start()
+    {
 
+        if (FirstButtonSelected != null) EventSystem.current.SetSelectedGameObject(FirstButtonSelected);
+
+        PauseMenu.ResumeGame(); // cerrar todo el menu de pausa si estaba abierto
         PauseMenu.enabled = false; // impide su funcionamiento mientras exista el popup
+
         CursorBlocker.enabled = false; // impide que se de su Start() y por ende no bloquea el cursor
         CursorBlocker.UnlockCursor(); // me aseguro
 
         if (PlaySong != null) PlaySong.enabled = false;
-
-        EventSystem.current.SetSelectedGameObject(FirstButtonSelected);
     }
 
     /// <summary>

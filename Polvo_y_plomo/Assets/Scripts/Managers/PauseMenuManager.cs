@@ -217,17 +217,7 @@ public class PauseMenuManager : MonoBehaviour
                 }
                 else // menu abierto -> cerrar la pausa
                 {
-                    if (BlockCursor != null)
-                    {
-                        BlockCursor.enabled = true; // se reactiva y la proxima vez que se active Exit se abre el menu con el cursor liberado
-                        BlockCursor.LockCursor(); // bloqueo el mouse
-                    }
-
-                    _gamePaused = false;
-                    _settingsOpen = false;
-                    InputManager.Instance.ActivarInput();
-                    GameManager.Instance.ResumeGame(); // reanudar el juego
-                    PausePanel.SetActive(false);
+                    ResumeGame();
                 }
             }
         }
@@ -287,7 +277,7 @@ public class PauseMenuManager : MonoBehaviour
     /// <summary>
     /// Reanudar el juego.
     /// </summary>
-    public void ResumeGameFromButton()
+    public void ResumeGame()
     {
         PausePanel.SetActive(false);
         HelpPanel.SetActive(false);
