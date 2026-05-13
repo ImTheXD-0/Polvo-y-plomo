@@ -101,6 +101,8 @@ GameObject:
   m_Component:
   - component: {fileID: 963654306252283241}
   - component: {fileID: 4864011063731840737}
+  - component: {fileID: 2583903953616418702}
+  - component: {fileID: 4524125800720687660}
   m_Layer: 0
   m_Name: RotateBody
   m_TagString: Untagged
@@ -141,6 +143,37 @@ MonoBehaviour:
   FlipY: 1
   RotationOffset: 0
   Anim: {fileID: 7364166214027565214}
+--- !u!114 &2583903953616418702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709658674322198269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa3e3750d15de0344a0a7da57726cbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cursor: {fileID: 8633089953209525018}
+  CooldownMelee: 1.2
+--- !u!114 &4524125800720687660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709658674322198269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf79ecfd9d29a245bdc220f6ae40236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleePrefab: {fileID: 5015214724800111349, guid: 8e3abd07c76a80745873b79eeb433e2b, type: 3}
+  DistanciaSpawnAtaque: 1
+  MeleeShadowPrefab: {fileID: 8050898191946779312, guid: 7af6244c8a64f6640abdc73abf374c71, type: 3}
+  Attack: {fileID: 8300000, guid: dd204d5d02c26384c84a4a5ef767cef5, type: 3}
+  AttackShadow: {fileID: 8300000, guid: 399363073f652c3408a1b8345655990c, type: 3}
 --- !u!1 &4821254670401775029
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +348,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4959565184602570148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ad203d1d0710cb49bc56490640be0ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 4722cdd11533a4b49abd0529dfa5ce97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Reload: 0.6
@@ -356,8 +389,6 @@ GameObject:
   - component: {fileID: 5489619501543049800}
   - component: {fileID: 318241813652885617}
   - component: {fileID: 166880489185979541}
-  - component: {fileID: 8960657160136326528}
-  - component: {fileID: 5273611612293079281}
   - component: {fileID: 8640769707630179225}
   - component: {fileID: 3385198336411724539}
   - component: {fileID: 7364166214027565214}
@@ -522,37 +553,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8960657160136326528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794519440049798451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3e3750d15de0344a0a7da57726cbb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cursor: {fileID: 8633089953209525018}
-  CooldownMelee: 1.2
---- !u!114 &5273611612293079281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6794519440049798451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bf79ecfd9d29a245bdc220f6ae40236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MeleePrefab: {fileID: 5015214724800111349, guid: 8e3abd07c76a80745873b79eeb433e2b, type: 3}
-  DistanciaSpawnAtaque: 1
-  MeleeShadowPrefab: {fileID: 8050898191946779312, guid: 7af6244c8a64f6640abdc73abf374c71, type: 3}
-  Attack: {fileID: 8300000, guid: dd204d5d02c26384c84a4a5ef767cef5, type: 3}
-  AttackShadow: {fileID: 8300000, guid: 399363073f652c3408a1b8345655990c, type: 3}
 --- !u!114 &8640769707630179225
 MonoBehaviour:
   m_ObjectHideFlags: 0

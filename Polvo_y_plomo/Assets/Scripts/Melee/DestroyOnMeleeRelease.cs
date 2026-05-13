@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Componente que se añade a un objeto y le da la capacidad de curar vida.
-// Miguel Gómez García 
+// Breve script que verifica si se ha liberado la acción de melee para destruir el GameObject.
+// Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -10,12 +10,12 @@ using UnityEngine;
 
 
 /// <summary>
-/// Script que verifica si el gameObject con el que choca tiene la vida máxima, y si no lo tiene podrá curarle una cierta cantidad de vida configurable.
-/// El objeto con este script sera destruido tras una cierta cantidad de tiempo configurable.
+/// Breve script que verifica si se ha liberado la acción de melee para destruir el GameObject.
+/// También tiene en cuenta si se esta presionando la acción de "Exit", para poder borrarlo en caso de cancelar la acción.
 /// 
-/// (!) POR AHORA SOLO FUNCIONA PARA EL JUGADOR
+/// Usado para destruir la sombra del ataque a melee.
 /// </summary>
-public class GiveHealth : MonoBehaviour
+public class DestroyOnMeleeRelease : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,12 +24,6 @@ public class GiveHealth : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    /// <summary>
-    /// Con esta variable indicaremos la cantidad de curación que podra darnos el gameObject
-    /// </summary>
-    [SerializeField]
-    private int CantidadCuracion = 1;
 
     #endregion
 
@@ -51,22 +45,23 @@ public class GiveHealth : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
-    /// <summary>
-    /// Se llama cuando el collider trigger de GiveHealth choca con algo.
-    ///
-    /// (!) DENTRO DEL COMPONENTE HITBOX se comprueba si es jugador, solo funcionando para este.
-    /// 
-    /// HitboxHeal se encargará de destruir este GameObject si la curación es válida.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
-        if (hitbox != null)
+        if (!InputManager.HasInstance())
         {
-            hitbox.HitboxHeal(gameObject, CantidadCuracion);
+            Debug.Log("DestroyOnMeleeRelease puesto en una escena sin InputManager. Se destruirá el objeto de inmediato");
+            Destroy(gameObject);
         }
     }
+
+    /// <summary>
+    /// Llamado cada frame si el componente esta activo.
+    /// </summary>
+    private void Update()
+    {
+        if (InputManager.Instance.MeleeWasReleasedThisFrame() || InputManager.Instance.ExitWasPressedThisFrame()) Destroy(gameObject);
+    }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -78,14 +73,15 @@ public class GiveHealth : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
     #endregion   
 
-} // class GiveHealth 
+} // class DestroyOnMeleeRelease 
 // namespace

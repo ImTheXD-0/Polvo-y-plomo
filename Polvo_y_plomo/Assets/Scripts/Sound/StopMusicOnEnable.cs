@@ -48,7 +48,7 @@ public class StopMusicOnEnable : MonoBehaviour
     /// Se llama antes de la primera actualización del frame.
     /// Comprueba si existe la instancia del AudioManager y, de ser así, silencia toda la música de golpe.
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
         if (AudioManager.HasInstance())
         {

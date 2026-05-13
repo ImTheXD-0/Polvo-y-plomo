@@ -115,10 +115,8 @@ public class CanMelee : MonoBehaviour
         if (MeleeShadowPrefab != null)
         {
             float angulo = 180f / Mathf.PI * Mathf.Atan2(dirAtaque.y, dirAtaque.x);
-            Instantiate(MeleeShadowPrefab, (Vector2)transform.position + DistanciaSpawnAtaque * dirAtaque.normalized, Quaternion.Euler(0, 0, angulo));
+            Instantiate(MeleeShadowPrefab, (Vector2)transform.position + DistanciaSpawnAtaque * dirAtaque.normalized, Quaternion.Euler(0, 0, angulo), transform);
             if (AttackShadow) AudioManager.Instance.Play(AttackShadow, transform.position);
-            MoveWithPlayerAndCursor shadowMovement = MeleeShadowPrefab.GetComponent<MoveWithPlayerAndCursor>();
-            if (shadowMovement != null) shadowMovement.InitialDistanceValue(DistanciaSpawnAtaque);
         }
     }
     #endregion

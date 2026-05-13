@@ -168,7 +168,7 @@ public class SuziesThirdPattern : MonoBehaviour
 
         _player = LevelManager.Instance.PlayerTransform();
 
-        Barrels = GameObject.FindGameObjectsWithTag("Barrel");
+        Barrels = Barrels.Where(b => b != null).ToArray();
 
         if (Barrels.Length >= 2) // Si hay más de dos barriles se lanzará una dinamita de manera aleatoria a dos de los barriles sin que se repita
         {

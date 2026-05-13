@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Componente que se añade a un objeto y le da la capacidad de curar vida.
-// Miguel Gómez García 
+// Script StateMachineBehaviour para añadirle al animator del barril, permitiendo detectar su estado de salida.
+// Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -10,12 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Script que verifica si el gameObject con el que choca tiene la vida máxima, y si no lo tiene podrá curarle una cierta cantidad de vida configurable.
-/// El objeto con este script sera destruido tras una cierta cantidad de tiempo configurable.
-/// 
-/// (!) POR AHORA SOLO FUNCIONA PARA EL JUGADOR
+/// Script StateMachineBehaviour para añadirle al animator del barril, permitiendo detectar su estado de salida.
+/// Una vez detectado, llamará al método ExitDetected del script que ha de tener el gameobject con el animator; BarrelAnimatorController.
 /// </summary>
-public class GiveHealth : MonoBehaviour
+public class BarrelExitStateDetector : StateMachineBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,12 +22,6 @@ public class GiveHealth : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    /// <summary>
-    /// Con esta variable indicaremos la cantidad de curación que podra darnos el gameObject
-    /// </summary>
-    [SerializeField]
-    private int CantidadCuracion = 1;
 
     #endregion
 
@@ -42,6 +34,11 @@ public class GiveHealth : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Almacena el BarrelAnimatorController que deberá tener el animator cuya exit se detecta.
+    /// </summary>
+    private BarrelAnimatorController barrel;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -51,22 +48,6 @@ public class GiveHealth : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
-    /// <summary>
-    /// Se llama cuando el collider trigger de GiveHealth choca con algo.
-    ///
-    /// (!) DENTRO DEL COMPONENTE HITBOX se comprueba si es jugador, solo funcionando para este.
-    /// 
-    /// HitboxHeal se encargará de destruir este GameObject si la curación es válida.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
-        if (hitbox != null)
-        {
-            hitbox.HitboxHeal(gameObject, CantidadCuracion);
-        }
-    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -77,15 +58,38 @@ public class GiveHealth : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
-    #endregion
+    /// <summary>
+    /// Override del método OnStateExit que se añade a un estado de las rotaciones de barril para saber
+    /// que se ha salido.
+    /// </summary>
+    /// <param name="animator"></param>
+    /// <param name="stateInfo"></param>
+    /// <param name="layerIndex"></param>
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (barrel == null) barrel = animator.GetComponent<BarrelAnimatorController>();
 
+        if (barrel != null)
+        {
+            barrel.ExitDetected();
+        }
+        else
+        {
+            Debug.Log("BarrelExitStateDetector puesto para un animator puesto en un gameobject sin BarrelAnimatorController. No se detectará la salida");
+            Destroy(this);
+        }
+    }
+
+    #endregion
+    
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
     #endregion   
 
-} // class GiveHealth 
+} // class ExitStateDetector 
 // namespace

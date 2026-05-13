@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 2026523966856952716}
   - component: {fileID: 7086580917772646072}
   - component: {fileID: 6310602219984379506}
+  - component: {fileID: 9115527351470112978}
   m_Layer: 5
   m_Name: Revolver
   m_TagString: Untagged
@@ -848,6 +849,18 @@ MonoBehaviour:
   StartAlpha: 1
   FinalAlpha: 0.15
   FadeTime: 0.5
+--- !u!114 &9115527351470112978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2809791468682919325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c7cf87e7ae58b4ea39db9f0e30f043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2994655258988497272
 GameObject:
   m_ObjectHideFlags: 0

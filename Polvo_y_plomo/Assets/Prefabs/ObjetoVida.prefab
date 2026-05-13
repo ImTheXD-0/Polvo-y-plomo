@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2935224476946838689}
   - component: {fileID: -6602536590427227289}
   - component: {fileID: -7753420644658580361}
+  - component: {fileID: 3397672776057594724}
+  - component: {fileID: 6717614592001999413}
   m_Layer: 12
   m_Name: ObjetoVida
   m_TagString: Untagged
@@ -104,8 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CantidadCuracion: 1
-  TiempoVida: 15
-  TiempoParpadeo: 5
 --- !u!114 &2935224476946838689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,3 +183,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3397672776057594724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709000755548246357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4462ae8b06de044398076b8dd9dc654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LifeTime: 15
+--- !u!114 &6717614592001999413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709000755548246357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2849048d32c8cf34aa4c508f4539d3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TiempoParpadeo: 10

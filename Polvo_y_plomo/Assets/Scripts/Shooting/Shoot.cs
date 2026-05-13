@@ -89,7 +89,7 @@ public class Shoot : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        Destroy(GetComponent<HasAmmo>());
+        Destroy(GetComponent<PlayerHasAmmo>());
     }
     #endregion
 

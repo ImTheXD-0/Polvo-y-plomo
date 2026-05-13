@@ -1,6 +1,6 @@
 //---------------------------------------------------------
-// Componente que se añade a un objeto y le da la capacidad de curar vida.
-// Miguel Gómez García 
+// Inicia los flashes del objeto tras pasar cierto tiempo.
+// Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
@@ -10,12 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Script que verifica si el gameObject con el que choca tiene la vida máxima, y si no lo tiene podrá curarle una cierta cantidad de vida configurable.
-/// El objeto con este script sera destruido tras una cierta cantidad de tiempo configurable.
-/// 
-/// (!) POR AHORA SOLO FUNCIONA PARA EL JUGADOR
+/// Componente para iniciar los flashes de un objeto tras transcurrir cierto tiempo configurable.
+/// Después de activar los flashes este script se desactiva.
 /// </summary>
-public class GiveHealth : MonoBehaviour
+public class FlashOverTime : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -26,10 +24,10 @@ public class GiveHealth : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Con esta variable indicaremos la cantidad de curación que podra darnos el gameObject
+    /// Variable que indica a partir de cuantos segundos empieza el parpadeo.
     /// </summary>
     [SerializeField]
-    private int CantidadCuracion = 1;
+    private float TiempoParpadeo = 10f;
 
     #endregion
 
@@ -42,6 +40,17 @@ public class GiveHealth : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    /// <summary>
+    /// Almacena el tiempo para iniciar el parpadeo.
+    /// </summary>
+    private float _t;
+
+    /// <summary>
+    /// Almacena el componente CanFlash que ha de tener este gameobject.
+    /// Inicializado en el Awake().
+    /// </summary>
+    private CanFlash _canFlash;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -52,19 +61,40 @@ public class GiveHealth : MonoBehaviour
     // - Hay que borrar los que no se usen 
 
     /// <summary>
-    /// Se llama cuando el collider trigger de GiveHealth choca con algo.
-    ///
-    /// (!) DENTRO DEL COMPONENTE HITBOX se comprueba si es jugador, solo funcionando para este.
-    /// 
-    /// HitboxHeal se encargará de destruir este GameObject si la curación es válida.
+    /// Se llama al cargarse en la escena.
+    /// Hace comprobaciones necesarias para el componente.
     /// </summary>
-    /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
     {
-        Hitbox hitbox = collision.gameObject.GetComponent<Hitbox>();
-        if (hitbox != null)
+        _canFlash = GetComponent<CanFlash>();
+        if (_canFlash == null)
         {
-            hitbox.HitboxHeal(gameObject, CantidadCuracion);
+            Debug.Log("FlashOverTime puesto en un gameobject sin CanFlash. No funcionará");
+            Destroy(this);
+        }
+    }
+
+    /// <summary>
+    /// Reinicia _t al activarse el componente.
+    /// </summary>
+    private void OnEnable()
+    {
+        _t = 0;
+    }
+
+    /// <summary>
+    /// Se llama cada frame si el componente esta activo.
+    /// Actualiza el contador de tiempo y si es suficientemnete grande inicia los flashes.
+    /// </summary>
+    private void Update()
+    {
+        if (GameManager.HasInstance()) _t += Time.deltaTime * GameManager.SlowMultiplier;
+        else _t += Time.deltaTime;
+
+        if (_t >= TiempoParpadeo)
+        {
+            _canFlash.StartFlashes();
+            this.enabled = false;
         }
     }
     #endregion
@@ -85,7 +115,8 @@ public class GiveHealth : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-    #endregion   
 
-} // class GiveHealth 
+    #endregion
+
+} // class FlashOverTime 
 // namespace

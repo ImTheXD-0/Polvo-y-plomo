@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4639298600308810840}
   - component: {fileID: 942619402090727234}
-  - component: {fileID: -5829705902282346722}
+  - component: {fileID: 1253030530345551842}
   m_Layer: 0
   m_Name: MeleeShadow
   m_TagString: Untagged
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2861237161059435373, guid: 294d07babc520c848a0de5944ea65e23, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.15375805, a: 0.09803922}
+  m_Color: {r: 1, g: 0, b: 0.15375805, a: 0.20392157}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5829705902282346722
+--- !u!114 &1253030530345551842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8050898191946779312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14d548644b5d8854eb604a51e22730e2, type: 3}
+  m_Script: {fileID: 11500000, guid: fd57e74fc0ed67a44b7c6a30a5e5c7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

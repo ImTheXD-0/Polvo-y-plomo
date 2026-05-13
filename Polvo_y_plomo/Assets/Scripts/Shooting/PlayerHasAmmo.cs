@@ -21,7 +21,7 @@ using UnityEngine;
 /// +++
 /// Se ha reescrito un poco el código para incluir el ShootEscopeta
 /// </summary>
-public class HasAmmo : MonoBehaviour
+public class PlayerHasAmmo : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -78,12 +78,6 @@ public class HasAmmo : MonoBehaviour
     /// </summary>
     private float _tParaSiguienteRecarga;
 
-    /// <summary>
-    /// Variable que determina si este componente esta puesto en el jugador (ducktyping
-    /// de controlador de player). Inicializada en el Awake().
-    /// </summary>
-    private bool _isPlayer;
-
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -108,9 +102,6 @@ public class HasAmmo : MonoBehaviour
             Destroy(this);
         }
 
-        if (GetComponent<PlayerGetShootingInput>() == null) _isPlayer = false;
-        else _isPlayer = true;
-
         _numBalas = NumMaxBalas;
 
         this.enabled = false; // desactiva el update y se activará para la secuencia de recarga bala a bala.
@@ -132,7 +123,7 @@ public class HasAmmo : MonoBehaviour
         }
         else _tParaSiguienteRecarga -= Time.deltaTime;
 
-        if (_isPlayer && IsReloadCanceledThisFrame())
+        if (IsReloadCanceledThisFrame())
         {
             this.enabled = false; // deja de recargar al cancelarse la acción.
         }
@@ -140,7 +131,7 @@ public class HasAmmo : MonoBehaviour
         if (_tParaSiguienteRecarga <= 0)
         {
             _numBalas++;
-            if (_isPlayer && GameManager.HasInstance()) GameManager.Instance.UpdateAmmoHUD(_numBalas);
+            if (GameManager.HasInstance()) GameManager.Instance.UpdateAmmoHUD(_numBalas);
             if (_numBalas >= NumMaxBalas) this.enabled = false;
             _tParaSiguienteRecarga = Reload;
         }
@@ -183,7 +174,7 @@ public class HasAmmo : MonoBehaviour
             else if (_shootEscopeta != null) _shootEscopeta.ShootBullet(fireDir);
 
             _numBalas--;
-            if (_isPlayer && GameManager.HasInstance()) GameManager.Instance.UpdateAmmoHUD(_numBalas);
+            if (GameManager.HasInstance()) GameManager.Instance.UpdateAmmoHUD(_numBalas);
             return true;  // dispara
         }
         else

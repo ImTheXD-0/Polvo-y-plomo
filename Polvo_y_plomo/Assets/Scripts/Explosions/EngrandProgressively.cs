@@ -1,6 +1,5 @@
 //---------------------------------------------------------
 // Este Componente Cambia la escala del GameObject progresivamente durante un tiempo. 
-// Luego, después de un tiempo, puede o no desaparecer.
 // Juan José de Reyna Godoy. 
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
@@ -12,9 +11,7 @@ using UnityEngine;
 
 /// <summary>
 /// Este componente, en cada frame, aumenta la escala del GameObject, hasta que pase el tiempo adecuado
-/// para que alcance el tamaño objetivo. Luego, si la variable Vanishes es true, después de un
-/// tiempo especificado, se elimina el gameobject. Si es false, se elimina este componente, y el tamaño
-/// del gameobject se mantiene igual.
+/// para que alcance el tamaño objetivo. 
 /// </summary>
 public class EngrandProgressively : MonoBehaviour
 {
@@ -27,22 +24,10 @@ public class EngrandProgressively : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Variable que guarda si desaparece o no.
-    /// </summary>
-    [SerializeField]
-    private bool Vanishes;
-
-    /// <summary>
     /// Tiempo que tarda en escalarse.
     /// </summary>
     [SerializeField]
     private float ChangeTime;
-
-    /// <summary>
-    /// Tiempo que permanece en el mundo antes de desvanecerse.
-    /// </summary>
-    [SerializeField]
-    private float VanishTime;
 
     /// <summary>
     /// Es la escala final a la que se quiere llegar.
@@ -106,9 +91,6 @@ public class EngrandProgressively : MonoBehaviour
 
         _actualScale = 0; //Inicializa la escala aumentada actual.
 
-        VanishTime += ChangeTime; //Tiempo total desde que se activa el componente para que
-                                  // se elimine.
-
         _x = this.gameObject.transform.localScale.x; //Guarda la escala inicial en 3 variables.
         _y = this.gameObject.transform.localScale.y;
         _z = this.gameObject.transform.localScale.z;
@@ -125,13 +107,6 @@ public class EngrandProgressively : MonoBehaviour
         {
             _actualScale = _scalePerSecond * _actualTime;
             this.gameObject.transform.localScale = new Vector3(_x + _actualScale, _y + _actualScale, _z);
-        }
-        else if (Vanishes)
-        {
-            if (_actualTime > VanishTime)
-            {
-                Destroy(this.gameObject);
-            }
         }
         else Destroy(this);
     }
@@ -164,7 +139,7 @@ public class EngrandProgressively : MonoBehaviour
         // este en concreto no debería ser llamado
         if (DifficultyManager.HasInstance())
         {
-            FinalScale *= DifficultyManager.Instance.GetPointsGivenMultiplier();
+            FinalScale *= DifficultyManager.Instance.GetExplosionRadiusMultiplier();
         }
     }
 

@@ -35183,6 +35183,7 @@ MonoBehaviour:
   TimeBetweenShots: 0.35
   TimeBetweenBursts: 4.5
   ClockwiseBurst: 0
+  BurstWavesAmmount: 1
 --- !u!1001 &1846977401
 PrefabInstance:
   m_ObjectHideFlags: 0

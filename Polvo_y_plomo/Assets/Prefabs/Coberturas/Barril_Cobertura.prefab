@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1145377437468689943}
   m_Layer: 10
   m_Name: Barril_Cobertura
-  m_TagString: Barrel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

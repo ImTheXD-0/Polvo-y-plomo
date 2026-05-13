@@ -57,7 +57,7 @@ public class PlayerGetShootingInput : MonoBehaviour
     ///<summary>
     /// Esta variable almacena el componente de tipo HasAmmo (encargado de disparar en el jugador) que tiene este GameObject;
     ///</summary>>
-    private HasAmmo _hasAmmo;
+    private PlayerHasAmmo _hasAmmo;
 
     #endregion
 
@@ -82,10 +82,10 @@ public class PlayerGetShootingInput : MonoBehaviour
             Destroy(this);
         }
 
-        _hasAmmo = GetComponent<HasAmmo>();
+        _hasAmmo = GetComponent<PlayerHasAmmo>();
         if (_hasAmmo == null)
         {
-            Debug.Log("Se ha puesto el componente  \"PlayerGetShootingInput\" en un objeto sin el componente \"HasAmmo\", y no podrá disparar.");
+            Debug.Log("Se ha puesto el componente  \"PlayerGetShootingInput\" en un objeto sin el componente \"PlayerHasAmmo\", y no podrá disparar.");
             Destroy(this);
         }
 
@@ -101,7 +101,7 @@ public class PlayerGetShootingInput : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        Destroy(GetComponent<HasAmmo>());
+        Destroy(GetComponent<PlayerHasAmmo>());
         Destroy(GetComponent<Shoot>());
     }
 

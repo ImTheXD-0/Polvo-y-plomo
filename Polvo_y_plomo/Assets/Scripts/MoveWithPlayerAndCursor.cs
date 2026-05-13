@@ -12,6 +12,10 @@ using UnityEngine.UIElements;
 
 /// <summary>
 /// Clase que, guardando el Transform del jugador y de su cursor, calcula la posición relativa del objeto con esta clase.
+/// 
+/// ---
+/// Antes se usaba (de mala forma) para mover el objeto de la sombra del ataque a melee. Ahora este se situa en el rotatebody del jugador
+/// y no es necesario este script, por lo que no se usa para nada.
 /// </summary>
 public class MoveWithPlayerAndCursor : MonoBehaviour
 {
@@ -75,7 +79,7 @@ public class MoveWithPlayerAndCursor : MonoBehaviour
         else
         {
             _player = LevelManager.Instance.PlayerTransform();
-            _playerCursor = _player.gameObject.transform.GetChild(2);
+            _playerCursor = _player.gameObject.transform.GetChild(2); // terrible esto
         }
 
         if (!InputManager.HasInstance())

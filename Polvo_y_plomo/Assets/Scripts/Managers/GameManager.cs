@@ -821,7 +821,7 @@ public class GameManager : MonoBehaviour
     {
         bool recarga = NuevaMunicionJugador - _municionJugador > 0;
 
-        Animator barrelAnimator = Barrel.GetComponent<Animator>();
+        BarrelAnimatorController barrelAnimator = Barrel.GetComponent<BarrelAnimatorController>();
 
         _municionJugador = NuevaMunicionJugador;
         for (int i = 0; i < Bullets.Length; i++)
@@ -842,9 +842,9 @@ public class GameManager : MonoBehaviour
         {
             if (recarga)
             {
-                barrelAnimator.Play("RevolverAntiClock", 0, 0f);
+                barrelAnimator.AddAnticlockwiseRotation();
             }
-            else barrelAnimator.Play("RevolverClock", 0, 0f);
+            else barrelAnimator.AddClockwiseRotation();
         }
 
         if (recarga && ReloadClip && LevelManager.HasInstance()) AudioManager.Instance.Play(ReloadClip, LevelManager.Instance.PlayerTransform().position);

@@ -24,18 +24,6 @@ public class SuziePhaseManager : MonoBehaviour
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
 
-    [SerializeField]
-    private Health _healthManager;
-
-    [SerializeField]
-    private SuziesFirstPattern _patron1;
-
-    [SerializeField]
-    private SuziesSecondPattern _patron2;
-
-    [SerializeField]
-    private SuziesThirdPattern _patron3;
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -62,6 +50,30 @@ public class SuziePhaseManager : MonoBehaviour
     /// </summary>
     private bool _atacando = false;
 
+    /// <summary>
+    /// Almacena el componente Health de Suzie.
+    /// Inicializado en el Start()
+    /// </summary>
+    private Health _healthManager;
+
+    /// <summary>
+    /// Almacena el componente del primer patron de Suzie.
+    /// Inicializado en el Start()
+    /// </summary>
+    private SuziesFirstPattern _patron1;
+
+    /// <summary>
+    /// Almacena el componente del segundo patron de Suzie.
+    /// Inicializado en el Start()
+    /// </summary>
+    private SuziesSecondPattern _patron2;
+
+    /// <summary>
+    /// Almacena el componente del tercer patron de Suzie.
+    /// Inicializado en el Start()
+    /// </summary>
+    private SuziesThirdPattern _patron3;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -77,9 +89,36 @@ public class SuziePhaseManager : MonoBehaviour
     /// </summary>
     void Start()
     {
-        if (_patron1 != null) _patron1.enabled = false;
-        if (_patron2 != null) _patron2.enabled = false;
-        if (_patron3 != null) _patron3.enabled = false;
+        _patron1 = GetComponent<SuziesFirstPattern>();
+        if (_patron1 == null)
+        {
+            Debug.Log("SuziePhaseManager puesto en un GameObject sin el patron 1 de Suzie.");
+            Destroy(gameObject);
+        }
+        else _patron1.enabled = false;
+
+        _patron2 = GetComponent<SuziesSecondPattern>();
+        if (_patron2 == null)
+        {
+            Debug.Log("SuziePhaseManager puesto en un GameObject sin el patron 2 de Suzie.");
+            Destroy(gameObject);
+        }
+        else _patron2.enabled = false;
+
+        _patron3 = GetComponent<SuziesThirdPattern>();
+        if (_patron3 == null)
+        {
+            Debug.Log("SuziePhaseManager puesto en un GameObject sin el patron 3 de Suzie.");
+            Destroy(gameObject);
+        }
+        else _patron3.enabled = false;
+
+        _healthManager = GetComponent<Health>();
+        if (_healthManager == null)
+        {
+            Debug.Log("SuziePhaseManager puesto en un GameObject sin componente de vida.");
+            Destroy(gameObject);
+        }
 
         SiguienteAtaque();
     }
