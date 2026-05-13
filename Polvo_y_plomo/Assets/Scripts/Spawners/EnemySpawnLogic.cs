@@ -41,13 +41,6 @@ public class EnemySpawnLogic : MonoBehaviour
     [SerializeField]
     private Animator SpawnAnimator;
 
-
-    /// <summary>
-    /// Offset de la posición en la que aparecerá el enemigo, desde la posición del spawner.
-    /// </summary>
-    [SerializeField]
-    private Vector3 SpawnPositionOffset;
-
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -154,13 +147,6 @@ public class EnemySpawnLogic : MonoBehaviour
     {
         _spawnID = id;
     }
-    /// <summary>
-    /// Método que modifica el offset del spawn del enemigo.
-    /// </summary>
-    public void SetSpawnOffset(Vector3 offset)
-    {
-        SpawnPositionOffset = offset;
-    }
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -176,7 +162,10 @@ public class EnemySpawnLogic : MonoBehaviour
     /// </summary>
     private void DoSpawn()
     {
-        GameObject enemy = Instantiate(EnemyPrefab, transform.position + SpawnPositionOffset, transform.rotation);
+        // Buscar el offset en el hijo con hitbox (el que ha realizado la animacion de spawn)
+        Vector3 spawnOffset = GetComponentInChildren<Hitbox>().transform.localPosition;
+
+        GameObject enemy = Instantiate(EnemyPrefab, transform.position + spawnOffset , transform.rotation);
         Health enemyHealth = enemy.GetComponent<Health>();
         if (enemyHealth != null)
         {
