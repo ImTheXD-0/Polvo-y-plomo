@@ -100,7 +100,12 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// Almacena una referencia al script principal de Suzie
     /// </summary>
-    private SuziesSecondPattern _boss; 
+    private SuziesSecondPattern _boss;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
 
 
     #endregion
@@ -111,6 +116,15 @@ public class EnemySpawner : MonoBehaviour
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
+
+    /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
 
     /// <summary>
     /// Se llama al ser activado el componente, incluyendo al cargarse en la escena (si esta activo).
@@ -146,8 +160,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (GameManager.HasInstance()) _t -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _t -= Time.deltaTime;
+        _t -= Time.deltaTime * _slowMultiplier;
 
         if (_t <= 0) // spawn de nuevo enemigo
         {
@@ -161,6 +174,15 @@ public class EnemySpawner : MonoBehaviour
             }
             else _t = SpawnList[_indEnemigo].SpawnDelay;
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
 
     #endregion
@@ -190,6 +212,14 @@ public class EnemySpawner : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

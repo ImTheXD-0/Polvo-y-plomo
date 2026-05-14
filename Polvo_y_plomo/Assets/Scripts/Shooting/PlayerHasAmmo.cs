@@ -84,6 +84,11 @@ public class PlayerHasAmmo : MonoBehaviour
     /// </summary>
     private float _tParaSiguienteRecarga;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -114,20 +119,23 @@ public class PlayerHasAmmo : MonoBehaviour
     }
 
     /// <summary>
-    /// 
-    /// 
+    /// Se llama después del awake si el componente esta activo o al activarse por primera vez.
+    /// Añade al delegado del GameManager el método para actualizar la _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Se llama cada frame.
     /// Lleva la lógica de recarga bala a bala.
     /// Si se dispara, hace roll o ataque melee, la recarga se para.
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance())
-        {
-            // Si es 0 no debe correr el tiempo. De otra forma, que corra, sin que le afecte el tiempo (recarga transcurre normal).
-            if (GameManager.SlowMultiplier != 0) _tParaSiguienteRecarga -= Time.deltaTime;
-        }
-        else _tParaSiguienteRecarga -= Time.deltaTime;
+        // Si es 0 no debe correr el tiempo. De otra forma, que corra, sin que le afecte el tiempo (recarga transcurre normal).
+        if (_slowMultiplier != 0) _tParaSiguienteRecarga -= Time.deltaTime;
 
         if (IsReloadCanceledThisFrame())
         {
@@ -152,6 +160,7 @@ public class PlayerHasAmmo : MonoBehaviour
     {
         if (_shoot != null) Destroy(_shoot);
         if (_shootEscopeta != null) Destroy(_shootEscopeta);
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -224,6 +233,15 @@ public class PlayerHasAmmo : MonoBehaviour
     private bool IsReloadCanceledThisFrame()
     {
         return (InputManager.Instance.FireWasPressedThisFrame() || InputManager.Instance.MeleeWasReleasedThisFrame());
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion
 

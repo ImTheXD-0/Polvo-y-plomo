@@ -55,6 +55,11 @@ public class playerMeleeAttack : MonoBehaviour
     /// Bool que dice si hay una sombra de ataque melee en ese momento ya generada, o no
     /// </summary>
     private bool _shadowSpawned = false;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -88,6 +93,8 @@ public class playerMeleeAttack : MonoBehaviour
             Debug.Log("Se ha puesto el componente \"playerMeleeAttack\" en una escena sin InputManager. No podrá atacar con melee.");
             Destroy(this);
         }
+
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -97,8 +104,7 @@ public class playerMeleeAttack : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance()) _tRemainingToMelee -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tRemainingToMelee -= Time.deltaTime;
+        _tRemainingToMelee -= Time.deltaTime * _slowMultiplier;
 
         if (InputManager.Instance.MeleeIsPressed() && _tRemainingToMelee <= 0 && !_shadowSpawned)
         {
@@ -118,6 +124,15 @@ public class playerMeleeAttack : MonoBehaviour
         }
 
         if (_tRemainingToMelee > 0 && HUDManager.HasInstance()) HUDManager.Instance.UpdateMeleeCooldownShadow(1 - _tRemainingToMelee / CooldownMelee);
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -143,6 +158,15 @@ public class playerMeleeAttack : MonoBehaviour
 
         if (!shadow) _canMelee.HitboxMelee(dirCursorJugador);
         else _canMelee.ShadowMelee(dirCursorJugador);
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion   
 

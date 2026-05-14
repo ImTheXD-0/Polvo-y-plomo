@@ -127,11 +127,16 @@ public class LevelManager : MonoBehaviour
     /// Número de enemigos totales en escena.
     /// </summary>
     private int _totalEnemiesInScene = 0;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
 
     #region Métodos de MonoBehaviour
-    
+
     /// <summary>
     /// Se ejecuta al activar el objeto. Hará comprobaciones.
     /// </summary>
@@ -160,6 +165,7 @@ public class LevelManager : MonoBehaviour
         {
             _pointsOnStart = GameManager.Instance.TransferInitialPoints();
             _killsOnStart = GameManager.Instance.TransferTotalDeaths();
+            GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
         }
     }
 
@@ -171,6 +177,7 @@ public class LevelManager : MonoBehaviour
         if (this == _instance)
         {
             _instance = null;
+            if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
         }
     }
 
@@ -235,8 +242,7 @@ public class LevelManager : MonoBehaviour
     /// <param name="EnemyPoints"></param>
     public void UpdateScoreSystem(int EnemyPoints = 0)
     {
-        if (GameManager.HasInstance()) _tLastStreak -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tLastStreak -= Time.deltaTime;
+        _tLastStreak -= Time.deltaTime * _slowMultiplier;
 
         if (EnemyPoints > 0)
         {
@@ -364,6 +370,15 @@ public class LevelManager : MonoBehaviour
             HUDManager.Instance.UpdateStreakBar(1);
             HUDManager.Instance.UpdateStreakMultiplierHUD(_streak);
         }
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
 
     #endregion

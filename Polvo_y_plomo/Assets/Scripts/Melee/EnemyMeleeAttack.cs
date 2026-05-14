@@ -70,6 +70,11 @@ public class EnemyMeleeAttack : MonoBehaviour
     /// Bool que dice si hay o no GameManager en la escena
     /// </summary>
     private bool _gameManager = false;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -120,6 +125,7 @@ public class EnemyMeleeAttack : MonoBehaviour
         }
 
         _gameManager = GameManager.HasInstance();
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -128,8 +134,7 @@ public class EnemyMeleeAttack : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_gameManager) _tRemainingToMelee -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tRemainingToMelee -= Time.deltaTime;
+        _tRemainingToMelee -= Time.deltaTime * _slowMultiplier;
 
         if ((!_chasePlayer.IsChasing()) && _tRemainingToMelee <= 0)
         {
@@ -146,6 +151,7 @@ public class EnemyMeleeAttack : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(GetComponent<CanMelee>());
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
         // se podría destruir ChasePlayer... pero realmente puede funcinoar sin controlador
     }
     #endregion
@@ -176,6 +182,15 @@ public class EnemyMeleeAttack : MonoBehaviour
         Vector2 dirMvtoEnemigo = (_playerTransform.position - transform.position).normalized;
 
         _canMelee.HitboxMelee(dirMvtoEnemigo);
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion   
 

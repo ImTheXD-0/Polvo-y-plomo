@@ -6,6 +6,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -64,13 +65,6 @@ using UnityEngine.SceneManagement;
 /// 
 /// +++
 /// Funcionalidad para almacenar la sensibilidad ajustada por el jugador.
-/// 
-/// +++
-/// Funcionalidad añadida para manejar la vibración del multiplicador de la racha y sus colores. En el update
-/// del HUD se aprovecha a verificar si cambiar la vibración.
-/// 
-/// +++
-/// Funcionalidad añadida para manejar las animaciones de los corazones
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -319,17 +313,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Assert(_instance != null);
             return _instance;
-        }
-    }
-
-    /// <summary>
-    /// Propiedad para acceder al valor de _slowMultiplier.
-    /// </summary>
-    public static float SlowMultiplier
-    {
-        get
-        {
-            return _slowMultiplier;
         }
     }
 
@@ -596,13 +579,26 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Funcionalidad SlowShot y Pausa
+    
+    /// <summary>
+    /// Delegado de tipo evento (solo permite += y -=, por lo que hace que sea seguro)
+    /// que llamará a todas las funciones añadidas al cambiar la escala de tiempo.
+    /// 
+    /// Servirá para que los distintos componentes que usan la escala de SlowShot para su
+    /// flujo de tiempo no tengan que estar preguntando constantemente en el Update() por el valor
+    /// en el GameManager.
+    /// 
+    /// (!!!) Siempre que se añada un método a este delegado, asegurarse de que se elimina en el OnDestroy() o cuando sea apropiado.
+    /// </summary>
+    public event Action<float> OnTimeScaleChanged;
+
     /// <summary>
     /// Método público que modifica la velocidad de ralentización consecuencia de la activación de la habilidad del jugador
     /// </summary>
     public void SlowShotOn()
     {
         _playerSlowShotOn = true;
-        _slowMultiplier = SLOWSHOT_TIMEMULTIPLIER;
+        ChangeTimeScale(SLOWSHOT_TIMEMULTIPLIER);
         if (HUDManager.HasInstance()) HUDManager.Instance.StartSlowshot();
 
         if (AudioManager.HasInstance())
@@ -627,7 +623,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        _slowMultiplier = 0;
+        ChangeTimeScale(0);
+
         if (AudioManager.HasInstance())
         {
             // Activa el estado de pausa musical. El AudioManager se encarga de subir el volumen de la pista pausada.
@@ -640,9 +637,9 @@ public class GameManager : MonoBehaviour
     /// </summary
     public void ResumeGame()
     {
-        if (_gameMustBePaused) _slowMultiplier = 0;
-        else if (_playerSlowShotOn) _slowMultiplier = SLOWSHOT_TIMEMULTIPLIER;
-        else _slowMultiplier = 1.00f;
+        if (_gameMustBePaused) ChangeTimeScale(0);
+        else if (_playerSlowShotOn) ChangeTimeScale(SLOWSHOT_TIMEMULTIPLIER);
+        else ChangeTimeScale(1.00f);
 
         if (AudioManager.HasInstance())
         {
@@ -821,6 +818,17 @@ public class GameManager : MonoBehaviour
     private void ReinicioEscena()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// Método para cambiar la escala de tiempo del juego.
+    /// Llama a los métodos del delegado OnTimeScaleChanged.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void ChangeTimeScale(float newScale)
+    {
+        _slowMultiplier = newScale;
+        if (OnTimeScaleChanged != null) OnTimeScaleChanged.Invoke(newScale);
     }
     #endregion
 } // class GameManager 

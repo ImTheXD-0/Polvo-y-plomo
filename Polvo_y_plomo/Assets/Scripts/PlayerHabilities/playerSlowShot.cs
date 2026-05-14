@@ -98,6 +98,11 @@ public class playerSlowShot : MonoBehaviour
     /// Es el porcentaje de progreso para subir al siguiente nivel de habilidad (para el HUD)
     /// </summary>
     private float _levelBar = 0f;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -144,6 +149,8 @@ public class playerSlowShot : MonoBehaviour
         // Inicialización de los niveles
         int kills = kills = GameManager.Instance.TransferTotalDeaths();
 
+        GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+
         _abilityCurrentLevel = 0;
         bool f = false;
         while (_abilityCurrentLevel < AbilityLevels.Length - 1 && !f)
@@ -175,7 +182,7 @@ public class playerSlowShot : MonoBehaviour
         if (_abilityOn)
         {
             // Paso del tiempo
-            if (GameManager.SlowMultiplier != 0) _tRemainingOfAbility -= Time.deltaTime;
+            if (_slowMultiplier != 0) _tRemainingOfAbility -= Time.deltaTime;
 
             if (_tRemainingOfAbility <= 0)
             {
@@ -222,7 +229,7 @@ public class playerSlowShot : MonoBehaviour
         else
         {
             // Paso del tiempo
-            _tToReactivateAbility -= Time.deltaTime * GameManager.SlowMultiplier;
+            _tToReactivateAbility -= Time.deltaTime * _slowMultiplier;
 
             // Activacion de la habilidad
             if (InputManager.Instance.HabilityWasPressedThisFrame() && _tToReactivateAbility <= 0)
@@ -236,6 +243,15 @@ public class playerSlowShot : MonoBehaviour
             // pintar el fillAmmount de la sombra de la habilidad
             if (HUDManager.HasInstance()) HUDManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -280,14 +296,21 @@ public class playerSlowShot : MonoBehaviour
         }
     }
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
     #endregion   
 
 } // class playerSlowShot 

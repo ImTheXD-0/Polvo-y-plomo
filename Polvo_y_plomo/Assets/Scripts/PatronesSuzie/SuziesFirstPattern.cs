@@ -132,6 +132,11 @@ public class SuziesFirstPattern : MonoBehaviour
     /// disparar
     /// </summary>
     private float _secondRndShootingMoment = 0.4f;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -181,6 +186,8 @@ public class SuziesFirstPattern : MonoBehaviour
             Debug.Log("Se ha puesto el componente \"SuziesFirstPattern\" en un GameObject sin prefab de dinamita asignado. No podrá lanzarla.");
         }
 
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+
         _initialPos = transform.position;
     }
 
@@ -200,8 +207,7 @@ public class SuziesFirstPattern : MonoBehaviour
     void Update()
     {
         // Si no está asomando y ya ha estado escondida todo lo que debería, realiza una acción
-        if (GameManager.HasInstance()) _tWhileHidden += Time.deltaTime * GameManager.SlowMultiplier;
-        else _tWhileHidden += Time.deltaTime;
+        _tWhileHidden += Time.deltaTime * _slowMultiplier;
 
         if (!_isPeeking && _tWhileHidden > _rndHidingTime)
         {
@@ -233,11 +239,9 @@ public class SuziesFirstPattern : MonoBehaviour
 
         if (_isPeeking)
         {
-            if (GameManager.HasInstance()) _tPeeking += Time.deltaTime * GameManager.SlowMultiplier;
-            else _tPeeking += Time.deltaTime;
+            _tPeeking += Time.deltaTime * _slowMultiplier;
 
-            if (GameManager.HasInstance()) _tSinceFirstShot += Time.deltaTime * GameManager.SlowMultiplier;
-            else _tSinceFirstShot += Time.deltaTime;
+            _tSinceFirstShot += Time.deltaTime * _slowMultiplier;
 
             // Si ha perdido suficiente vida, se esconde
             if (_health != null && _health.GetCurrentHealth() <= (_currentAttackStartingHealth - HealthLossToHide)) SuzieHide();
@@ -271,6 +275,15 @@ public class SuziesFirstPattern : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -282,7 +295,7 @@ public class SuziesFirstPattern : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -362,6 +375,15 @@ public class SuziesFirstPattern : MonoBehaviour
 
             _health.BlockDamage();
         }
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion   
 

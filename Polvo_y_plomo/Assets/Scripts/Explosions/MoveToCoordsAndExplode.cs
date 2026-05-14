@@ -72,6 +72,11 @@ public class MoveToCoordsAndExplode : MonoBehaviour
     /// Inicializado en el Start().
     /// </summary>
     private float _difficultySpeedMultiplier;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -92,6 +97,7 @@ public class MoveToCoordsAndExplode : MonoBehaviour
 
         _exp.enabled = false;//Desactiva el componente,en caso de que estuviese activado.
 
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
         UpdateDifficultyStats(); // tambien inicializa la velocidad de movimiento
     }
 
@@ -100,16 +106,14 @@ public class MoveToCoordsAndExplode : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (GameManager.HasInstance()) transform.Translate(_vel * Time.fixedDeltaTime * GameManager.SlowMultiplier);
-        else transform.Translate(_vel * Time.fixedDeltaTime);
+        transform.Translate(_vel * Time.fixedDeltaTime*_slowMultiplier);
     }
 
     private void Update()
     {
 
 
-        if (GameManager.HasInstance()) _timer += Time.deltaTime * GameManager.SlowMultiplier;
-        else _timer += Time.deltaTime;
+        _timer += Time.deltaTime * _slowMultiplier;
 
 
         if (_timer > MovingTime / _difficultySpeedMultiplier)
@@ -118,6 +122,15 @@ public class MoveToCoordsAndExplode : MonoBehaviour
             _exp.enabled = true;
             this.enabled = false;
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -161,6 +174,15 @@ public class MoveToCoordsAndExplode : MonoBehaviour
             _difficultySpeedMultiplier = 1f;
         }
         _vel =  (Pos - transform.position) / (MovingTime / _difficultySpeedMultiplier);
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
 
     #endregion

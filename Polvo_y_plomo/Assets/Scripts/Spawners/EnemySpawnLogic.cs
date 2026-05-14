@@ -66,6 +66,11 @@ public class EnemySpawnLogic : MonoBehaviour
     /// Variable que contiene una referencia al script de HealthChanger que ha de tener el EnemySpawnLogic.
     /// </summary>
     private Health _healthChanger;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -97,6 +102,8 @@ public class EnemySpawnLogic : MonoBehaviour
             Destroy(this);
         }
 
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+
         if (SpawnAnimator == null) DoSpawn();
         else
         {
@@ -119,15 +126,19 @@ public class EnemySpawnLogic : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (GameManager.HasInstance())
-        {
-            _duracionAnimacion -= Time.deltaTime * GameManager.SlowMultiplier;
-            if (SpawnAnimator != null) SpawnAnimator.speed = GameManager.SlowMultiplier;
-        }
-        else _duracionAnimacion -= Time.deltaTime;
+        _duracionAnimacion -= Time.deltaTime * _slowMultiplier; 
 
         if (_duracionAnimacion < 0) DoSpawn();
         else SpawnAnimator.SetFloat("Time", _duracionAnimacion);
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
 
     #endregion
@@ -180,6 +191,16 @@ public class EnemySpawnLogic : MonoBehaviour
         if (LevelManager.HasInstance()) LevelManager.Instance.EnemyKilled();
 
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+        if (SpawnAnimator != null) SpawnAnimator.speed = _slowMultiplier;
     }
     #endregion   
 

@@ -67,6 +67,11 @@ public class CanFlash : MonoBehaviour
     /// </summary>
     private int _flashesAmmount;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -99,14 +104,23 @@ public class CanFlash : MonoBehaviour
 
         this.enabled = false; // el componente ha de iniciar desactivado y parpadear solo cuando se le indica.
     }
+
+    /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
     /// <summary>
     /// Se llama cada frame si el componente esta activo.
     /// Realiza los flashes indicados por los parámetros.
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance()) _tLastFlash -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tLastFlash -= Time.deltaTime;
+        _tLastFlash -= Time.deltaTime * _slowMultiplier;
 
         if (_tLastFlash <= 0) // 1  flash completo
         {
@@ -122,6 +136,15 @@ public class CanFlash : MonoBehaviour
         {
             _mat.SetFloat("_FlashAmount", 1 - _tLastFlash / FlashTime);
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -145,13 +168,22 @@ public class CanFlash : MonoBehaviour
     }
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion   
 

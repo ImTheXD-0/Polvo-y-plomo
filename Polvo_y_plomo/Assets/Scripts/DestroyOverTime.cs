@@ -45,6 +45,11 @@ public class DestroyOverTime : MonoBehaviour
     /// Inicializada en el Start()
     /// </summary>
     private float _tLifeSpan;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -61,6 +66,7 @@ public class DestroyOverTime : MonoBehaviour
     void Start()
     {
         _tLifeSpan = LifeTime;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -69,13 +75,21 @@ public class DestroyOverTime : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance()) _tLifeSpan -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tLifeSpan -= Time.deltaTime;
+         _tLifeSpan -= Time.deltaTime * _slowMultiplier;
 
         if (_tLifeSpan <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -95,7 +109,14 @@ public class DestroyOverTime : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
-
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
     #endregion
 
 } // class DestroyOverTime 

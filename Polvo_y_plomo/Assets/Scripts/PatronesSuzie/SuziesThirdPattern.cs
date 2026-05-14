@@ -105,6 +105,11 @@ public class SuziesThirdPattern : MonoBehaviour
     /// </summary>
     private Transform _player;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -124,12 +129,20 @@ public class SuziesThirdPattern : MonoBehaviour
     }
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// En el update dependiendo de los booleanos que se hayan marcado como true, lanzaremos la segunda dinamita con el tiempo configurable al objetivo
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance()) _tFirstDyna += Time.deltaTime * GameManager.SlowMultiplier;
-        else _tFirstDyna += Time.deltaTime;
+        _tFirstDyna += Time.deltaTime * _slowMultiplier;
 
         if (_manyBarrels && _tFirstDyna > Contador1)
         {
@@ -143,6 +156,16 @@ public class SuziesThirdPattern : MonoBehaviour
             FinalizarPatron();
         }
     }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+    }
+
 
     #endregion
 
@@ -247,6 +270,15 @@ public class SuziesThirdPattern : MonoBehaviour
     private void FinalizarPatron()
     {
         GetComponent<SuziePhaseManager>().ReportarAtaqueTerminado();
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion
 }

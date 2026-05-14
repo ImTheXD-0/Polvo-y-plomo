@@ -50,6 +50,11 @@ public class CanBeStunned : MonoBehaviour
     /// Almacena cuanto falta de duración de Stun.
     /// </summary>
     private float _tOfStunRemaining;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -76,14 +81,22 @@ public class CanBeStunned : MonoBehaviour
     }
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Se llama cada frame mientras el componente este activo.
     /// Realiza un contador
     /// </summary>
     void Update()
     {
         // Reducción del contador según el flujo del tiempo.
-        if (GameManager.HasInstance()) _tOfStunRemaining -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tOfStunRemaining -= Time.deltaTime;
+        _tOfStunRemaining -= Time.deltaTime * _slowMultiplier;
 
         if (_tOfStunRemaining <= 0)
         {
@@ -91,6 +104,17 @@ public class CanBeStunned : MonoBehaviour
             this.enabled = false;
         }
     }
+
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+    }
+
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -118,6 +142,15 @@ public class CanBeStunned : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

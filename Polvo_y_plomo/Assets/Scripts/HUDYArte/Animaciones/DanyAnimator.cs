@@ -62,6 +62,10 @@ public class DanyAnimator : MonoBehaviour
     /// </summary>
     private int _frameActual = 0;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -81,6 +85,15 @@ public class DanyAnimator : MonoBehaviour
     }
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Se llama en cada frame.
     /// Actualiza el temporizador y cambia el sprite cuando se alcanza el tiempo definido,
     /// teniendo en cuenta la habilidad de cámara lenta del GameManager si este existe en la escena.
@@ -90,14 +103,8 @@ public class DanyAnimator : MonoBehaviour
         if (SpritesTocando == null || SpritesTocando.Length == 0) return;
 
         // Respeta la habilidad de tiempo
-        if (GameManager.HasInstance())
-        {
-            _timer += Time.deltaTime * GameManager.SlowMultiplier;
-        }
-        else
-        {
-            _timer += Time.deltaTime;
-        }
+         _timer += Time.deltaTime * _slowMultiplier;
+        
 
         if (_timer >= TiempoEntreFrames)
         {
@@ -105,6 +112,15 @@ public class DanyAnimator : MonoBehaviour
             _frameActual = (_frameActual + 1) % SpritesTocando.Length;
             _sr.sprite = SpritesTocando[_frameActual];
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -124,6 +140,15 @@ public class DanyAnimator : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

@@ -49,6 +49,11 @@ public class ExplodeOverTime : MonoBehaviour
     /// Almacena el CanExplode que ha de tener el gameobject con este componente.
     /// </summary>
     private CanExplode _canExplode;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -66,6 +71,8 @@ public class ExplodeOverTime : MonoBehaviour
             Debug.Log("ExplodeOverTime puesto en un gameobject sin CanExplode. No funcionará");
             Destroy(this);
         }
+
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -73,14 +80,22 @@ public class ExplodeOverTime : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (GameManager.HasInstance()) _actualTime += Time.deltaTime * GameManager.SlowMultiplier;
-        else _actualTime += Time.deltaTime;
+        _actualTime += Time.deltaTime * _slowMultiplier;
 
         if (_actualTime > BoomTime)
         {
             
             _canExplode.Explode();
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -100,6 +115,15 @@ public class ExplodeOverTime : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

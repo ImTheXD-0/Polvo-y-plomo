@@ -63,6 +63,11 @@ public class playerControlledMovement : MonoBehaviour
     /// Bool que dice si hay o no GameManager en la escena
     /// </summary>
     private bool _gameManager = false;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -93,6 +98,7 @@ public class playerControlledMovement : MonoBehaviour
         }
 
         _gameManager = GameManager.HasInstance();
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -103,9 +109,18 @@ public class playerControlledMovement : MonoBehaviour
     {
         // Movimiento del jugador
         _rb.linearVelocity = InputManager.Instance.MovementVector * PlayerSpeed;
-        if (_gameManager && GameManager.SlowMultiplier != 1) _rb.linearVelocity *= GameManager.SlowMultiplier * PlayerAntiSlowBuff;
+        if (_slowMultiplier != 1) _rb.linearVelocity *= _slowMultiplier * PlayerAntiSlowBuff;
 
         if (Anim != null) Anim.SetBool("isWalking", _rb.linearVelocity.magnitude > 0);
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
 
     #endregion
@@ -126,6 +141,15 @@ public class playerControlledMovement : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

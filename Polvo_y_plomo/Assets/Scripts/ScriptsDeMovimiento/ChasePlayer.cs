@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -134,6 +135,11 @@ public class ChasePlayer : MonoBehaviour
     /// Inicializado en el Start();
     /// </summary>
     private float _difficultySpeedMultiplier;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -188,8 +194,9 @@ public class ChasePlayer : MonoBehaviour
             }
         }
 
-        UpdateDifficultyStats();
         _gameManager = GameManager.HasInstance();
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        UpdateDifficultyStats();
     }
 
     /// <summary>
@@ -261,12 +268,7 @@ public class ChasePlayer : MonoBehaviour
         if (_isStunned) // lógica de stunneo
         {
             _isChasing = true; // durante el stun se indica que se persigue para evitar ataques de enemigo
-            _rb.linearVelocity = _stunVelocity;
-            if (_gameManager)
-            {
-                _rb.linearVelocity *= GameManager.SlowMultiplier;
-                if (_animator != null) _animator.speed = GameManager.SlowMultiplier;
-            }
+            _rb.linearVelocity = _stunVelocity * _slowMultiplier;
         }
         else
         {
@@ -283,8 +285,7 @@ public class ChasePlayer : MonoBehaviour
             // Si estoy persiguiendo actualizo la velocidad hacia el jugador, con módulo ChaseSpeed.
             if (_isChasing)
             {
-                _rb.linearVelocity = ChaseSpeed * (directionToPlayer).normalized * _difficultySpeedMultiplier;
-                if (_gameManager) _rb.linearVelocity *= GameManager.SlowMultiplier;
+                _rb.linearVelocity = ChaseSpeed * (directionToPlayer).normalized * _difficultySpeedMultiplier * _slowMultiplier;
             }
             else
             {
@@ -302,17 +303,19 @@ public class ChasePlayer : MonoBehaviour
         if (_animator != null)
         {
             _animator.SetBool("isWalking", _isChasing);
-            if (GameManager.HasInstance()) _animator.speed = GameManager.SlowMultiplier;
+            _animator.speed = _slowMultiplier;
         }
     }
 
     /// <summary>
     /// Se llama al destruirse el componente.
     /// Intentará destruir otros componentes que dependen completamente del ChasePlayer.
+    /// Elimina su método del delegado del GameManager.
     /// </summary>
     private void OnDestroy()
     {
         Destroy(GetComponent<CanBeStunned>());
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -387,6 +390,15 @@ public class ChasePlayer : MonoBehaviour
         {
             _difficultySpeedMultiplier = 1f;
         }
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
 
     #endregion

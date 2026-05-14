@@ -36,6 +36,11 @@ public class VanishOverTime : MonoBehaviour
     [SerializeField]
     private FadeColor FadeOut;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -75,6 +80,15 @@ public class VanishOverTime : MonoBehaviour
     }
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Al ser activado se reinicia el contador del tiempo.
     /// </summary>
     private void OnEnable()
@@ -89,14 +103,22 @@ public class VanishOverTime : MonoBehaviour
     void Update()
     {
 
-        if (GameManager.HasInstance()) _t += Time.deltaTime * GameManager.SlowMultiplier;
-        else _t += Time.deltaTime;
+        _t += Time.deltaTime * _slowMultiplier;
 
         if (_t >= VanishTime)
         {
             FadeOut.enabled = true;
             this.enabled = false;
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -109,7 +131,7 @@ public class VanishOverTime : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -117,7 +139,17 @@ public class VanishOverTime : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
+
+
+    #endregion
 
 } // class VanishOverTime 
 // namespace

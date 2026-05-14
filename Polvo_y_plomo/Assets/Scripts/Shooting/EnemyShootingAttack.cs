@@ -98,6 +98,11 @@ public class EnemyShootingAttack : MonoBehaviour
     /// </summary>
     private float _fireRateMultiplier;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -149,8 +154,9 @@ public class EnemyShootingAttack : MonoBehaviour
             }
         }
 
-        UpdateDifficultyStats();
         _gameManager = GameManager.HasInstance();
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        UpdateDifficultyStats();
     }
 
     /// <summary>
@@ -159,8 +165,7 @@ public class EnemyShootingAttack : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_gameManager) _tParaDisparar -= Time.deltaTime * GameManager.SlowMultiplier * _fireRateMultiplier;
-        else _tParaDisparar -= Time.deltaTime * _fireRateMultiplier;
+       _tParaDisparar -= Time.deltaTime * _fireRateMultiplier * _slowMultiplier;
         
         if (_chasePlayer.IsChasing()) // Chasing
         {
@@ -185,10 +190,12 @@ public class EnemyShootingAttack : MonoBehaviour
     /// <summary>
     /// Si el componente se destruye por no poder funcionar, se asegura de que los otros muy relacionados no
     /// puedan dar problemas, destruyendolos también.
+    /// Elimina su método del delegado del GameManager.
     /// </summary>
     private void OnDestroy()
     {
         Destroy(GetComponent<Shoot>());
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -232,6 +239,15 @@ public class EnemyShootingAttack : MonoBehaviour
         {
             _fireRateMultiplier = 1f;
         }
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion   
 

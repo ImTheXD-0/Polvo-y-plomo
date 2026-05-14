@@ -132,6 +132,11 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     /// Contador que almacena cuantas pasadas de ráfaga se han realizado en el ataque actual.
     /// </summary>
     private int _totalWavesDone = 0;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -168,14 +173,22 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     }
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Se llama cada frame, mientras el componente este activo.
     /// </summary>
     private void Update()
     {
         if (_isShooting) // esta en una rafaga
         {
-            if (GameManager.HasInstance()) _t += Time.deltaTime * GameManager.SlowMultiplier;
-            else _t += Time.deltaTime;
+            _t += Time.deltaTime * _slowMultiplier;
 
             // Rotación del RotateBody
             // calculo el angulo actual
@@ -226,8 +239,7 @@ public class EnemyBurstShootingAttack : MonoBehaviour
         }
         else // aun no ha empezado ráfaga
         {
-            if (GameManager.HasInstance()) _timeSinceLastBurst += Time.deltaTime * GameManager.SlowMultiplier;
-            else _timeSinceLastBurst += Time.deltaTime;
+            _timeSinceLastBurst += Time.deltaTime * _slowMultiplier;
 
             _isChasing = _chasePlayer.IsChasing();
             if (!_isChasing && _timeSinceLastBurst >= TimeBetweenBursts) // si esta atacando
@@ -249,8 +261,15 @@ public class EnemyBurstShootingAttack : MonoBehaviour
                 _initialAngle = _rotateBody.GetAngle();
             }
         }
+    }
 
-
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -270,6 +289,15 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

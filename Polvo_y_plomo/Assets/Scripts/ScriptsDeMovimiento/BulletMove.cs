@@ -50,6 +50,11 @@ public class BulletMove : MonoBehaviour
     /// Inicializado en el Start().
     /// </summary>
     private float _difficultySpeedMultiplier;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -67,6 +72,7 @@ public class BulletMove : MonoBehaviour
     void Start()
     {
         _gameManager = GameManager.HasInstance();
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
         UpdateDifficultyStats();
     }
     /// <summary>
@@ -75,8 +81,16 @@ public class BulletMove : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_gameManager) transform.Translate(Vector2.right * Speed * Time.deltaTime * GameManager.SlowMultiplier * _difficultySpeedMultiplier);
-        else transform.Translate(Vector2.right * Speed * Time.deltaTime * _difficultySpeedMultiplier);
+       transform.Translate(Vector2.right * Speed * Time.deltaTime * _difficultySpeedMultiplier * _slowMultiplier);
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -110,6 +124,15 @@ public class BulletMove : MonoBehaviour
         {
             _difficultySpeedMultiplier = 1f;
         }
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
 
     #endregion   

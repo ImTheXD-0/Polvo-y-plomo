@@ -82,15 +82,20 @@ public class TimerAndGoalManager : MonoBehaviour
     /// Segundos restantes
     /// </summary>
     private int _seconds = 30;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
-    
+
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
     #region Métodos de MonoBehaviour
-    
+
     // Por defecto están los típicos (Update y Start) pero:
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
-    
+
     /// <summary>
     /// Awake que busca los scripts de vibración de ambos textos, y pone el tiempo restante al máximo (es decir, al inicial del crono).
     /// </summary>
@@ -103,12 +108,21 @@ public class TimerAndGoalManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Update que calcula en cada frame el tiempo restante para representarlo en pantalla, y que cambia el texto del objetivo del nivel cuando el crono acaba.
     /// Además, controla las vibraciones de ambos textos.
     /// </summary>
     void Update()
     {
-        _lastingTime -= Time.deltaTime * GameManager.SlowMultiplier;
+        _lastingTime -= Time.deltaTime * _slowMultiplier;
 
         _minutes = (int)_lastingTime / 60;
         _seconds = (int)_lastingTime % 60;
@@ -143,6 +157,15 @@ public class TimerAndGoalManager : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+    }
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -154,7 +177,7 @@ public class TimerAndGoalManager : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     #endregion
-    
+
     // ---- MÉTODOS PRIVADOS ----
     #region Métodos Privados
     // Documentar cada método que aparece aquí
@@ -162,7 +185,16 @@ public class TimerAndGoalManager : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
-    #endregion   
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
+
+    #endregion
 
 } // class TimerAndGoalManager 
 // namespace

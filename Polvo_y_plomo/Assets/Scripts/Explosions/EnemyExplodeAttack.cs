@@ -68,6 +68,11 @@ public class EnemyExplodeAttack : MonoBehaviour
     /// </summary>
     private float _t = 0;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -77,6 +82,10 @@ public class EnemyExplodeAttack : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
+    /// <summary>
+    /// Se llama al cargarse en escena.
+    /// Hace comprobaciones necesarias para el componente.
+    /// </summary>
     private void Awake()
     {
         _canExplode = GetComponent<CanExplode>();
@@ -92,6 +101,15 @@ public class EnemyExplodeAttack : MonoBehaviour
             Debug.Log("EnemyExplodeAttack puesto en un gameobject sin ChasePlayer. No funcionará");
             Destroy(this);
         }
+    }
+
+    /// <summary>
+    /// Se llama después del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     private void Update()
@@ -114,8 +132,7 @@ public class EnemyExplodeAttack : MonoBehaviour
             }
             else // esta quieto intentando explotar
             {
-                if (GameManager.HasInstance()) _t += Time.deltaTime * GameManager.SlowMultiplier;
-                else _t += Time.deltaTime;
+                _t += Time.deltaTime * _slowMultiplier;
 
                 if (_t >= FuzeTime) // explota
                 {
@@ -125,6 +142,15 @@ public class EnemyExplodeAttack : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
 
     #endregion
@@ -145,6 +171,15 @@ public class EnemyExplodeAttack : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 

@@ -100,6 +100,11 @@ public class playerRoll : MonoBehaviour
     /// Almacena la dirección en la que se está dando el roll.
     /// </summary>
     private Vector2 _dirRoll;
+
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -141,6 +146,7 @@ public class playerRoll : MonoBehaviour
             Destroy(this);
         }
         _gameManager = GameManager.HasInstance();
+        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -149,8 +155,7 @@ public class playerRoll : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (_gameManager) _tVolverARodar -= Time.deltaTime * GameManager.SlowMultiplier;
-        else _tVolverARodar -= Time.deltaTime;
+        _tVolverARodar -= Time.deltaTime * _slowMultiplier;
 
         if (InputManager.Instance.RollWasPressedThisFrame() && InputManager.Instance.MovementVector != Vector2.zero && _tVolverARodar <= 0)
         {
@@ -167,11 +172,10 @@ public class playerRoll : MonoBehaviour
     {
         if (_isRolling)
         {
-            _rb.linearVelocity = _dirRoll * DesplazamientoRodado * (1 / DuracionRodado);
-            if (_gameManager) _rb.linearVelocity *= GameManager.SlowMultiplier;
+            _rb.linearVelocity = _dirRoll * DesplazamientoRodado * (1 / DuracionRodado) * _slowMultiplier;
+            if (Anim != null) Anim.speed = _slowMultiplier;
 
-            if (_gameManager) _tDuracionRodado -= Time.fixedDeltaTime * GameManager.SlowMultiplier;
-            else _tDuracionRodado -= Time.fixedDeltaTime;
+            _tDuracionRodado -= Time.fixedDeltaTime * _slowMultiplier;
 
             if (_tDuracionRodado <= 0)
             {
@@ -182,6 +186,15 @@ public class playerRoll : MonoBehaviour
                 LogicaRoll(true);
             }
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -238,6 +251,15 @@ public class playerRoll : MonoBehaviour
         _desplazamientoJugador.enabled = logica;
         HitboxJugador.enabled = logica;
         SpriteArmaJugador.enabled = logica;
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion
 

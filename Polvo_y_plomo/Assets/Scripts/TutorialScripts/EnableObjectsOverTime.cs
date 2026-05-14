@@ -59,6 +59,11 @@ public class EnableObjectsOverTime : MonoBehaviour
     /// </summary>
     private float _t = 0;
 
+    /// <summary>
+    /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -69,13 +74,21 @@ public class EnableObjectsOverTime : MonoBehaviour
     // - Hay que borrar los que no se usen 
 
     /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Se añade al delegado del GameManager para actualizar _slowMultiplier
+    /// </summary>
+    private void Start()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+    }
+
+    /// <summary>
     /// Se llama cada frame.
     /// Lleva el temporizador y activa los elementos.
     /// </summary>
     private void Update()
     {
-        if (GameManager.HasInstance()) _t += Time.deltaTime * GameManager.SlowMultiplier;
-        else _t += Time.deltaTime;
+        _t += Time.deltaTime * _slowMultiplier;
 
         if (_t > TimeToActivate)
         {
@@ -91,6 +104,15 @@ public class EnableObjectsOverTime : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -110,6 +132,15 @@ public class EnableObjectsOverTime : MonoBehaviour
     // El convenio de nombres de Unity recomienda que estos métodos
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
+    }
 
     #endregion
 
