@@ -9,7 +9,10 @@
 - Ángel Seijas de Ema
 - Samuel Asensio Torres
 # Breve descripción y cómo ganar: 
-Polvo y Plomo es un shooter de vista top down ambientado en el viejo oeste. Deberás ponerte en la piel de Hudson, un forajido que llega a un pueblo en el desierto con la intención de robar un banco. <img width="200" height="150" alt="Cinema7" src="https://github.com/user-attachments/assets/62e0068f-0cc7-4c54-9456-5d7cf57c5b5e" />
+Polvo y Plomo es un shooter de vista top down ambientado en el viejo oeste. Deberás ponerte en la piel de Hudson, un forajido que llega a un pueblo en el desierto con la intención de robar un banco. 
+
+ <img width="200" height="150" alt="Cinema7" src="https://github.com/user-attachments/assets/62e0068f-0cc7-4c54-9456-5d7cf57c5b5e" />
+ 
 Para ello deberá sobrevivir a la furia de sus habitantes que se vuelven contra ti para vengar los actos criminales que has cometido.
 Para ganar debes acabar con todos los enemigos y enfrentarte en un duelo final, cumpliendo así tu objetivo de llenar tus bolsillos de oro.
  <img width="1597" height="896" alt="0OfByp" src="https://github.com/user-attachments/assets/c0cf6794-b9c6-47b4-8db3-ddeb6500c0b1" />
