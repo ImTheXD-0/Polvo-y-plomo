@@ -240,7 +240,7 @@ public class LevelManager : MonoBehaviour
 
         if (EnemyPoints > 0)
         {
-            if (GameManager.HasInstance()) GameManager.Instance.UpdateScoreHUD(EnemyPoints * _streak); // enviado de puntos al GameManager
+            if (GameManager.HasInstance()) GameManager.Instance.UpdateScore(EnemyPoints * _streak); // enviado de puntos al GameManager
             KeepStreak();
         }
 
@@ -251,7 +251,7 @@ public class LevelManager : MonoBehaviour
 
         if (_streak > 1)
         {
-            if (GameManager.HasInstance()) GameManager.Instance.UpdateStreakBar(_tLastStreak / _streakDuration);
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateStreakBar(_tLastStreak / _streakDuration);
         }
     }
 
@@ -343,10 +343,10 @@ public class LevelManager : MonoBehaviour
         _streakDuration /= DIV_STREAK_DUR;
         if (_streakDuration <= MinStreakDuration) _streakDuration = MinStreakDuration;
         _tLastStreak = _streakDuration;
-        if (GameManager.HasInstance())
+        if (HUDManager.HasInstance())
         {
-            GameManager.Instance.UpdateStreakMultiplierHUD(_streak);
-            if (_streak > 2) GameManager.Instance.UpdateStreakBar(1);
+            HUDManager.Instance.UpdateStreakMultiplierHUD(_streak);
+            if (_streak > 2) HUDManager.Instance.UpdateStreakBar(1);
         }
     }
 
@@ -359,10 +359,10 @@ public class LevelManager : MonoBehaviour
         _streakDuration = MaxStreakDuration;
         _streak++;
         _tLastStreak = _streakDuration;
-        if (GameManager.HasInstance())
+        if (HUDManager.HasInstance())
         {
-            GameManager.Instance.UpdateStreakBar(1);
-            GameManager.Instance.UpdateStreakMultiplierHUD(_streak);
+            HUDManager.Instance.UpdateStreakBar(1);
+            HUDManager.Instance.UpdateStreakMultiplierHUD(_streak);
         }
     }
 

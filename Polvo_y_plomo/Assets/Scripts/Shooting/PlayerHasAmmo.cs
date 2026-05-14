@@ -47,6 +47,12 @@ public class PlayerHasAmmo : MonoBehaviour
     [SerializeField]
     private AudioClip ShootFailed;
 
+    /// <summary>
+    /// Variable de sonido que debe almacenar el sonido de la recarga
+    /// </summary>
+    [SerializeField]
+    private AudioClip ReloadClip; // quitarlo de aqui y meterlo al hasammo
+
     #endregion
 
     // ---- ATRIBUTOS PRIVADOS ----
@@ -131,7 +137,8 @@ public class PlayerHasAmmo : MonoBehaviour
         if (_tParaSiguienteRecarga <= 0)
         {
             _numBalas++;
-            if (GameManager.HasInstance()) GameManager.Instance.UpdateAmmoHUD(_numBalas);
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateAmmoHUD(_numBalas);
+            if (AudioManager.HasInstance() && ReloadClip) AudioManager.Instance.Play(ReloadClip, transform.position);
             if (_numBalas >= NumMaxBalas) this.enabled = false;
             _tParaSiguienteRecarga = Reload;
         }
@@ -174,7 +181,7 @@ public class PlayerHasAmmo : MonoBehaviour
             else if (_shootEscopeta != null) _shootEscopeta.ShootBullet(fireDir);
 
             _numBalas--;
-            if (GameManager.HasInstance()) GameManager.Instance.UpdateAmmoHUD(_numBalas);
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateAmmoHUD(_numBalas);
             return true;  // dispara
         }
         else

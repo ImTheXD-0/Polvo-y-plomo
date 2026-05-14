@@ -106,7 +106,7 @@ public class PlayerHealth : Health
         // Actualizar HUD del jugador o sonido de bloqueo de cobertura
         if (GameManager.HasInstance())
         {
-            GameManager.Instance.UpdateHealthHUD(_vida);
+            GameManager.Instance.UpdatePlayerHealth(_vida);
             if (AudioManager.HasInstance() && SonidoDanyo && cambio < 0) AudioManager.Instance.Play(SonidoDanyo, transform.position);
             else if (AudioManager.HasInstance() && SonidoCura && cambio > 0) AudioManager.Instance.Play(SonidoCura, transform.position);
         }

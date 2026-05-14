@@ -84,15 +84,15 @@ public class PointsOnDeath : MonoBehaviour
     {
         if (LevelManager.HasInstance())
         {
-            if (GameManager.HasInstance())
+            if (HUDManager.HasInstance())
             {
                 // Para que se pongan los puntos en la posicion correcta si se mata durante la animación de spawn
                 EnemySpawnLogic enemySpawn = GetComponent<EnemySpawnLogic>();
-                if (enemySpawn == null) GameManager.Instance.SpawnPointIndicator(transform.position, (int)(_difficultyPointsMultiplier * Points) * LevelManager.Instance.GetStreak());
+                if (enemySpawn == null) HUDManager.Instance.SpawnPointIndicator(transform.position, (int)(_difficultyPointsMultiplier * Points) * LevelManager.Instance.GetStreak());
                 else
                 {
                     Hitbox enemyHitbox = enemySpawn.GetComponentInChildren<Hitbox>();
-                    if (enemyHitbox != null) GameManager.Instance.SpawnPointIndicator(enemyHitbox.transform.position, (int)(_difficultyPointsMultiplier * Points) * LevelManager.Instance.GetStreak());
+                    if (enemyHitbox != null) HUDManager.Instance.SpawnPointIndicator(enemyHitbox.transform.position, (int)(_difficultyPointsMultiplier * Points) * LevelManager.Instance.GetStreak());
                     else Debug.Log("No se ha encontrado hitbox en el PointsOnDeath y no se pueden colocar los puntos correctamente");
                 }
             }

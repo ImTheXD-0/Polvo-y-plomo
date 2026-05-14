@@ -354,6 +354,7 @@ MonoBehaviour:
   Reload: 0.6
   NumMaxBalas: 6
   ShootFailed: {fileID: 8300000, guid: 53154a6907a208043be356da1eb6c9b6, type: 3}
+  ReloadClip: {fileID: 8300000, guid: b61ed8c783d3b3f4b9d907b56bab5663, type: 3}
 --- !u!95 &2698698690778364192
 Animator:
   serializedVersion: 7

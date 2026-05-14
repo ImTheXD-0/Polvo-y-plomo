@@ -113,11 +113,11 @@ public class playerMeleeAttack : MonoBehaviour
         {
             DoMelee(false);
             _tRemainingToMelee = CooldownMelee;
-            if (GameManager.HasInstance()) GameManager.Instance.UpdateMeleeCooldownShadow(0);
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateMeleeCooldownShadow(0);
             _shadowSpawned = false;
         }
 
-        if (_tRemainingToMelee > 0 && GameManager.HasInstance()) GameManager.Instance.UpdateMeleeCooldownShadow(1 - _tRemainingToMelee / CooldownMelee);
+        if (_tRemainingToMelee > 0 && HUDManager.HasInstance()) HUDManager.Instance.UpdateMeleeCooldownShadow(1 - _tRemainingToMelee / CooldownMelee);
     }
     #endregion
 

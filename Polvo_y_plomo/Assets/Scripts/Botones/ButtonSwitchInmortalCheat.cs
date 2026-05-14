@@ -60,7 +60,7 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
         if (GameManager.HasInstance())
         {
             GameManager.Instance.InmortalCheats();
-            GameManager.Instance.UpdateInmortalCheatHUD();
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateInmortalCheatHUD(GameManager.Instance.AreInmortalCheatsOn());
         }
 
     }
@@ -70,7 +70,7 @@ public class ButtonSwitchInmortalCheat : MonoBehaviour
     /// </summary>
     public void UpdateHUDCheats()
     {
-        if (GameManager.HasInstance()) GameManager.Instance.UpdateInmortalCheatHUD();
+        if (GameManager.HasInstance() && HUDManager.HasInstance()) HUDManager.Instance.UpdateInmortalCheatHUD(GameManager.Instance.AreInmortalCheatsOn());
     }
     #endregion
 

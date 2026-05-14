@@ -95,6 +95,8 @@ public class PopUpController : MonoBehaviour
             Debug.Log("PopUpController sin PauseMenu asignado. No funcionará y destruira el PopUp");
             Destroy(gameObject);
         }
+
+        if (PlaySong != null) PlaySong.enabled = false;
     }
 
     /// <summary>
@@ -111,8 +113,6 @@ public class PopUpController : MonoBehaviour
 
         CursorBlocker.enabled = false; // impide que se de su Start() y por ende no bloquea el cursor
         CursorBlocker.UnlockCursor(); // me aseguro
-
-        if (PlaySong != null) PlaySong.enabled = false;
     }
 
     /// <summary>

@@ -85,136 +85,6 @@ public class GameManager : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Texto que guarda el nivel actual de la habilidad.
-    /// </summary>
-    [SerializeField]
-    private TextMeshProUGUI ActLevelMessage;
-
-    /// <summary>
-    /// Texto que saldrá al subir de nivel la habilidad.
-    /// </summary>
-    [SerializeField]
-    private ChangeColorAndHide LevelUpMessage;
-
-    /// <summary>
-    /// Componente con el FadeIn configurado
-    /// Realizará un FadeIn de pantalla negra al morir el jugador.
-    /// Se debería configurar para que acabe en 1 de transparencia.
-    /// </summary>
-    [SerializeField]
-    private FadeColor FadeInBlackScreen;
-
-    /// <summary>
-    /// Componente con el FadeOut configurado
-    /// Realizará un FadeOut de pantalla negra al reaparecer el jugador.
-    /// </summary>
-    [SerializeField]
-    private FadeColor FadeOutBlackScreen;
-
-    /// <summary>
-    /// Componente con el FadeIn configurado.
-    /// Realizará un FadeIn de pantalla azul al activarse la habilidad de tiempo lento del jugador.
-    /// </summary>
-    [SerializeField]
-    private FadeColor FadeInBlueScreen;
-
-    /// <summary>
-    /// Componente con FadeOut configurado.
-    /// Realizará un FadeOut de pantalla azul al desactivarse la habilidad de tiempo lento del jugador.
-    /// </summary>
-    [SerializeField]
-    private FadeColor FadeOutBlueScreen;
-
-    /// <summary>
-    /// Componente con el "líquido" de la habilidad (duración restante de esta)
-    /// Se podrá llamar al GameManager para modificar su fillAmmount.
-    /// </summary>
-    [SerializeField]
-    private ImageFill HabilityLiquid;
-
-    /// <summary>
-    /// Componente con la "sombra" de la habilidad (duración restante del cooldown de la habilidad)
-    /// Se podrá llamar al GameManager para modificar su fillAmmount.
-    /// </summary>
-    [SerializeField]
-    private ImageFill HabilityShadow;
-
-    /// <summary>
-    /// Barril de revólver del HUD
-    /// </summary>
-    [SerializeField]
-    private GameObject Barrel;
-
-    /// <summary>
-    /// Lista de objetos de vida del HUD
-    /// </summary>
-    [SerializeField]
-    private HeartUI[] Lifes;
-  
-    /// <summary>
-    /// Lista de objetos de balas del HUD
-    /// </summary>
-    [SerializeField]
-    private GameObject[] Bullets = new GameObject[MUNICIONBASEJUGADOR];
-
-    /// <summary>
-    /// Texto que muestra los puntos en el HUD.
-    /// </summary>
-    [SerializeField]
-    private TextMeshProUGUI ScoreText;
-
-    /// <summary>
-    /// Texto que muestra el multiplicador en el HUD.
-    /// También se usará para acceder al componente UIVibration del mismo GameObject.
-    /// </summary>
-    [SerializeField]
-    private TextMeshProUGUI StreakMultiplier;
-
-
-    /// <summary>
-    /// Struct para añadir colores al multiplicador y su racha asociada a la que cambiar
-    /// </summary>
-    [System.Serializable]
-    public struct StreakColor
-    {
-        /// <summary>
-        /// Color al que cambiará el texto en este StreakColor
-        /// </summary>
-        public Color Color;
-
-        /// <summary>
-        /// Cantidad para pasar al siguiente nivel configurado de StreakColors.
-        /// El del último elemento del Array será ignorado.
-        /// </summary>
-        public int StreakToChangeColor;
-
-        /// <summary>
-        /// Nueva Vibration Intensity para el texto.
-        /// </summary>
-        public float NewVibration;
-    }
-
-    /// <summary>
-    /// Array de colores.
-    /// </summary>
-    [SerializeField]
-    private StreakColor[] StreakColors;
-
-    /// <summary>
-    /// Componente con el "liquido" de la barra que muestra cuanto porcentaje de tiempo
-    /// queda para que la racha baje en 1.
-    /// </summary>
-    [SerializeField]
-    private ImageFill StreakBar;
-
-    /// <summary>
-    /// Componente con el "liquido" de la barra que muestra cuantas muertes
-    /// quedan para que la habilidad suba de nivel.
-    /// </summary>
-    [SerializeField]
-    private ImageFill LevelBar;
-
-    /// <summary>
     /// Componente de audio que almacena la canción de victoria que sonará
     /// tras ganar un nivel.
     /// </summary>
@@ -230,65 +100,20 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Tiempo que tardara la escena en reiniciarse
+    /// Ha de estar configurado de forma en la que funcione bien con los fadein y fadeout de la blackscreen
     /// </summary>
     [SerializeField]
     private float TiempoEsperaRespawn = 3f;
 
     /// <summary>
     /// Almacena cuanto tiempo se tardará en cargar la siguiente escena tras
+    /// Ha de estar configurado de forma en la que funcione bien con los fadein y fadeout de la blackscreen
     /// la victoria del jugador.
     /// </summary>
     [SerializeField]
     private float TiempoEsperaSiguienteNivel = 5f;
 
-    /// <summary>
-    /// ImageFill de la "sombra" del ataque melee, para representar su cooldown con un sprite que "cambia" de color
-    /// </summary>
-    [SerializeField]
-    private ImageFill MeleeCooldown = null;
 
-    /// <summary>
-    /// Organizar apartados del Highscore
-    /// </summary>
-    [Header("Highscore")]
-
-    /// <summary>
-    /// Texto en el que se escribe el número del highscore.
-    /// </summary>
-    [SerializeField]
-    private TextMeshProUGUI HighScoreTextUI;
-
-    /// <summary>
-    /// Array para almacenar todos los gameObjects que se usaran para indicar los puntos que dan los enemigos en pantalla
-    /// </summary>
-    [SerializeField]
-    private GameObject[] StreakText;
-
-    /// <summary>
-    /// Variable a la que se le debe asignar el Animator del icono de la habilidad.
-    /// En concreto, la del icono (reloj y contorno).
-    /// Esto hace que se pueda cambiar al "estado activo" durante la habilidad.
-    /// </summary>
-    [SerializeField]
-    private Animator TimeAbilityAnimator;
-
-    /// <summary>
-    /// Variable de sonido que debe almacenar el sonido de la recarga
-    /// </summary>
-    [SerializeField]
-    private AudioClip ReloadClip;
-
-    /// <summary>
-    /// Variable que almacena el texto que te dice si los cheats de inmortalidad estan activados o no
-    /// </summary>
-    [SerializeField] 
-    private TextMeshProUGUI TextoInmortalCheatHUD;
-
-    /// <summary>
-    /// Variable que almacena el texto que te dice si los cheats de Max LVL estan activados o no.
-    /// </summary>
-    [SerializeField]
-    private TextMeshProUGUI TextoMaxLVLCheatHUD;
 
     #endregion
 
@@ -302,11 +127,6 @@ public class GameManager : MonoBehaviour
     private const int VIDABASEJUGADOR = 10;
 
     /// <summary>
-    /// Constante que guarda la munición máxima del jugador.
-    /// </summary>
-    private const int MUNICIONBASEJUGADOR = 6;
-
-    /// <summary>
     /// Instancia única de la clase (singleton).
     /// </summary>
     private static GameManager _instance;
@@ -317,11 +137,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private int _vidaJugador = VIDABASEJUGADOR;
 
-    /// <summary>
-    /// Esta es la munición actual del jugador.
-    /// Inicializada en 6 por ser en la que empieza.
-    /// </summary>
-    private int _municionJugador = MUNICIONBASEJUGADOR;
 
     /// <summary>
     /// Este es el contador total de muertes.
@@ -353,11 +168,6 @@ public class GameManager : MonoBehaviour
     private bool _playerDied = false;
 
     /// <summary>
-    /// Almacena el highscore del jugador, leido de un archivo.
-    /// </summary>
-    private int _highScore = 0;
-
-    /// <summary>
     /// Almacena el componente de control del jugador para cambiarle
     /// la sensibilidad con los settings
     /// </summary>
@@ -367,16 +177,6 @@ public class GameManager : MonoBehaviour
     /// Almacena la sensibilidad del jugador, en un intervalo del [0,10].
     /// </summary>
     private float _cursorSensibility = 5f;
-
-    /// <summary>
-    /// Indice que indica que color se esta usando actualmente para el StreakColor.
-    /// </summary>
-    private int _currentStreakColor = 0;
-
-    /// <summary>
-    /// Almacena el componente de UIVibration del texto StreakVibration.
-    /// </summary>
-    private UIVibration _streakVibration;
 
     /// <summary>
     /// Variable booleana para conocer si la habilidad del jugador esta activa o no.
@@ -395,10 +195,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private const float SLOWSHOT_TIMEMULTIPLIER = 0.25f;
 
-    /// <summary>
-    /// Número que lleva la cuenta del gameObject actual con el que indicar los puntos (Cual de los gameObjects dentro del array es el encargado de generarse)
-    /// </summary>
-    private int actualtext;
+
 
     /// <summary>
     /// Variable booleana para saber si el jugador tiene activados el rexibir daño
@@ -432,12 +229,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // Transferencia de configuración del HUD
-            GameManager.Instance.TransferManagerSetup(ActLevelMessage, LevelUpMessage, FadeInBlackScreen, FadeOutBlackScreen, FadeInBlueScreen, FadeOutBlueScreen, HabilityLiquid, HabilityShadow, Barrel, Lifes, Bullets, ScoreText, StreakMultiplier, StreakColors, StreakBar, LevelBar, VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel, MeleeCooldown, HighScoreTextUI, TextoInmortalCheatHUD, StreakText, TextoMaxLVLCheatHUD);
-        }
-
-        foreach (GameObject obj in StreakText) // Desactiva los indicadores de puntos 
-        {
-            obj.SetActive(false);
+            GameManager.Instance.TransferManagerSetup(VictoryMusic, NextLevel, TiempoEsperaRespawn, TiempoEsperaSiguienteNivel);
         }
     }
 
@@ -474,8 +266,6 @@ public class GameManager : MonoBehaviour
             this.enabled = false;
             Init();
         } // if-else somos instancia nueva o no.
-
-        if (SceneManager.GetActiveScene().buildIndex == 0) LoadScore();
     }
 
     /// <summary>
@@ -593,8 +383,7 @@ public class GameManager : MonoBehaviour
     {
         // Reinicio de las stats del jugador para que empiecen completas tras reiniciarse la escena.
         _vidaJugador = VIDABASEJUGADOR;
-        _municionJugador = MUNICIONBASEJUGADOR;
-        _currentStreakColor = 0;
+
         if (LevelManager.HasInstance())
         {
             _totalPoints = LevelManager.Instance.GetPointsAtStartOfLevel();
@@ -606,10 +395,10 @@ public class GameManager : MonoBehaviour
             _totalDeaths = 0;
         }
 
+        if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
 
         // Animación de pantalla negra.
-        if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
-        if (FadeInBlackScreen != null) FadeInBlackScreen.enabled = true;
+        if (HUDManager.HasInstance()) HUDManager.Instance.StartFadeInBlackScreen();
 
 
 
@@ -627,11 +416,9 @@ public class GameManager : MonoBehaviour
         _gameMustBePaused = true;
         PauseGame();
 
-        _currentStreakColor = 0;
-
         // Feedback de victoria
         if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
-        if (FadeInBlackScreen != null) FadeInBlackScreen.enabled = true;
+        if (HUDManager.HasInstance()) HUDManager.Instance.StartFadeInBlackScreen();
         if (AudioManager.HasInstance()) AudioManager.Instance.PlayMusic(VictoryMusic);
 
         _t = Time.time;
@@ -666,322 +453,19 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region Metodos únicos del Hud
-
-    /// <summary>
-    /// Este metodo actualiza los puntos, y su HUD.
-    /// </summary>
-    public void UpdateScoreHUD(int cambioDePuntos)
-    {
-        _totalPoints += cambioDePuntos;
-        if (ScoreText != null) ScoreText.text = _totalPoints.ToString();
-
-    }
-
-    /// <summary>
-    /// Método que se encarga de generar los puntos que se le pasen en la posición que se le introduzca y de gestionar cual es el siguiente gameObject en encargarse de mostrarlos 
-    /// </summary>
-    public void SpawnPointIndicator(Vector3 position, int cambioDePuntos)
-    {
-        if (StreakText.Length > 0)
-        {
-            //Setear el punto
-            StreakText[actualtext].SetActive(true);
-            StreakText[actualtext].GetComponent<PointIndicator>().SpawnHere(position, cambioDePuntos);
-
-            //Gestionar lista
-            actualtext++;
-            if (actualtext >= StreakText.Length) actualtext = 0;
-        }
-    }
-
-    /// <summary>
-    /// Este método actualiza la racha de muertes y su HUD.
-    /// </summary>
-    /// <param name="NuevoScoreJugador"></param>
-    public void UpdateStreakMultiplierHUD(int Streak)
-    {
-        if (StreakMultiplier != null)
-        {
-            StreakMultiplier.text = "x" + Streak.ToString();
-            if (StreakColors.Length > 0)
-            {
-                // Actualización de color y vibración
-                if (_currentStreakColor < StreakColors.Length - 1 && Streak >= StreakColors[_currentStreakColor].StreakToChangeColor)
-                {
-                    _currentStreakColor++;
-                    UpdateStreakMultiplierEffects();
-                }
-                else if (_currentStreakColor > 0 && Streak < StreakColors[_currentStreakColor-1].StreakToChangeColor)
-                {
-                    _currentStreakColor--;
-                    UpdateStreakMultiplierEffects();
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Este metodo actualiza la vida y su HUD.
-    /// </summary>
-    public void UpdateHealthHUD(int NuevaVidaJugador)
-    {
-        int diff = NuevaVidaJugador - _vidaJugador;
-        _vidaJugador = NuevaVidaJugador;
-
-        for (int i = 0; i < Lifes.Length; i++)
-        {
-            if (Lifes[i] != null)
-            {
-                // i recorre corazones enteros
-                // cada corazon son 2 PV
-
-                // en cada corazón hay que ver si:
-                // 1) hay que rellenarlo completo o dejarlo vacio
-                // 2) hay que hacer una animación, de daño o de cura
-                // para decidir entre si he recibido daño o me he curado seguramente sea
-                // más intuitivo calcular  diff = NuevaVidaJugador - vidaAnterior, si es (+) se ha curado, si es (-) ha perdido vida
-
-
-                // lo primordal al analizar cada corazón es ver si se tiene que hacer la animacion en este o no
-                // verlo es más sencillo si primero verificamos el signo de diff
-
-                // Para diff < 0:
-                // si 2i <= NuevaVidaJugador < 2(i+1) el corazon necesita animacion
-
-                // if NuevaVidaJugador >= 2(ì+1) entonces se pinta el corazon lleno y listo
-                // else if NuevaVidaJugador < 2i entonces se pinta el corazon vacio y listo
-                // else, (hace falta animacion) hago un switch con (NuevaVidaJugador - 2i)
-                // case 0: animacion corazon medio a corazon vacio
-                // case 1: animacion corazon completo a corazon medio
-                // --> Aqui se asume que los cambios son de 1 PV, habría que ver con Suzie como queda la perdida de vida
-
-                // Para diff > 0:
-                // si 2i < NuevaVidaJugador <= 2(i+1) el corazon necesita animacion
-                
-                // if NuevaVidaJugador > 2(i+1) se pinta el corazon lleno y listo
-                // else if NuevaVidaJugador <= 2i se pinta el corazon vacio y listo
-                // else, (hace falta animacion) hago un switch con (NuevaVidaJugador - 2i)
-                // case 1: animacion de corazon vacio a corazon medio
-                // case 2: animacion de corazon medio a corazon lleno
-                // --> De nuevo asumimos que los cambios son de 1 PV y podría quedar raro con curas mayores
-
-                // Para diff = 0: (posible en la transición de escenas)
-                // if NuevaVidaJugador >= 2(i+1) se pinta el corazón lleno y listo
-                // else if NuevaVidaJugador <= 2i se pinta el corazon vacio y listo
-                // else -> mitad de corazon
-                if (diff < 0)
-                {
-                    if (NuevaVidaJugador >= 2 * (i + 1)) Lifes[i].FullHeart();
-                    else if (NuevaVidaJugador < 2 * i) Lifes[i].EmptyHeart();
-                    else
-                    {
-                        switch(NuevaVidaJugador - 2 * i)
-                        {
-                            case 0:
-                                Lifes[i].HitToEmpty();
-                                break;
-                            case 1:
-                                Lifes[i].HitToHalf();
-                                break;
-                        }
-                    }
-                }
-                else if (diff > 0)
-                {
-                    if (NuevaVidaJugador > 2 * (i + 1)) Lifes[i].FullHeart();
-                    else if (NuevaVidaJugador <= 2 * i) Lifes[i].EmptyHeart();
-                    else
-                    {
-                        switch(NuevaVidaJugador - 2 * i)
-                        {
-                            case 1:
-                                Lifes[i].HealToHalf();
-                                break;
-                            case 2:
-                                Lifes[i].HealToFull();
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    if (NuevaVidaJugador >= 2 * (i + 1)) Lifes[i].FullHeart();
-                    else if (NuevaVidaJugador <= 2*i) Lifes[i].EmptyHeart();
-                    else Lifes[i].HalfHeart();
-                }
-            }
-        }
-    }
-
-    /// <summary>
-    /// Este metodo actualiza las balas y su HUD
-    /// </summary>
-    public void UpdateAmmoHUD(int NuevaMunicionJugador)
-    {
-        bool recarga = NuevaMunicionJugador - _municionJugador > 0;
-
-        BarrelAnimatorController barrelAnimator = Barrel.GetComponent<BarrelAnimatorController>();
-
-        _municionJugador = NuevaMunicionJugador;
-        for (int i = 0; i < Bullets.Length; i++)
-        {
-            if (Bullets[i] != null)
-            {
-                Animator bulletAnimator = Bullets[i].GetComponent<Animator>();
-                if (bulletAnimator != null)
-                {
-                    if ((i < _municionJugador)) bulletAnimator.Play("BulletIdle", 0, 0f);
-                    else if ((i == _municionJugador) && !recarga) bulletAnimator.Play("Bullet", 0, 0f);
-                }
-                else Debug.Log("Falta animator en una de las bullets del barril de recarga");
-            }
-        }
-
-        if (barrelAnimator != null)
-        {
-            if (recarga)
-            {
-                barrelAnimator.AddAnticlockwiseRotation();
-            }
-            else barrelAnimator.AddClockwiseRotation();
-        }
-
-        if (recarga && ReloadClip && LevelManager.HasInstance()) AudioManager.Instance.Play(ReloadClip, LevelManager.Instance.PlayerTransform().position);
-        //Debug.Log(_municionJugador);
-    }
-
-    /// <summary>
-    /// Actualiza el fill ammount de la imagen del liquido de la habilidad.
-    /// Se irá llamando durante la duración de la habilidad para indicar cuanto tiempo le queda.
-    /// </summary>
-    /// <param name="fillAmmount"></param>
-    public void UpdateTimeHabilityLiquid(float fillAmmount)
-    {
-        if (HabilityLiquid != null) HabilityLiquid.UpdateImageFillAmmount(fillAmmount);
-    }
-
-    /// <summary>
-    /// Actualiza el fill ammount de la imagen del tiempo de la racha.
-    /// Se llamará en cada comprobación.
-    /// </summary>
-    /// <param name="fillAmmount"></param>
-    public void UpdateStreakBar(float fillAmmount)
-    {
-        if (StreakBar != null) StreakBar.UpdateImageFillAmmount(fillAmmount);
-    }
-
-    /// <summary>
-    /// Actualiza el fill ammount de la imagen del nivel de la habilidad.
-    /// se llamará en 
-    /// </summary>
-    /// <param name="fillAmmount"></param>
-    public void UpdateLevelBar(float fillAmmount)
-    {
-        if (LevelBar != null)
-        {
-            LevelBar.UpdateImageFillAmmount(fillAmmount);
-        }
-    }
-
-    /// <summary>
-    /// Actualiza en el HUD el texto que dice el nivel actual de la habilidad.
-    /// </summary>
-    /// <param name="a">Este sería el nuevo valor del nivel</param>
-    public void UpdateActLevelText(int a)
-    {
-        if (ActLevelMessage != null)
-        {
-            ActLevelMessage.text = a.ToString();
-        }
-    }
-
-    /// <summary>
-    /// Llama al método ColorChanging de LevelUpMessage (solo hace que se active dicho componente)
-    /// </summary>
-    public void ActivateLevelUpText()
-    {
-        if (LevelUpMessage != null)
-        {
-            LevelUpMessage.ColorChanging();
-        }
-    }
-
-    /// <summary>
-    /// Actualiza el fill ammount de la imagen de la sombra de la habilidad.
-    /// Se irá llamando durante el cooldown de la habilidad para indicar cuánto tiempo queda.
-    /// </summary>
-    /// <param name="fillAmmount"></param>
-    public void UpdateTimeHabilityShadow(float fillAmmount)
-    {
-        if (HabilityShadow != null) HabilityShadow.UpdateImageFillAmmount(fillAmmount);
-    }
-
-    /// <summary>
-    /// Empieza el FadeIn de la pantalla azul.
-    /// Se llamará cuando empiece la habilidad del jugador, desde su correspondiente script.
-    /// </summary>
-    public void StartFadeInBlueScreen()
-    {
-        if (FadeInBlueScreen != null) FadeInBlueScreen.enabled = true;
-    }
-
-    /// <summary>
-    /// Empieza el FadeOut de la pantalla azul.
-    /// Se llamará cuando acabe la habilidad del jugador, desde su correspondiente script.
-    /// </summary>
-    public void StartFadeOutBlueScreen()
-    {
-        if (FadeOutBlueScreen != null) FadeOutBlueScreen.enabled = true;
-    }
-
-    /// <summary>
-    /// Método público que llama al ImageFill que controla la representación del cooldown del ataque melee, para que se actualice al valor que le corresponda.
-    /// </summary>
-    /// <param name="fillAmount"></param>
-    public void UpdateMeleeCooldownShadow(float fillAmount)
-    {
-        if (MeleeCooldown != null) MeleeCooldown.UpdateImageFillAmmount(fillAmount);
-    }
-    #endregion
-
     #region Metodos transferencia de informacion
 
     /// <summary>
     /// Transfiere datos importantes de un GameManager que ha de destruirse al activo.
     /// Reconfigura el HUD para incluir el de la escena actual.
     /// </summary>
-    public void TransferManagerSetup(TextMeshProUGUI ActLevelMessage, ChangeColorAndHide LevelUpMessage, FadeColor FadeInBlackScreen, FadeColor FadeOutBlackScreen, FadeColor FadeInBlueScreen, FadeColor FadeOutBlueScreen,
-        ImageFill HabilityLiquid, ImageFill HabilityShadow, GameObject Barrel , HeartUI[] Lifes, GameObject[] Bullets, TextMeshProUGUI ScoreText, TextMeshProUGUI StreakMultiplier, StreakColor[] StreakColors,
-        ImageFill StreakBar, ImageFill LevelBar, AudioClip VictoryMusic,
-        int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel, ImageFill MeleeCooldown, TextMeshProUGUI highScoreTextUI, TextMeshProUGUI textoCheatHUDParametro,
-        GameObject[] streakText, TextMeshProUGUI TextoMaxLVLCheatHUD)
+    public void TransferManagerSetup(AudioClip VictoryMusic,
+        int NextLevel, float TiempoEsperaRespawn, float TiempoEsperaSiguienteNivel)
     {
-        this.ActLevelMessage = ActLevelMessage;
-        this.LevelUpMessage = LevelUpMessage;
-        this.FadeInBlackScreen = FadeInBlackScreen;
-        this.FadeOutBlackScreen = FadeOutBlackScreen;
-        this.FadeInBlueScreen = FadeInBlueScreen;
-        this.FadeOutBlueScreen = FadeOutBlueScreen;
-        this.HabilityLiquid = HabilityLiquid;
-        this.HabilityShadow = HabilityShadow;
-        this.Barrel = Barrel;
-        this.Lifes = Lifes;
-        this.Bullets = Bullets;
-        this.ScoreText = ScoreText;
-        this.StreakMultiplier = StreakMultiplier;
-        this.StreakColors = StreakColors;
-        this.StreakBar = StreakBar;
-        this.LevelBar = LevelBar;
         this.VictoryMusic = VictoryMusic;
         this.NextLevel = NextLevel;
         this.TiempoEsperaRespawn = TiempoEsperaRespawn;
         this.TiempoEsperaSiguienteNivel = TiempoEsperaSiguienteNivel;
-        this.MeleeCooldown = MeleeCooldown;
-        this.HighScoreTextUI = highScoreTextUI;
-        this.StreakText = streakText;
-        this.TextoInmortalCheatHUD = textoCheatHUDParametro;
-        this.TextoMaxLVLCheatHUD = TextoMaxLVLCheatHUD;
     }
 
     /// <summary>
@@ -992,9 +476,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void NewSceneUpdate()
     {
-        // Actualizar HUD del jugador
-        UpdateHealthHUD(_vidaJugador);
-        UpdateScoreHUD(0);
+        if (HUDManager.HasInstance())
+        {
+            // Actualizar HUD del jugador
+            HUDManager.Instance.UpdateHealthHUD(_vidaJugador);
+            HUDManager.Instance.UpdateScoreHUD(_totalPoints);
+
+            // Realizar el FadeOut de la pantalla negra al inicio de la escena solo si estaba activo (valor 1).
+            HUDManager.Instance.StartFadeOutBlackScreen();
+        }
 
         // Reiniciar flujo del tiempo (es posible salir de una escena con la habilidad activada, si no se reinicia,
         // se podría mantener la habilidad siempre activa.
@@ -1004,9 +494,7 @@ public class GameManager : MonoBehaviour
         if (AudioManager.HasInstance())
             AudioManager.Instance.SetSlowMotionAudio(false);
 
-        // Realizar el FadeOut de la pantalla negra al inicio de la escena solo si estaba activo (valor 1).
         this.enabled = false;
-        if (FadeOutBlackScreen != null) FadeOutBlackScreen.enabled = true;
 
         if (InputManager.HasInstance()) InputManager.Instance.ActivarInput();
 
@@ -1040,10 +528,8 @@ public class GameManager : MonoBehaviour
     public void ResetStats()
     {
         _vidaJugador = VIDABASEJUGADOR;
-        _municionJugador = MUNICIONBASEJUGADOR;
         _totalDeaths = 0;
         _totalPoints = 0;
-        _currentStreakColor = 0;
     }
 
     /// <summary>
@@ -1085,6 +571,28 @@ public class GameManager : MonoBehaviour
         return _vidaJugador;
     }
 
+    /// <summary>
+    /// Método para actualizar el puntaje del jugador.
+    /// </summary>
+    /// <param name="cambioDePuntos"></param>
+    public void UpdateScore(int cambioDePuntos)
+    {
+        _totalPoints += cambioDePuntos;
+        if (HUDManager.HasInstance()) HUDManager.Instance.UpdateScoreHUD(_totalPoints);
+    }
+
+    public int GetPlayerHealth()
+    {
+        return _vidaJugador;
+    }
+
+    public void UpdatePlayerHealth(int newPlayerHealth)
+    {
+        // IMPORTANTE: Primero la llamada y luego el cambio de vida. Así HUDManager puede calcular la diferencia.
+        if (HUDManager.HasInstance()) HUDManager.Instance.UpdateHealthHUD(newPlayerHealth);
+        _vidaJugador = newPlayerHealth;
+    }
+
     #endregion
 
     #region Funcionalidad SlowShot y Pausa
@@ -1095,9 +603,7 @@ public class GameManager : MonoBehaviour
     {
         _playerSlowShotOn = true;
         _slowMultiplier = SLOWSHOT_TIMEMULTIPLIER;
-        StartFadeInBlueScreen();
-
-        if (TimeAbilityAnimator != null) TimeAbilityAnimator.SetBool("AbilityActive", true);
+        if (HUDManager.HasInstance()) HUDManager.Instance.StartSlowshot();
 
         if (AudioManager.HasInstance())
             AudioManager.Instance.SetSlowMotionAudio(true);
@@ -1110,8 +616,7 @@ public class GameManager : MonoBehaviour
     {
         _playerSlowShotOn = false;
         ResumeGame();
-        StartFadeOutBlueScreen();
-        if (TimeAbilityAnimator != null) TimeAbilityAnimator.SetBool("AbilityActive", false);
+        if (HUDManager.HasInstance()) HUDManager.Instance.EndSlowShot();
 
         if (AudioManager.HasInstance())
             AudioManager.Instance.SetSlowMotionAudio(false);
@@ -1226,16 +731,14 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Actualiza en pantalla si el jugador tiene o no los cheats
+    /// Método para saber si los cheats de inmortalidad del jugador estan activos
     /// </summary>
-    public void UpdateInmortalCheatHUD()
+    /// <returns></returns>
+    public bool AreInmortalCheatsOn()
     {
-        if (TextoInmortalCheatHUD != null)
-        {
-            if (_cheatInmortalJugador) TextoInmortalCheatHUD.text = "God Mode: ON";
-            else TextoInmortalCheatHUD.text = "God Mode: OFF";
-        }
+        return _cheatInmortalJugador;
     }
+
 
     /// <summary>
     /// Un método para indicar que se activan y desactican los trucos
@@ -1255,16 +758,14 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Actualiza en pantalla si el jugador tiene o no los cheats
+    /// Método para saber si los cheats de max lvl del jugador estan activos
     /// </summary>
-    public void UpdateMaxLVLCheatHUD()
+    /// <returns></returns>
+    public bool AreMaxLvlCheatsOn()
     {
-        if (TextoMaxLVLCheatHUD != null)
-        {
-            if (_cheatMaxLVLJugador) TextoMaxLVLCheatHUD.text = "Max LVL: ON";
-            else TextoMaxLVLCheatHUD.text = "Max LVL: OFF";
-        }
+        return _cheatMaxLVLJugador;
     }
+
 
     #endregion
 
@@ -1277,7 +778,7 @@ public class GameManager : MonoBehaviour
         {
             string data = score.ToString();
             string path = Application.persistentDataPath + "/Score.txt";
-
+            
             if (File.Exists(path)) //Si existe el path se leera el número almacenado
             {
                 string contenido = File.ReadAllText(path);
@@ -1320,53 +821,6 @@ public class GameManager : MonoBehaviour
     private void ReinicioEscena()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    
-    /// <summary>
-    /// Método que permite cargar el puntaje desde una ruta de archivo guardada
-    /// </summary>
-    private void LoadScore()
-    {
-        if (HighScoreTextUI == null) // Si no existe el archivo el puntaje es 0 y se acaba
-        {
-            HighScoreTextUI.text = "0";
-            return;
-        }
-
-        string path = Application.persistentDataPath + "/Score.txt";
-
-        if (File.Exists(path)) // Si existe el archivo se lee y se actualiza el highscore
-        {
-            string file = File.ReadAllText(path);
-
-            HighScoreTextUI.text = file;
-            _highScore = int.Parse(file);
-
-        }
-        //Ponerla en la UI
-
-    }
-
-    /// <summary>
-    /// Actualiza el color y la intensidad de vibración del texto del multiplicador de racha.
-    /// (!) No verifica si _currentStreakColor es correcta, ha de serlo (se controla en el método
-    /// de UpdateStreakMultiplierHUD() ).
-    /// </summary>
-    private void UpdateStreakMultiplierEffects()
-    {
-        StreakMultiplier.color = StreakColors[_currentStreakColor].Color;
-
-        // intento de inicializar la vibración (puede ya estar almacenado)
-        if (_streakVibration == null)
-        {
-            _streakVibration = StreakMultiplier.gameObject.GetComponent<UIVibration>();
-        }
-
-        // si se consigue o si ya estaba guardada
-        if (_streakVibration != null)
-        {
-            _streakVibration.ChangeIntensity(StreakColors[_currentStreakColor].NewVibration);
-        }
     }
     #endregion
 } // class GameManager 

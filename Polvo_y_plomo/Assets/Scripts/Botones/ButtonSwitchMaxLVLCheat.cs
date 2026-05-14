@@ -60,7 +60,7 @@ public class ButtonSwitchMaxLVLCheat : MonoBehaviour
         if (GameManager.HasInstance())
         {
             GameManager.Instance.MaxLvlCheats();
-            GameManager.Instance.UpdateMaxLVLCheatHUD();
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateMaxLVLCheatHUD(GameManager.Instance.AreMaxLvlCheatsOn());
         }
 
     }
@@ -70,7 +70,7 @@ public class ButtonSwitchMaxLVLCheat : MonoBehaviour
     /// </summary>
     public void UpdateHUDCheats()
     {
-        if (GameManager.HasInstance()) GameManager.Instance.UpdateMaxLVLCheatHUD();
+        if (GameManager.HasInstance() && HUDManager.HasInstance()) HUDManager.Instance.UpdateMaxLVLCheatHUD(GameManager.Instance.AreMaxLvlCheatsOn());
     }
 
     #endregion

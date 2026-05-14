@@ -125,8 +125,11 @@ public class playerSlowShot : MonoBehaviour
         else
         {
             // Se inicializa activo los cooldowns.
-            GameManager.Instance.UpdateTimeHabilityLiquid(1);
-            GameManager.Instance.UpdateTimeHabilityShadow(0);
+            if (HUDManager.HasInstance())
+            {
+                HUDManager.Instance.UpdateTimeHabilityLiquid(1);
+                HUDManager.Instance.UpdateTimeHabilityShadow(0);
+            }
         }
 
         foreach (Level level in  AbilityLevels)
@@ -148,7 +151,7 @@ public class playerSlowShot : MonoBehaviour
             if (AbilityLevels[_abilityCurrentLevel + 1].AbilityUpgradeKillThreshold <= kills)
             {
                 _abilityCurrentLevel++;
-                GameManager.Instance.UpdateActLevelText(_abilityCurrentLevel + 1);
+                if (HUDManager.HasInstance()) HUDManager.Instance.UpdateActLevelText(_abilityCurrentLevel + 1);
             }
             else
             {
@@ -158,7 +161,7 @@ public class playerSlowShot : MonoBehaviour
         // Render inicial de la barra de nivel
         if (_abilityCurrentLevel < AbilityLevels.Length - 1) _levelBar = (float)(kills - AbilityLevels[_abilityCurrentLevel].AbilityUpgradeKillThreshold) / (float)(AbilityLevels[_abilityCurrentLevel + 1].AbilityUpgradeKillThreshold - AbilityLevels[_abilityCurrentLevel].AbilityUpgradeKillThreshold);
         else _levelBar = 1f;
-        GameManager.Instance.UpdateLevelBar(_levelBar);
+        if (HUDManager.HasInstance()) HUDManager.Instance.UpdateLevelBar(_levelBar);
     }
 
     /// <summary>
@@ -182,8 +185,11 @@ public class playerSlowShot : MonoBehaviour
                 GameManager.Instance.SlowShotOff();
 
                 // Reset de las burbujas
-                GameManager.Instance.UpdateTimeHabilityLiquid(1);
-                GameManager.Instance.UpdateTimeHabilityShadow(1);
+                if (HUDManager.HasInstance())
+                {
+                    HUDManager.Instance.UpdateTimeHabilityLiquid(1);
+                    HUDManager.Instance.UpdateTimeHabilityShadow(1);
+                }
             }
             else if (InputManager.Instance.HabilityWasPressedThisFrame()) // Desactivar la habilidad
             {
@@ -193,11 +199,16 @@ public class playerSlowShot : MonoBehaviour
                 _abilityOn = false;
                 GameManager.Instance.SlowShotOff();
 
-                // reset fillAmmount del líquido
-                GameManager.Instance.UpdateTimeHabilityLiquid(1);
+                if (HUDManager.HasInstance())
+                {
+                    // reset fillAmmount del líquido
+                    HUDManager.Instance.UpdateTimeHabilityLiquid(1);
 
-                // Pintado de sombra
-                GameManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
+                    // Pintado de sombra
+                    HUDManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
+                }
+
+                
             }
             else
             {
@@ -205,7 +216,7 @@ public class playerSlowShot : MonoBehaviour
                 _abilityProportionLasting = _tRemainingOfAbility / AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration;
 
                 // pintar el fillAmmount del liquido de la habilidad
-                GameManager.Instance.UpdateTimeHabilityLiquid(_abilityProportionLasting);
+                if (HUDManager.HasInstance()) HUDManager.Instance.UpdateTimeHabilityLiquid(_abilityProportionLasting);
             }
         }
         else
@@ -223,7 +234,7 @@ public class playerSlowShot : MonoBehaviour
             }
 
             // pintar el fillAmmount de la sombra de la habilidad
-            GameManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
+            if (HUDManager.HasInstance()) HUDManager.Instance.UpdateTimeHabilityShadow(_tToReactivateAbility / PlayerAbilityCooldown);
         }
     }
     #endregion
@@ -252,16 +263,19 @@ public class playerSlowShot : MonoBehaviour
                 // Para que la habilidad se amplie si se sube de nivel durante la duración de esta:
                 if (_abilityOn) _tRemainingOfAbility += AbilityLevels[_abilityCurrentLevel].PlayerAbilityDuration - AbilityLevels[_abilityCurrentLevel - 1].PlayerAbilityDuration;
 
-                GameManager.Instance.ActivateLevelUpText();
-                if (_abilityCurrentLevel == AbilityLevels.Length - 1) GameManager.Instance.UpdateLevelBar(1);
-                else GameManager.Instance.UpdateLevelBar(0);
-                GameManager.Instance.UpdateActLevelText(_abilityCurrentLevel + 1);
+                if (HUDManager.HasInstance())
+                {
+                    HUDManager.Instance.ActivateLevelUpText();
+                    if (_abilityCurrentLevel == AbilityLevels.Length - 1) HUDManager.Instance.UpdateLevelBar(1);
+                    else HUDManager.Instance.UpdateLevelBar(0);
+                    HUDManager.Instance.UpdateActLevelText(_abilityCurrentLevel + 1);
+                }
                 if (LevelUP) AudioManager.Instance.Play(LevelUP, transform.position);
             }
             else
             {
                 _levelBar = (float)(kills - AbilityLevels[_abilityCurrentLevel].AbilityUpgradeKillThreshold) / (float)(AbilityLevels[_abilityCurrentLevel + 1].AbilityUpgradeKillThreshold - AbilityLevels[_abilityCurrentLevel].AbilityUpgradeKillThreshold);
-                GameManager.Instance.UpdateLevelBar(_levelBar);
+                if (HUDManager.HasInstance()) HUDManager.Instance.UpdateLevelBar(_levelBar);
             }
         }
     }
