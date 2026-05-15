@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Script sencillo para explotar un CanExplode al destruirse el objeto
+// Script sencillo para explotar un CanExplode al morir el objeto
 // Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
@@ -11,14 +11,14 @@ using UnityEngine;
 
 /// <summary>
 /// Hace explotar el CanExplode, que ha de tener el gameobject en el que se pone este componente, al
-/// ser destruido el objeto.
+/// morir el objeto.
 /// 
 /// +++
 /// Añadida funcionalidad para que se incluya un método que evite que explote. Esto es ya que
 /// otros componentes pueden querer hacer que CanExplode se active pero que el ExplodeOnDestroy no lo haga,
 /// ya que generaria 2 explosiones.
 /// </summary>
-public class ExplodeOnDestroy : MonoBehaviour
+public class ExplodeOnDeath : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -46,7 +46,13 @@ public class ExplodeOnDestroy : MonoBehaviour
     private CanExplode _canExplode;
 
     /// <summary>
-    /// Variable booleana que maneja si el objeto debe explotar en el OnDestroy.
+    /// Almacena el componente tipo Health que ha de tener el gameobject.
+    /// Inicializado en el awake().
+    /// </summary>
+    private Health _health;
+
+    /// <summary>
+    /// Variable booleana que maneja si el objeto debe explotar en el OnDeath.
     /// </summary>
     private bool _explode = true;
 
@@ -62,27 +68,35 @@ public class ExplodeOnDestroy : MonoBehaviour
     /// <summary>
     /// Se llama al cargarse en la escena.
     /// Hace comprobaciones necesarias para el componente.
+    /// Se añade el método DoExplosionOnDeath al delegado OnDeath del componente Heatlh
     /// </summary>
     private void Awake()
     {
         _canExplode = GetComponent<CanExplode>();
         if (_canExplode == null)
         {
-            Debug.Log("ExplodeOnDestroy puesto en un componente sin CanExplode. No funcionará");
+            Debug.Log("ExplodeOnDeath puesto en un gameobject sin CanExplode. No funcionará");
             Destroy(this);
 
+        }
+        else
+        {
+            _health = GetComponent<Health>();
+            if (_health == null)
+            {
+                Debug.Log("ExplodeOnDeath puesto en un gameobject sin compotente tipo Health. No funcionará");
+                Destroy(this);
+            }
+            else _health.OnDeath += DoExplosionOnDeath;
         }
     }
 
     /// <summary>
-    /// Al destruirse el objeto (normalmente interpretado como morir) explota.
-    /// 
-    /// +++
-    /// Ahora solo explota si _explode es true.
+    /// Al destruirse el objeto elimina su método del OnDeath del health.
     /// </summary>
     private void OnDestroy()
     {
-        if (_explode && _canExplode != null ) _canExplode.Explode();
+        if (_health != null) _health.OnDeath -= DoExplosionOnDeath;
     }
     #endregion
 
@@ -119,6 +133,13 @@ public class ExplodeOnDestroy : MonoBehaviour
     // se nombren en formato PascalCase (palabras con primera letra
     // mayúscula, incluida la primera letra)
 
+    /// <summary>
+    /// Realiza la explosión si es posible
+    /// </summary>
+    private void DoExplosionOnDeath()
+    {
+        if (_explode) _canExplode.Explode();
+    }
     #endregion
 
 } // class ExplodeOnDestroy 

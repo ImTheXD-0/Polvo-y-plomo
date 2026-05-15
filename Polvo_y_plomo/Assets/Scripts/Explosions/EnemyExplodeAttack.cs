@@ -136,7 +136,7 @@ public class EnemyExplodeAttack : MonoBehaviour
 
                 if (_t >= FuzeTime) // explota
                 {
-                    ExplodeOnDestroy _explodeOnDestroy = GetComponent<ExplodeOnDestroy>();
+                    ExplodeOnDeath _explodeOnDestroy = GetComponent<ExplodeOnDeath>();
                     if (_explodeOnDestroy != null) _explodeOnDestroy.DisableExplosion();
                     _canExplode.Explode();
                 }

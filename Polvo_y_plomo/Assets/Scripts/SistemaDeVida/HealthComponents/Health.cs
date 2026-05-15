@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
 
@@ -133,6 +134,8 @@ public class Health : MonoBehaviour
         return VidaMax;
     }
 
+    public event Action OnDeath;
+
     #endregion
 
     // ---- MÉTODOS PRIVADOS ----
@@ -155,7 +158,20 @@ public class Health : MonoBehaviour
             genCad.PonCadaver();
         }
         else Debug.Log("Este Objeto no tiene un componente GeneraCadaver");
+
+        // llamadas del OnDeath
+        InvokeOnDeath();
+
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Método necesario para llamar a los métodos del OnDeath.
+    /// Al ser un evento público no se puede usar en otras clases, es necesario invocarlo así.
+    /// </summary>
+    protected void InvokeOnDeath()
+    {
+        if (OnDeath != null) OnDeath.Invoke();
     }
     #endregion
 }

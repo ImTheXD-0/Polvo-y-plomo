@@ -107,9 +107,10 @@ public class PlayerHealth : Health
         if (GameManager.HasInstance())
         {
             GameManager.Instance.UpdatePlayerHealth(_vida);
-            if (AudioManager.HasInstance() && SonidoDanyo && cambio < 0) AudioManager.Instance.Play(SonidoDanyo, transform.position);
-            else if (AudioManager.HasInstance() && SonidoCura && cambio > 0) AudioManager.Instance.Play(SonidoCura, transform.position);
         }
+
+        if (AudioManager.HasInstance() && SonidoDanyo && cambio < 0) AudioManager.Instance.Play(SonidoDanyo, transform.position);
+        else if (AudioManager.HasInstance() && SonidoCura && cambio > 0) AudioManager.Instance.Play(SonidoCura, transform.position);
 
         // Muerte del objeto
         if (_vida <= 0)
@@ -144,6 +145,9 @@ public class PlayerHealth : Health
     protected override void MetodoMuerte()
     {
         if (GameManager.HasInstance()) GameManager.Instance.Respawn();
+
+        InvokeOnDeath();
+
         Destroy(this);
     }
     #endregion
