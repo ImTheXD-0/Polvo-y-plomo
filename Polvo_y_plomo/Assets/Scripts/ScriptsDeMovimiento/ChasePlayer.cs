@@ -121,11 +121,6 @@ public class ChasePlayer : MonoBehaviour
     private Transform _playerTransform;
 
     /// <summary>
-    /// Bool que dice si hay o no GameManager en la escena
-    /// </summary>
-    private bool _gameManager = false;
-
-    /// <summary>
     /// Almacena la dirección y velocidad del stun en el momento en el que se inicia.
     /// </summary>
     private Vector3 _stunVelocity;
@@ -196,8 +191,7 @@ public class ChasePlayer : MonoBehaviour
             }
         }
 
-        _gameManager = GameManager.HasInstance();
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
         if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
     }
@@ -320,7 +314,7 @@ public class ChasePlayer : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(GetComponent<CanBeStunned>());
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
         if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
 

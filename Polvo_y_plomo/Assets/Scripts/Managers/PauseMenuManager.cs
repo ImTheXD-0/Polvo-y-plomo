@@ -113,6 +113,11 @@ public class PauseMenuManager : MonoBehaviour
     /// Booleano que registra si se ha abierto el panel de Warning.
     /// </summary>
     private bool _warningOpen = false;
+
+    /// <summary>
+    ///  Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
+    /// </summary>
+    private float _slowMultiplier = 1f;
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -162,6 +167,8 @@ public class PauseMenuManager : MonoBehaviour
     /// <summary>
     /// Se llama al cargarse en la escena si esta activo, o al activarse por primera vez.
     /// Hace comprobaciones necesarias para el componente.
+    /// 
+    /// Añade el método de actualizar _slowMultiplier al GameManager.
     /// </summary>
     private void Start()
     {
@@ -176,6 +183,7 @@ public class PauseMenuManager : MonoBehaviour
             Debug.Log("PauseMenuManager puesto en una escena sin GameManager. No funcionará.");
             Destroy(this);
         }
+        else GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -183,7 +191,7 @@ public class PauseMenuManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (InputManager.Instance.ExitWasPressedThisFrame())
+        if (InputManager.Instance.ExitWasPressedThisFrame()) 
         {
             if (_settingsOpen) // settings abierto (y por construccion juego pausado) -> cerrar settings
             {
@@ -204,16 +212,21 @@ public class PauseMenuManager : MonoBehaviour
             {
                 if (!_gamePaused) // menu no abierto -> abrir pausa
                 {
-                    if (BlockCursor != null)
+                    // ++ Añadida la condición _slowMultiplier != 0. Esto es porque no queremos que se abra el menú de pausa
+                    // si algun otro elemento del juego ya habia pausado el juego. Por ejemplo por el final de un nivel.
+                    if (_slowMultiplier != 0)
                     {
-                        BlockCursor.enabled = false; // quizas ya se ha liberado el cursor. Lo apago ya que es posible presionar Exit en el menu
-                        BlockCursor.UnlockCursor(); // es posible por el orden de ejecución de las cosas que no se haya liberado, lo fuerzo.
-                    }
+                        if (BlockCursor != null)
+                        {
+                            BlockCursor.enabled = false; // quizas ya se ha liberado el cursor. Lo apago ya que es posible presionar Exit en el menu
+                            BlockCursor.UnlockCursor(); // es posible por el orden de ejecución de las cosas que no se haya liberado, lo fuerzo.
+                        }
 
-                    _gamePaused = true;
-                    InputManager.Instance.DesactivarInput();
-                    GameManager.Instance.PauseGame(); // pausar el juego
-                    OpenPauseMenuFromInput();
+                        _gamePaused = true;
+                        InputManager.Instance.DesactivarInput();
+                        GameManager.Instance.PauseGame(); // pausar el juego
+                        OpenPauseMenuFromInput();
+                    }
                 }
                 else // menu abierto -> cerrar la pausa
                 {
@@ -221,6 +234,15 @@ public class PauseMenuManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina su método del delegado del GameManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
 
@@ -356,6 +378,15 @@ public class PauseMenuManager : MonoBehaviour
         _settingsOpen = false;
 
         EventSystem.current.SetSelectedGameObject(FirstButtonPausePannel);
+    }
+
+    /// <summary>
+    /// Método que se delegará al GameManager para actualizar el _slowMultiplier.
+    /// </summary>
+    /// <param name="newScale"></param>
+    private void OnTimeScaleChanged(float newScale)
+    {
+        _slowMultiplier = newScale;
     }
     #endregion
 

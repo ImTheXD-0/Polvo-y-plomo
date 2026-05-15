@@ -40,10 +40,6 @@ public class BulletMove : MonoBehaviour
     // primera palabra en minúsculas y el resto con la 
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
-    /// <summary>
-    /// Bool que dice si hay o no GameManager en la escena
-    /// </summary>
-    private bool _gameManager = false;
 
     /// <summary>
     /// Almacena el modificador por dificultad de la velocidad de las balas del DifficultyManager.
@@ -73,8 +69,7 @@ public class BulletMove : MonoBehaviour
     /// </summary>
     void Start()
     {
-        _gameManager = GameManager.HasInstance();
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
         if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
     }

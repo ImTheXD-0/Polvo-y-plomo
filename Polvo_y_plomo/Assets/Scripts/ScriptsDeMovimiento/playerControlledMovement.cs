@@ -59,10 +59,6 @@ public class playerControlledMovement : MonoBehaviour
     /// Guarda el Rigidbody2D del objeto. Inicializado en el awake.
     /// </summary>
     private Rigidbody2D _rb;
-    /// <summary>
-    /// Bool que dice si hay o no GameManager en la escena
-    /// </summary>
-    private bool _gameManager = false;
 
     /// <summary>
     /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
@@ -97,8 +93,7 @@ public class playerControlledMovement : MonoBehaviour
             Destroy(this);
         }
 
-        _gameManager = GameManager.HasInstance();
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>

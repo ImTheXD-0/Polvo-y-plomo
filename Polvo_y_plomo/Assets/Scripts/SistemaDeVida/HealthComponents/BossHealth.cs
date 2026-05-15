@@ -175,21 +175,15 @@ public class BossHealth : Health
             VidaMax = _originalMaxHealth + DifficultyManager.Instance.GetSuzieHealthAdded();
             _vida += DifficultyManager.Instance.GetSuzieHealthAdded();
 
+            // en el cambio la vida puede disminuir y volverse menor que 0. In-game queda muy mal matar al jefe cambiando la dificultad.
+            // por ello simplemente la vida se pondrá a 1.
+            if (_vida <= 0) _vida = 1;
+
             // actualizar el hud de la vida
             SuzieHealthBar healthBar = GetComponent<SuzieHealthBar>();
             if (healthBar != null)
             {
                 healthBar.UpdateHealthBar(VidaMax, _vida);
-            }
-
-            // en el cambio la vida puede disminuir y volverse menor que 0, será necesario actualizar 
-            if (_vida <= 0)
-            {
-                MetodoMuerte();
-                if (GameManager.HasInstance())
-                {
-                    GameManager.Instance.GameEnds();
-                }
             }
         }
     }

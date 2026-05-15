@@ -92,11 +92,6 @@ public class playerRoll : MonoBehaviour
     private playerControlledMovement _desplazamientoJugador;
 
     /// <summary>
-    /// Bool que dice si hay o no GameManager en la escena
-    /// </summary>
-    private bool _gameManager = false;
-
-    /// <summary>
     /// Almacena la dirección en la que se está dando el roll.
     /// </summary>
     private Vector2 _dirRoll;
@@ -145,8 +140,8 @@ public class playerRoll : MonoBehaviour
             Debug.Log("Se ha puesto \"PlayerRoll\" en una escena sin InputManager. No funcionará");
             Destroy(this);
         }
-        _gameManager = GameManager.HasInstance();
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>

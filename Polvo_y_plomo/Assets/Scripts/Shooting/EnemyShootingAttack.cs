@@ -81,12 +81,6 @@ public class EnemyShootingAttack : MonoBehaviour
     private float _tParaDisparar = 0;
 
     /// <summary>
-    /// Bool que dice si hay o no GameManager en la escena.
-    /// Inicicializado en el Start().
-    /// </summary>
-    private bool _gameManager = false;
-
-    /// <summary>
     /// Variable para detectar la transición Chasing -> Attacking al leer esta información desde el ChasePlayer
     /// Inicializada como True para incluir el caso "Acabo de spawnear y espero a disparar".
     /// </summary>
@@ -156,8 +150,7 @@ public class EnemyShootingAttack : MonoBehaviour
             }
         }
 
-        _gameManager = GameManager.HasInstance();
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
         if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
     }

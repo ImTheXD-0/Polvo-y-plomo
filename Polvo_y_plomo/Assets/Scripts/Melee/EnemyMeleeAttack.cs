@@ -67,11 +67,6 @@ public class EnemyMeleeAttack : MonoBehaviour
     private float _tRemainingToMelee = 0;
 
     /// <summary>
-    /// Bool que dice si hay o no GameManager en la escena
-    /// </summary>
-    private bool _gameManager = false;
-
-    /// <summary>
     /// Almacena el multiplicador de tiempo del GameManager. Se actualiza siempre que cambia con un método delegado.
     /// </summary>
     private float _slowMultiplier = 1f;
@@ -124,8 +119,7 @@ public class EnemyMeleeAttack : MonoBehaviour
             }
         }
 
-        _gameManager = GameManager.HasInstance();
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
     }
 
     /// <summary>
@@ -151,7 +145,7 @@ public class EnemyMeleeAttack : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(GetComponent<CanMelee>());
-        if (_gameManager) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+        if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
         // se podría destruir ChasePlayer... pero realmente puede funcinoar sin controlador
     }
     #endregion
