@@ -90,8 +90,14 @@ public class ShootEscopeta : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Se llama despues del awake si el componente esta activo.
+    /// Inicializa el componente.
+    /// Añade el método al delegado del DifficultyManager.
+    /// </summary>
     private void Start()
     {
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
 
         // Validación matemática para evitar superposiciones
@@ -104,7 +110,15 @@ public class ShootEscopeta : MonoBehaviour
         {
             Debug.Log("Se ha puesto el componente \"ShootEscopeta\" sin un animator. No se animará.");
         }
+    }
 
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina el método del delegado del DifficultyManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
     #endregion
 

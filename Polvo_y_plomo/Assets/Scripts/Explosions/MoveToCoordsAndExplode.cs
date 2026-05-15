@@ -165,6 +165,7 @@ public class MoveToCoordsAndExplode : MonoBehaviour
     /// </summary>
     private void UpdateDifficultyStats()
     {
+        // NOTA: No añadir est método al delegado del DifficultyManager.
         if (DifficultyManager.HasInstance())
         {
             _difficultySpeedMultiplier = DifficultyManager.Instance.GetDynaTravelSpeedMultiplier();

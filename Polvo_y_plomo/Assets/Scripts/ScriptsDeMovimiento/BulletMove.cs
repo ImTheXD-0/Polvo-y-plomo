@@ -68,11 +68,14 @@ public class BulletMove : MonoBehaviour
     /// Se ejecuta en el primer frame en el que el script está activo.
     /// Inicializa la referencia al GameManager para la gestión del tiempo (SlowMotion)
     /// y ajusta la velocidad de la bala según el multiplicador de dificultad.
+    /// 
+    /// Añade métodosa a los delegados a GameManager y DifficultyManager
     /// </summary>
     void Start()
     {
         _gameManager = GameManager.HasInstance();
         if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
     }
     /// <summary>
@@ -86,11 +89,12 @@ public class BulletMove : MonoBehaviour
 
     /// <summary>
     /// Se llama al destruirse el componente.
-    /// Elimina su método del delegado del GameManager.
+    /// Elimina su método del delegado del GameManager y del DifficultyManager
     /// </summary>
     private void OnDestroy()
     {
         if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
     #endregion
 

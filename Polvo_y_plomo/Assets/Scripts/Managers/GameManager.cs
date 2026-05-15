@@ -581,7 +581,7 @@ public class GameManager : MonoBehaviour
     #region Funcionalidad SlowShot y Pausa
     
     /// <summary>
-    /// Delegado de tipo evento (solo permite += y -=, por lo que hace que sea seguro)
+    /// Delegado "de acceso" de tipo evento (solo permite += y -=, por lo que hace que sea seguro)
     /// que llamará a todas las funciones añadidas al cambiar la escala de tiempo.
     /// 
     /// Servirá para que los distintos componentes que usan la escala de SlowShot para su
@@ -590,7 +590,25 @@ public class GameManager : MonoBehaviour
     /// 
     /// (!!!) Siempre que se añada un método a este delegado, asegurarse de que se elimina en el OnDestroy() o cuando sea apropiado.
     /// </summary>
-    public event Action<float> OnTimeScaleChanged;
+    public event Action<float> OnTimeScaleChanged
+    {
+        add
+        {
+            onTimeScaleChanged += value;
+            value.Invoke(_slowMultiplier);
+        }
+        remove
+        {
+            onTimeScaleChanged -= value;
+        }
+    }
+
+    /// <summary>
+    /// El delegado que se llama en realidad al cambiar el flujo de tiempo.
+    /// Necesario ya que si se añadiese al evento público se crearia recursión infinita en el Add (no puedo
+    /// añadirlo al OnTimeScaleChanged, es necesario hacerlo al onTimeScaleChanged).
+    /// </summary>
+    private Action<float> onTimeScaleChanged;
 
     /// <summary>
     /// Método público que modifica la velocidad de ralentización consecuencia de la activación de la habilidad del jugador
@@ -828,7 +846,7 @@ public class GameManager : MonoBehaviour
     private void ChangeTimeScale(float newScale)
     {
         _slowMultiplier = newScale;
-        if (OnTimeScaleChanged != null) OnTimeScaleChanged.Invoke(newScale);
+        if (onTimeScaleChanged != null) onTimeScaleChanged.Invoke(newScale);
     }
     #endregion
 } // class GameManager 

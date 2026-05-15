@@ -172,6 +172,8 @@ public class ChasePlayer : MonoBehaviour
     /// <summary>
     /// Se llama una vez si el componente esta activo o al activarse por primera vez.
     /// Hace comprobaciones necesarias para el componente, después del Awake().
+    /// 
+    /// Añade métodos necesarios a los delegados de GameManager y DifficultyManager.
     /// </summary>
     private void Start()
     {
@@ -196,6 +198,7 @@ public class ChasePlayer : MonoBehaviour
 
         _gameManager = GameManager.HasInstance();
         if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
     }
 
@@ -311,11 +314,14 @@ public class ChasePlayer : MonoBehaviour
     /// Se llama al destruirse el componente.
     /// Intentará destruir otros componentes que dependen completamente del ChasePlayer.
     /// Elimina su método del delegado del GameManager.
+    /// 
+    /// También elimina el método delegado en el DifficultyManager.
     /// </summary>
     private void OnDestroy()
     {
         Destroy(GetComponent<CanBeStunned>());
         if (_gameManager) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
 
     /// <summary>

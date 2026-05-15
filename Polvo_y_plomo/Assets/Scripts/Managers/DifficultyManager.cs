@@ -5,6 +5,7 @@
 // Proyectos 1 - Curso 2025-26
 //---------------------------------------------------------
 
+using System;
 using UnityEngine;
 // Añadir aquí el resto de directivas using
 
@@ -27,7 +28,7 @@ public class DifficultyManager : MonoBehaviour
     private int OnLoadInitialDifficultyIndex = 1;
 
     [System.Serializable]
-    public struct Difficulty
+    public struct DifficultyData
     {
         public string DifficultyName;
 
@@ -55,7 +56,7 @@ public class DifficultyManager : MonoBehaviour
         #endregion
 
         #region Constructora
-        public Difficulty(string name = "Unnamed")
+        public DifficultyData(string name = "Unnamed")
         {
             this.DifficultyName = name;
             this.DifficultyDescription = "Error";
@@ -82,7 +83,7 @@ public class DifficultyManager : MonoBehaviour
     /// se recomienda configurarlos con el orden: más fácil -> más dificil
     /// </summary>
     [SerializeField]
-    private Difficulty[] difficulties;
+    private DifficultyData[] difficulties;
 
     #endregion
 
@@ -127,8 +128,8 @@ public class DifficultyManager : MonoBehaviour
             if (difficulties.Length == 0)
             {
                 Debug.Log("No se han configurado dificultades en el DifficultyManager activo. Se usará una por defecto");
-                difficulties = new Difficulty[1];
-                difficulties[0] = new Difficulty();
+                difficulties = new DifficultyData[1];
+                difficulties[0] = new DifficultyData();
             }
 
             if (OnLoadInitialDifficultyIndex < 0 || OnLoadInitialDifficultyIndex >= difficulties.Length)
@@ -158,6 +159,13 @@ public class DifficultyManager : MonoBehaviour
     // mayúscula, incluida la primera letra)
     // Ejemplo: GetPlayerController
 
+    /// <summary>
+    /// Delegado de tipo action que admite funciones con solo entrada de void.
+    /// 
+    /// Las llamará siempre que que cambie la dificultad.
+    /// </summary>
+    public event Action OnDifficultyChanged;
+
     #region Variables de acceso
     public static DifficultyManager Instance
     {
@@ -177,6 +185,7 @@ public class DifficultyManager : MonoBehaviour
     public void IncreaseDifficulty()
     {
         _currentDifficulty = (_currentDifficulty + 1) % difficulties.Length;
+        if (OnDifficultyChanged != null) OnDifficultyChanged.Invoke();
     }
     /// <summary>
     /// Disminuye el indice de dificultad actual en 1.
@@ -185,6 +194,7 @@ public class DifficultyManager : MonoBehaviour
     public void DecreaseDifficulty()
     {
         _currentDifficulty = (_currentDifficulty + difficulties.Length - 1) % difficulties.Length;
+        if (OnDifficultyChanged != null) OnDifficultyChanged.Invoke();
     }
     #endregion
 

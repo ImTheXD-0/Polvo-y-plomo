@@ -136,6 +136,8 @@ public class EnemyShootingAttack : MonoBehaviour
     /// <summary>
     /// Se llama una vez si el componente esta activo al cargarse en escena, o según se active. Después del Awake().
     /// Hace comprobaciones necesarias para el componente y registra otras.
+    /// 
+    /// Añade métodos a los delegados del GameManager y DifficultyManager
     /// </summary>
     void Start()
     {
@@ -156,6 +158,7 @@ public class EnemyShootingAttack : MonoBehaviour
 
         _gameManager = GameManager.HasInstance();
         if (_gameManager) GameManager.Instance.OnTimeScaleChanged += OnTimeScaleChanged;
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
     }
 
@@ -190,12 +193,13 @@ public class EnemyShootingAttack : MonoBehaviour
     /// <summary>
     /// Si el componente se destruye por no poder funcionar, se asegura de que los otros muy relacionados no
     /// puedan dar problemas, destruyendolos también.
-    /// Elimina su método del delegado del GameManager.
+    /// Elimina su método del delegado del GameManager y también el del DifficultyManager.
     /// </summary>
     private void OnDestroy()
     {
         Destroy(GetComponent<Shoot>());
         if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
     #endregion
 

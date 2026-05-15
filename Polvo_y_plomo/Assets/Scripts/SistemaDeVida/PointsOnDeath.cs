@@ -58,11 +58,22 @@ public class PointsOnDeath : MonoBehaviour
 
     /// <summary>
     /// Llamado al cargarse en escena el componente, si esta activo, o al activarse por primera vez
-    /// En este script solo inicializa el multiplicador de puntos
+    /// En este script solo inicializa el multiplicador de puntos.
+    /// Añade el método al delegado del DifficultyManager.
     /// </summary>
     private void Start()
     {
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina el método delegado en el DifficultyManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
     #endregion
 

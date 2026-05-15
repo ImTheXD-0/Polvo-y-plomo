@@ -84,10 +84,22 @@ public class BossHealth : Health
     /// <summary>
     /// Se llama al cargarse en escena si el objeto esta activo, o al activarse por primera vez.
     /// Actualiza las Stats que dependen de la dificultad para el jefe.
+    /// 
+    /// Añade el método al delegado del DifficultyManager.
     /// </summary>
     private void Start()
     {
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged += UpdateDifficultyStats;
         UpdateDifficultyStats();
+    }
+
+    /// <summary>
+    /// Se llama al destruirse el componente.
+    /// Elimina el método del delegado del DifficultyManager.
+    /// </summary>
+    private void OnDestroy()
+    {
+        if (DifficultyManager.HasInstance()) DifficultyManager.Instance.OnDifficultyChanged -= UpdateDifficultyStats;
     }
 
     #endregion
