@@ -156,7 +156,7 @@ public class playerMeleeAttack : MonoBehaviour
         Vector2 posCursor = Cursor.transform.position;
         Vector2 dirCursorJugador = (posCursor - (Vector2)transform.position).normalized;
 
-        if (!shadow) _canMelee.HitboxMelee(dirCursorJugador);
+        if (!shadow) _canMelee.Use(dirCursorJugador);
         else _canMelee.ShadowMelee(dirCursorJugador);
     }
 

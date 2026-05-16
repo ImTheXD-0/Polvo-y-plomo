@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf79ecfd9d29a245bdc220f6ae40236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeleePrefab: {fileID: 5015214724800111349, guid: 8e3abd07c76a80745873b79eeb433e2b, type: 3}
+  AttackPrefab: {fileID: 5015214724800111349, guid: 8e3abd07c76a80745873b79eeb433e2b, type: 3}
   DistanciaSpawnAtaque: 1
   MeleeShadowPrefab: {fileID: 8050898191946779312, guid: 7af6244c8a64f6640abdc73abf374c71, type: 3}
   Attack: {fileID: 8300000, guid: dd204d5d02c26384c84a4a5ef767cef5, type: 3}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34a6c8481ce5c34d835c9f5a5a9938e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 481267826506717086, guid: 4dbd16fc43d46874e86933e6adaa0ebb, type: 3}
+  AttackPrefab: {fileID: 7766981667260540878, guid: 4dbd16fc43d46874e86933e6adaa0ebb, type: 3}
   ShootClip: {fileID: 8300000, guid: 2975f864f1102644fa0dff7ff2987372, type: 3}
 --- !u!114 &2922786102867036322
 MonoBehaviour:

@@ -65,14 +65,9 @@ public class PlayerHasAmmo : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Guarda el componente Shoot del GameObject con munición.
+    /// Guarda el componente Weapon (pensado para que sea Shoot) del GameObject con munición.
     /// </summary>
-    private Shoot _shoot;
-
-    /// <summary>
-    /// Guarda el componente ShootEscopeta del GameObject con munición.
-    /// </summary>
-    private ShootEscopeta _shootEscopeta;
+    private Weapon _shoot;
 
     /// <summary>
     /// Esta variable es el número de balas que tendrá disponibles el Objeto con Shoot.
@@ -105,11 +100,10 @@ public class PlayerHasAmmo : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        _shoot = GetComponent<Shoot>();
-        _shootEscopeta = GetComponent<ShootEscopeta>();
-        if (_shoot == null && _shootEscopeta == null)
+        _shoot = GetComponent<Weapon>();
+        if (_shoot == null)
         {
-            Debug.Log("Se ha puesto el componente HasAmmo en un objeto sin componente Shoot ni ShootEscopeta. No funcionará.");
+            Debug.Log("Se ha puesto el componente HasAmmo en un objeto sin componente de tipo Weapon. No funcionará.");
             Destroy(this);
         }
 
@@ -159,7 +153,6 @@ public class PlayerHasAmmo : MonoBehaviour
     private void OnDestroy()
     {
         if (_shoot != null) Destroy(_shoot);
-        if (_shootEscopeta != null) Destroy(_shootEscopeta);
         if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
     }
     #endregion
@@ -186,8 +179,7 @@ public class PlayerHasAmmo : MonoBehaviour
         if (_numBalas > 0)
         {
             // Ejecuta el disparo dependiendo de qué componente tenga el arma
-            if (_shoot != null) _shoot.ShootBullet(fireDir);
-            else if (_shootEscopeta != null) _shootEscopeta.ShootBullet(fireDir);
+            if (_shoot != null) _shoot.Use(fireDir);
 
             _numBalas--;
             if (HUDManager.HasInstance()) HUDManager.Instance.UpdateAmmoHUD(_numBalas);

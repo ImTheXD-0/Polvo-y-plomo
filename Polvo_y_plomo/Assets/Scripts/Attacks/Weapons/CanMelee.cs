@@ -14,7 +14,7 @@ using UnityEngine.UIElements;
 /// Componente que se le da a cualquier objeto que tenga la capacidad de realizar un ataque a melee.
 /// Se encarga únicamente de realizar el ataque, el cuando y cómo (controlador) se deja a otro script.
 /// </summary>
-public class CanMelee : MonoBehaviour
+public class CanMelee : Weapon
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,12 +23,6 @@ public class CanMelee : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    /// <summary>
-    /// Prefab del objeto que aparecerá para hacer daño.
-    /// </summary>
-    [SerializeField]
-    private GameObject MeleePrefab;
 
     /// <summary>
     /// Determina que tan lejos aparecerá el objeto del ataque desde su origen (este GameObject).
@@ -79,7 +73,7 @@ public class CanMelee : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        if (MeleePrefab == null)
+        if (AttackPrefab == null)
         {
             Debug.Log("Se ha puesto el componente \"CanMelee\" sin un prefab de hitbox asignado. No podrá generar la hitbox.");
             Destroy(this);
@@ -99,10 +93,10 @@ public class CanMelee : MonoBehaviour
     /// Método público que genera un prefab de hitbox de un ataque melee, en una posición y rotación dadas, y lo destruye tras cierto tiempo.
     /// </summary>
     /// <param name="dirAtaque"></param>
-    public void HitboxMelee(Vector2 dirAtaque)
+    public override void Use(Vector2 dirAtaque)
     {
         float angulo = 180f / Mathf.PI * Mathf.Atan2(dirAtaque.y, dirAtaque.x);
-        Instantiate(MeleePrefab, (Vector2)transform.position + DistanciaSpawnAtaque * dirAtaque.normalized, Quaternion.Euler(0, 0, angulo));
+        Instantiate(AttackPrefab, (Vector2)transform.position + DistanciaSpawnAtaque * dirAtaque.normalized, Quaternion.Euler(0, 0, angulo));
         if (Attack) AudioManager.Instance.Play(Attack, transform.position);
     }
     /// <summary>

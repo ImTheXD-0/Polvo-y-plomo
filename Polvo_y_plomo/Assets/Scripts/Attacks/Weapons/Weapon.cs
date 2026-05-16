@@ -1,5 +1,5 @@
 //---------------------------------------------------------
-// Contiene un método para hacer que un objeto "explote"
+// Clase padre de otras encargadas de realizar ataques.
 // Ángel Seijas de Ema
 // Polvo y plomo
 // Proyectos 1 - Curso 2025-26
@@ -10,10 +10,10 @@ using UnityEngine;
 
 
 /// <summary>
-/// Contiene un objeto asignable para instanciar al activar el método Explode().
-/// Además contiene un AudioClip asignable que suene a la vez que se instancia, simulando la explosión.
+/// Clase padre de otras encargadas de realizar ataques, como CanMelee, Shoot...
+/// Proporciona un método "Use" que se llamará para realizar el ataque.
 /// </summary>
-public class CanExplode : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -24,16 +24,10 @@ public class CanExplode : MonoBehaviour
     // Ejemplo: MaxHealthPoints
 
     /// <summary>
-    /// Este es el GameObject que se instanciará pasado el tiempo. Hará daño al colisionar con objetos.
+    /// Prefab del objeto que se instanciará al realizar el ataque.
     /// </summary>
     [SerializeField]
-    private onCollisionDealDamage Explosion;
-
-    /// <summary>
-    /// Sonido que se dará al iniciarse la explosion
-    /// </summary>
-    [SerializeField]
-    private AudioClip ExplosionSound;
+    protected GameObject AttackPrefab;
 
     #endregion
 
@@ -55,19 +49,6 @@ public class CanExplode : MonoBehaviour
     // - Hay que añadir todos los que sean necesarios
     // - Hay que borrar los que no se usen 
 
-    /// <summary>
-    /// Se llama al cargarse en escena.
-    /// Realiza comprobaciones necesarias para el componente.
-    /// </summary>
-    private void Awake()
-    {
-        if (Explosion == null)
-        {
-            Debug.Log("Componente CanExplode puesto sin asignarle objeto de explosion. No funcionará");
-            Destroy(this);
-        }
-    }
-
     #endregion
 
     // ---- MÉTODOS PÚBLICOS ----
@@ -79,15 +60,10 @@ public class CanExplode : MonoBehaviour
     // Ejemplo: GetPlayerController
 
     /// <summary>
-    /// Método público para iniciar la explosión.
-    /// Causará la destrucción de este objeto, y se instanciará el objeto asignado de explosion en la misma posicion.
+    /// Método que se llamará al usar el arma.
     /// </summary>
-    public void Explode()
-    {
-        Instantiate(Explosion, transform.position, transform.rotation);
-        if (AudioManager.HasInstance()) AudioManager.Instance.Play(ExplosionSound, transform.position);
-        Destroy(gameObject);
-    }
+    /// <param name="dir">Dirección del ataque</param>
+    public abstract void Use(Vector2 dir);
 
     #endregion
     
@@ -100,5 +76,5 @@ public class CanExplode : MonoBehaviour
 
     #endregion   
 
-} // class CanExplode 
+} // class Weapon 
 // namespace

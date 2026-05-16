@@ -11,7 +11,9 @@ using UnityEngine;
 
 /// <summary>
 /// Este componente solo servirá para testear la escopeta. Es casi igual al PlayerGetShootingInput pero
-/// en vez de buscar el componente Shoot busca el componente ShootEscopeta. No usa HasAmmo.
+/// en vez de buscar el componente Shoot busca el componente ShootEscopeta. No usa HasAmmo
+/// 
+/// (( CREO QUE ESTE YA SE PUEDE BORRAR ))
 /// </summary>
 public class PlayerGetShootingInputEscopeta : MonoBehaviour
 {
@@ -145,7 +147,7 @@ public class PlayerGetShootingInputEscopeta : MonoBehaviour
             fireDir.y = Cursor.transform.position.y - transform.parent.position.y;
 
             // Disparo
-            _escopetafire.ShootBullet(fireDir);
+            _escopetafire.Use(fireDir);
         }
     }
 

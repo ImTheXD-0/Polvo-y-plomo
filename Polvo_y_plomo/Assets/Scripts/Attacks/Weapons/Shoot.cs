@@ -14,7 +14,7 @@ using UnityEngine;
 /// 
 /// Es imperativo que este componente esté cómo hijo de un gameObject con RotateTowardsObject para que las balas aparezcan con la direccion y rotación adecuadas.
 /// </summary>
-public class Shoot : MonoBehaviour
+public class Shoot : Weapon
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -23,12 +23,6 @@ public class Shoot : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    /// <summary>
-    /// Esta variable referencia al Objeto de tipo BulletMove que se instanciará cada vez que se dispare (la bala);
-    /// </summary>
-    [SerializeField]
-    protected BulletMove Bullet;
 
     [SerializeField]
     private AudioClip ShootClip;
@@ -62,7 +56,7 @@ public class Shoot : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        if (Bullet == null)
+        if (AttackPrefab == null)
         {
             Debug.Log("Se ha puesto el componente \"Shoot\" sin asociarse una bala. No podrá disparar.");
             Destroy(this);
@@ -105,15 +99,14 @@ public class Shoot : MonoBehaviour
     /// Este método instanciará una bala, y le pasará una dirección a la que desplazarse.
     /// Esta será la dirección hacia el cursor.
     /// </summary>
-    /// <param name="direction"> Dirección a la que apuntará la bala </param>
-    public void ShootBullet(Vector2 fireDir)
+    public override void Use(Vector2 fireDir)
     {
         float angulo = 180f / Mathf.PI * Mathf.Atan2(fireDir.y, fireDir.x);
         angulo %= 360;
         if (angulo < 0) angulo += 360f;
         Quaternion rot = Quaternion.Euler(0, 0, angulo);
 
-        Instantiate(Bullet, transform.position, rot);
+        Instantiate(AttackPrefab, transform.position, rot);
 
         if (ShootClip) AudioManager.Instance.Play(ShootClip, transform.position);
         if (_revolverAnimator!=null) _revolverAnimator.SetTrigger("Shot");

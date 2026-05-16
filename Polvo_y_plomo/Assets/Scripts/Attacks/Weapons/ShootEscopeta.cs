@@ -13,7 +13,7 @@ using UnityEngine;
 /// Componente que genera múltiples proyectiles (perdigones) en una dispersión cónica.
 /// Debe estar como hijo del arma principal.
 /// </summary>
-public class ShootEscopeta : MonoBehaviour
+public class ShootEscopeta : Weapon
 {
     // ---- ATRIBUTOS DEL INSPECTOR ----
     #region Atributos del Inspector (serialized fields)
@@ -22,12 +22,6 @@ public class ShootEscopeta : MonoBehaviour
     // públicos y de inspector se nombren en formato PascalCase
     // (palabras con primera letra mayúscula, incluida la primera letra)
     // Ejemplo: MaxHealthPoints
-
-    /// <summary>
-    /// Prefab del perdigón que se instanciará. Debe ser una versión más pequeña de la bala normal.
-    /// </summary>
-    [SerializeField]
-    private BulletMove PerdigonPrefab;
 
     /// <summary>
     /// Rango total en grados del cono de dispersión.
@@ -83,7 +77,7 @@ public class ShootEscopeta : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (PerdigonPrefab == null)
+        if (AttackPrefab == null)
         {
             Debug.Log("No se ha asignado el prefab del perdigón en ShootEscopeta. El arma no funcionará.");
             Destroy(this);
@@ -135,7 +129,7 @@ public class ShootEscopeta : MonoBehaviour
     /// y asegurando una disparidad direccional mínima entre ellos mediante división por sectores.
     /// </summary>
     /// /// <param name="fireDir">Vector de dirección central del apuntado.</param>
-    public void ShootBullet(Vector2 fireDir)
+    public override void Use(Vector2 fireDir)
     {
         float anguloBase = 180f / Mathf.PI * Mathf.Atan2(fireDir.y, fireDir.x);
 
@@ -156,7 +150,7 @@ public class ShootEscopeta : MonoBehaviour
 
             Quaternion rotacionPerdigon = Quaternion.Euler(0, 0, anguloFinal);
 
-            Instantiate(PerdigonPrefab, transform.position, rotacionPerdigon);
+            Instantiate(AttackPrefab, transform.position, rotacionPerdigon);
         }
         if (DisparoEscopeta) AudioManager.Instance.Play(DisparoEscopeta, transform.position);
         if (_gunshotAnimator != null) _gunshotAnimator.SetTrigger("Shot");

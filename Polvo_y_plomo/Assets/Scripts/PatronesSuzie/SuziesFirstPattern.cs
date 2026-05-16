@@ -253,7 +253,7 @@ public class SuziesFirstPattern : MonoBehaviour
                 {
                     _playerPos = LevelManager.Instance.PlayerTransform();
                     Vector2 dir = (_playerPos.position - transform.position).normalized;
-                    _shoot.ShootBullet(dir);
+                    _shoot.Use(dir);
                 }
 
                 _hasShotOnlyOnce = true;
@@ -267,7 +267,7 @@ public class SuziesFirstPattern : MonoBehaviour
                 {
                     _playerPos = LevelManager.Instance.PlayerTransform();
                     Vector2 dir = (_playerPos.position - transform.position).normalized;
-                    _shoot.ShootBullet(dir);
+                    _shoot.Use(dir);
                 }
 
                 // Tras el segundo disparo, se esconde

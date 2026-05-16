@@ -64,10 +64,10 @@ public class EnemyShootingAttack : MonoBehaviour
     private Transform _playerTransform;
 
     /// <summary>
-    /// Almacena el componente Shoot que ha de tener el GameObject con este script.
+    /// Almacena el componente de tipo Weapon (pensado para que sea Shoot) que ha de tener el GameObject con este script.
     /// Inicialziado en el Start();
     /// </summary>
-    private Shoot _shoot;
+    private Weapon _shoot;
 
     /// <summary>
     /// Almacena el componente ChasePlayer que ha de tener el mayor padre de los GameObject del enemigo con este script.
@@ -112,10 +112,10 @@ public class EnemyShootingAttack : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        _shoot = GetComponent<Shoot>();
+        _shoot = GetComponent<Weapon>();
         if (_shoot == null)
         {
-            Debug.Log("Se ha colocado el componente \"EnemyShootingAttack\" en un objeto que no tiene el componente \"Shoot\". No podrá disparar");
+            Debug.Log("Se ha colocado el componente \"EnemyShootingAttack\" en un objeto que no tiene componente  de tipo \"Weapon\". No podrá disparar");
             Destroy(this);
         }
 
@@ -220,7 +220,7 @@ public class EnemyShootingAttack : MonoBehaviour
     private void Dispara()
     {
         Vector2 fireDir = (Vector2)_playerTransform.position - (Vector2)transform.parent.position; // z = 0 automáticamente
-        _shoot.ShootBullet(fireDir);
+        _shoot.Use(fireDir);
     }
 
     /// <summary>

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf79ecfd9d29a245bdc220f6ae40236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeleePrefab: {fileID: 5015214724800111349, guid: febc8594a582bd54488df1c76a5fa589, type: 3}
+  AttackPrefab: {fileID: 5015214724800111349, guid: febc8594a582bd54488df1c76a5fa589, type: 3}
   DistanciaSpawnAtaque: 1
   MeleeShadowPrefab: {fileID: 0}
   Attack: {fileID: 8300000, guid: dd204d5d02c26384c84a4a5ef767cef5, type: 3}
@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VidaMax: 1
+  DeathSound: {fileID: 0}
 --- !u!1 &2029871151495548159
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,9 +46,9 @@ public class EnemyMeleeAttack : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Variable para usar el componente CanMelee
+    /// Variable para usar el componente Weapon (pensado para que sea CanMelee)
     /// </summary>
-    private CanMelee _canMelee;
+    private Weapon _canMelee;
 
     /// <summary>
     /// Variable para usar el componente ChasePlayer
@@ -84,10 +84,10 @@ public class EnemyMeleeAttack : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        _canMelee = GetComponent<CanMelee>();
+        _canMelee = GetComponent<Weapon>();
         if (_canMelee == null)
         {
-            Debug.Log("Se ha puesto el componente  \"EnemyMeleeAttack\" en un objeto sin el componente \"CanMelee\", y no podrá atacar.");
+            Debug.Log("Se ha puesto el componente  \"EnemyMeleeAttack\" en un objeto sin componente de tipo \"Weapon\", y no podrá atacar.");
             Destroy(this);
         }
 
@@ -140,11 +140,10 @@ public class EnemyMeleeAttack : MonoBehaviour
 
     /// <summary>
     /// Método llamado al destruirse el componente
-    /// Elimina otros componentes que dependen completamente de este, si existen.
+    /// Elimina el método del GameManager.
     /// </summary>
     private void OnDestroy()
     {
-        Destroy(GetComponent<CanMelee>());
         if (GameManager.HasInstance()) GameManager.Instance.OnTimeScaleChanged -= OnTimeScaleChanged;
         // se podría destruir ChasePlayer... pero realmente puede funcinoar sin controlador
     }
@@ -175,7 +174,7 @@ public class EnemyMeleeAttack : MonoBehaviour
     {
         Vector2 dirMvtoEnemigo = (_playerTransform.position - transform.position).normalized;
 
-        _canMelee.HitboxMelee(dirMvtoEnemigo);
+        _canMelee.Use(dirMvtoEnemigo);
     }
 
     /// <summary>

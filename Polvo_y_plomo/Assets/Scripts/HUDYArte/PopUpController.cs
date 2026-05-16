@@ -69,6 +69,8 @@ public class PopUpController : MonoBehaviour
     // primera letra en mayúsculas)
     // Ejemplo: _maxHealthPoints
 
+    private bool _gamePaused = false;
+
     #endregion
 
     // ---- MÉTODOS DE MONOBEHAVIOUR ----
@@ -121,9 +123,14 @@ public class PopUpController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        // Asegurarme de que todo se pause bien y los controles se apagen (en el Start podría no darse)
-        if (GameManager.HasInstance()) GameManager.Instance.PauseGame();
-        if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
+        if (!_gamePaused)
+        {
+            // Asegurarme de que todo se pause bien y los controles se apagen (en el Start podría no darse)
+            if (GameManager.HasInstance()) GameManager.Instance.PauseGame();
+            if (InputManager.HasInstance()) InputManager.Instance.DesactivarInput();
+            _gamePaused = true;
+        }
+        
 
         if (InputManager.HasInstance() && InputManager.Instance.ExitWasPressedThisFrame())
         {

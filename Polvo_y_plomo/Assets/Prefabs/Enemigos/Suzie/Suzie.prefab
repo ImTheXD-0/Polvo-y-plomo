@@ -239,10 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb8f35d34b54394fa6dafcf28c013bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthManager: {fileID: 0}
-  _patron1: {fileID: 5891100814486715577}
-  _patron2: {fileID: 7280290977658881276}
-  _patron3: {fileID: 786613330448179768}
 --- !u!114 &5891100814486715577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VidaMax: 20
+  IsFinalBoss: 1
 --- !u!1001 &7251475672145545783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -502,6 +499,10 @@ PrefabInstance:
       propertyPath: RangoCono
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 6906647698243497770, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
+      propertyPath: AttackPrefab
+      value: 
+      objectReference: {fileID: 7766981667260540878, guid: d942669e5e925cf4790bf0641aee667a, type: 3}
     - target: {fileID: 6906647698243497770, guid: d33f5860d59fd244b811f5db63b821e6, type: 3}
       propertyPath: NumPerdigones
       value: 4

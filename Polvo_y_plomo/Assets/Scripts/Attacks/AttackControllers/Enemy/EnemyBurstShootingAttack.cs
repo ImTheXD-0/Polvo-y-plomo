@@ -77,9 +77,9 @@ public class EnemyBurstShootingAttack : MonoBehaviour
     // Ejemplo: _maxHealthPoints
 
     /// <summary>
-    /// Almacena el componente Shoot que ha de tener este componente.
+    /// Almacena el componente Weapon (pensado para que sea Shoot) Shoot que ha de tener este componente.
     /// </summary>
-    private Shoot _shoot;
+    private Weapon _shoot;
 
     /// <summary>
     /// Almacena el componente _chasePlayer que ha de tener uno de los objetos padres del gameobject con el componente.
@@ -148,10 +148,10 @@ public class EnemyBurstShootingAttack : MonoBehaviour
 
     private void Awake()
     {
-        _shoot = GetComponent<Shoot>();
+        _shoot = GetComponent<Weapon>();
         if (_shoot == null)
         {
-            Debug.Log("EneyBurstShootingAttack puesto en un gameobject sin componente Shoot. No funcionará");
+            Debug.Log("EneyBurstShootingAttack puesto en un gameobject sin componente tipo Weapon. No funcionará");
             Destroy(this);
         }
 
@@ -208,7 +208,7 @@ public class EnemyBurstShootingAttack : MonoBehaviour
             if (_t >= TimeBetweenShots * _shotsTaken)
             {
                 _shotsTaken++;
-                _shoot.ShootBullet(new Vector2(Mathf.Cos(angulo * Mathf.Deg2Rad), Mathf.Sin(angulo * Mathf.Deg2Rad)));
+                _shoot.Use(new Vector2(Mathf.Cos(angulo * Mathf.Deg2Rad), Mathf.Sin(angulo * Mathf.Deg2Rad)));
 
                 // Rafaga acabada
                 if (_shotsTaken >= BurstShotAmmount)
