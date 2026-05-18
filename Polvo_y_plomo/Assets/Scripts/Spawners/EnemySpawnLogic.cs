@@ -113,7 +113,6 @@ public class EnemySpawnLogic : MonoBehaviour
                 {
                     SpawnAnimator.Play(clip.name, 0, 0f); // layer 0; movimiento del transform
                     SpawnAnimator.Play(clip.name + "Sprite", 1, 0f); // layer 1; cambios de sprite
-                    SpawnAnimator.speed = 1f;
                     _duracionAnimacion = clip.length;
                 }
             }
@@ -126,7 +125,8 @@ public class EnemySpawnLogic : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        _duracionAnimacion -= Time.deltaTime * _slowMultiplier; 
+        _duracionAnimacion -= Time.deltaTime * _slowMultiplier;
+        SpawnAnimator.speed = _slowMultiplier;
 
         if (_duracionAnimacion < 0) DoSpawn();
         else SpawnAnimator.SetFloat("Time", _duracionAnimacion);
@@ -200,7 +200,6 @@ public class EnemySpawnLogic : MonoBehaviour
     private void OnTimeScaleChanged(float newScale)
     {
         _slowMultiplier = newScale;
-        if (SpawnAnimator != null) SpawnAnimator.speed = _slowMultiplier;
     }
     #endregion   
 

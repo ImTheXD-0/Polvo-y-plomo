@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08ca9716aa52c9648b6b5631eac887ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 5640593100504841450, guid: c517fdbb0255f1746b2ed93c4dd845d3, type: 3}
+  AttackPrefab: {fileID: 1463262625093290188, guid: c517fdbb0255f1746b2ed93c4dd845d3, type: 3}
   ExplosionSound: {fileID: 8300000, guid: a06745194c1f1944786ed400c08d45ff, type: 3}
 --- !u!114 &3166594570574823066
 MonoBehaviour:

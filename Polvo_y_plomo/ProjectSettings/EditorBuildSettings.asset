@@ -24,97 +24,97 @@ EditorBuildSettings:
     path: Assets/Scenes/CreditsScene.unity
     guid: 6041e9d914880a34fb2003350d646491
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_InputManager.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_InputManager.unity
     guid: 1c25d1cc237ceb8429797289e7547ae2
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_PlayerMovement.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_PlayerMovement.unity
     guid: a1a39b02beeafec42a64839c067c2510
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_PlayerStalker.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_PlayerStalker.unity
     guid: 2b8b82f731f348d459e89dbb0f716080
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_Mirilla.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_Mirilla.unity
     guid: 9b0442df3154e6b42ae9d4a70859ef5b
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_Camara.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_Camara.unity
     guid: 0a2297ffcd2616f46a47eeae7d11663a
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_Health.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_Health.unity
     guid: ba4bad107b3750b4ebb116fee9678554
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_Melee_Coberturas.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_Melee_Coberturas.unity
     guid: 4db5bf540c074934fa6292b1490a9f7e
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint1/Test_CursorBloqueado.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint1/Test_CursorBloqueado.unity
     guid: 862f892bfa2c1854c8142def10138129
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint2/Test_LogicaDePersecucion.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint2/Test_LogicaDePersecucion.unity
     guid: a76a22cf1d1271d449a3dead5ee29411
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint2/Test_Spawner.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint2/Test_Spawner.unity
     guid: f8c7afdef35af814c97f892402e81d82
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint2/Test_Respawn.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint2/Test_Respawn.unity
     guid: 121774ead3c236848a69379b40bf7996
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint2/Test_Revolver.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint2/Test_Revolver.unity
     guid: ce98fc679730bdf44a65bf977e4a8aca
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint2/Test_PlayerRoll.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint2/Test_PlayerRoll.unity
     guid: 5c5252f4bf6aafd4bb7542d58df99f2a
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint2/Test_EnemyMeleeAttack.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint2/Test_EnemyMeleeAttack.unity
     guid: d5466de5546cef442b44d4724ed77c2c
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint3/Test_EnemyShooting.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint3/Test_EnemyShooting.unity
     guid: 73178b9b1cfa63645921ba7bc0c4ccdd
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint3/Test_ImageFill.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint3/Test_ImageFill.unity
     guid: 460729491d116a148b655cf77abf7122
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint3/Test_PuntajeRacha.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint3/Test_PuntajeRacha.unity
     guid: 2771d171d784f1d4181da30cc843acb8
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint3/Test_DeathCounter.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint3/Test_DeathCounter.unity
     guid: 16e64cb39a2cce24b9dde7b456af148a
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint3/Test_SlowShot.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint3/Test_SlowShot.unity
     guid: a570007252ce934488e48ebef047da82
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint4/Test_AudioManager.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint4/Test_AudioManager.unity
     guid: 7358f2dfb72457b46a8ffdc3be163fb2
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint4/Test_CanFlash.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint4/Test_CanFlash.unity
     guid: 7e4d251736ed92b4dbc9cebb50497719
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint4/Test_Cinematica.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint4/Test_Cinematica.unity
     guid: e1b592ccc8c889245af330a4a59abce2
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint4/Test_Stun.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint4/Test_Stun.unity
     guid: 0047ee0401322ed46a0f807c35abfc21
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint4/Test_PickupVida.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint4/Test_PickupVida.unity
     guid: f2eda247982634047a52d9f30f11d357
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint4/Test_Victoria.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint4/Test_Victoria.unity
     guid: 00a390cbe42c65844a645880265b3a98
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint5/Test_PauseMenu.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint5/Test_PauseMenu.unity
     guid: 8535d5720cbc0184e8a0c0b6409b2b79
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint5/Test_SpawnAnim.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint5/Test_SpawnAnim.unity
     guid: a4d5e9e49ce08d447971503988ed7442
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint5/Test_Configuracion.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint5/Test_Configuracion.unity
     guid: 90de195676da2654da9808ea7b4ec883
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint6/TestEscopeta.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint6/TestEscopeta.unity
     guid: 0efb259162b83c84e8f88f58d76d90c8
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint7/TestSuzie.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint7/TestSuzie.unity
     guid: c986718a5a25b15409a9e19d8b325ec4
   - enabled: 0
-    path: Assets/Scenes/Pruebas/Sprint10/PruebaCronoLvl1.unity
+    path: Assets/Scenes/Pruebas/Beta/Sprint10/PruebaCronoLvl1.unity
     guid: 427128e0c082d524795a8a0852058bfe
   - enabled: 0
     path: Assets/Scenes/Prototipo_Hito_1.unity
